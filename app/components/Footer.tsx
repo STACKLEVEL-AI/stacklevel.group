@@ -2,142 +2,63 @@
 
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { isRuLocale } from "@/i18n/localeUtils";
 
 export default function Footer() {
   const locale = useLocale();
   const t = useTranslations("footer");
-  const stats = [
-    { value: "30+", labelKey: "experiencedDevelopers" },
-    { value: "3+", labelKey: "yearsOnTheMarket" },
-    { value: "20+", labelKey: "successfulProjects" },
-    { value: "92%", labelKey: "ofReturnedCustomers" },
-    { value: locale === "ru" ? "ТОЛЬКО ..." : "POSITIVE", labelKey: "positiveOnly" },
-  ];
+  const isRu = isRuLocale(locale);
 
   return (
-    <footer className="relative z-[1] overflow-hidden bg-white">
-      <div
-        className="dots-pattern absolute inset-0"
-        style={{ backgroundPosition: "10px 0, 50.5px 40.5px" }}
-        aria-hidden
-      />
-
-      <div className="relative flex flex-col z-10 w-full pb-1 flex">
-        {/* Top: WE ARE + stats + CTA (white + dots) */}
-        <div className="mx-auto max-w-[min(1476px,92%)] grid grid-cols-2 gap-0 md:grid-cols-[auto_1fr] md:gap-0">
-          <div className="flex w-full max-w-[120px] min-[1280px]:max-h-[300px] justify-center md:col-start-1 md:row-span-1 md:mr-[5vw] md:justify-center bg-white">
-            <Image
-              src="/images/_we-are.svg"
-              alt="We are"
-              width={150}
-              height={400}
-              className="max-h-[400px] w-auto max-w-[150px] object-contain object-left"
-            />
-          </div>
-          <div className="flex flex-col w-full">
-            <div className="flex flex-col pb-10 md:col-start-2 md:items-center md:justify-center md:py-12 md:px-6 md:pb-12">
-              <div className="grid w-full max-w-[1000px] grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 md:gap-x-[3vw] md:gap-y-11 xl:grid-cols-3 xl:gap-x-[110px]">
-                {stats.map((s) => (
-                  <div
-                    key={s.labelKey}
-                    className="flex flex-col max-w-[300px] font-semibold uppercase text-2xl bg-white max-[400px]:ml-[0] max-[400px]:pl-[10px] ml-5 pl-5 py-1"
-                  >
-                    {t.rich(`${s.labelKey}`, {
-                      value: () => (
-                        <span className="text-[var(--accent)]">{s.value}</span>
-                      )
-                    })}
-                  </div>
-                ))}
-
-                <Link
-                  href="/about-us"
-                  className="hover-footer-btn flex h-[75px] w-full max-[1025px]:max-w-[300px] max-[769px]:max-w-[286px] items-center justify-center self-center border-[6px] border-[var(--accent)] bg-[var(--accent)] px-4 font-medium uppercase leading-tight text-white no-underline text-xl"
-                >
-                  {t("wantToKnow")}
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Bottom: blue block — stuck to right edge (breakout right only), responsive width */}
-        <div className="footer-blue-block mt-8 flex w-full flex-col items-center gap-8 bg-[var(--accent)] px-4 py-8 sm:mt-12 sm:px-6 sm:py-10 md:flex-row md:items-start md:justify-between md:gap-12 md:px-10 md:py-12 lg:gap-14 lg:px-12 lg:py-14 xl:px-16 xl:py-16">
-
-          {/* LOGO + CTA */}
-          <div className="flex w-full max-w-[300px] flex-col items-center md:items-start">
-            <Image
-              src="/images/_logo_white.svg"
-              alt="STACKLEVEL GROUP"
-              width={250}
-              height={110}
-              className="mb-6 w-[160px] sm:w-[180px] md:w-[200px]"
-            />
-
-            <Link
-              href="/hire-web-developers"
-              className="hover-hire-us mt-2 flex h-[60px] w-full max-w-[300px] items-center justify-center border-[4px] border-white text-lg font-semibold uppercase text-white sm:h-[65px] sm:text-xl"
-            >
-              {t("hireUs")}
+    <footer className="mt-12 border-t border-[rgba(0,0,0,.06)] bg-white">
+      <div className="width-wrapper py-10">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div>
+            <Link href="/" aria-label="Stacklevel Group" className="inline-block">
+              <Image src="/logo.svg" alt="STACKLEVEL GROUP" width={220} height={44} />
             </Link>
-          </div>
-
-          {/* CONTACTS */}
-          <div className="flex flex-col items-center text-center md:items-start md:text-left">
-            <h3 className="text-xl font-medium uppercase tracking-wide text-white sm:text-2xl">
-              {t("contacts")}
-            </h3>
-
-            <a
-              href="tel:+375293444489"
-              className="mt-4 text-lg text-white sm:text-xl"
-            >
-              +375 (29) 344-44-89
-            </a>
-
-            <a
-              href="mailto:contact@stacklevel.org"
-              className="mt-2 text-lg lowercase text-white sm:text-xl"
-            >
-              contact@stacklevel.org
-            </a>
-          </div>
-
-          {/* SOCIAL */}
-          <div className="flex flex-col items-center md:items-start">
-            <h3 className="text-xl font-medium uppercase tracking-wide text-white sm:text-2xl">
-              {t("beInTouch")}
-            </h3>
-
-            <div className="mt-4 flex gap-6">
-              <a
-                href="https://www.linkedin.com/company/stacklevel"
-                className="transition hover:scale-110"
-                aria-label="LinkedIn"
-              >
-                <Image src="/images/social/_linkedin.svg" alt="" width={24} height={24} />
-              </a>
-
-              <a
-                href="https://www.instagram.com/stacklevel_group/"
-                className="transition hover:scale-110"
-                aria-label="Instagram"
-              >
-                <Image src="/images/social/_instagram.svg" alt="" width={24} height={24} />
-              </a>
-
-              <a
-                href="https://www.facebook.com/stacklevel"
-                className="transition hover:scale-110"
-                aria-label="Facebook"
-              >
-                <Image src="/images/social/_fb.svg" alt="" width={24} height={24} />
-              </a>
+            <p className="mt-4 max-w-sm text-sm text-[var(--black)]">{t("tagline")}</p>
+            <div className="mt-4 space-y-1 text-sm font-semibold text-[var(--black)]">
+              <p>
+                <a href="mailto:info@stacklevel.group" className="hover:text-[var(--accent)]">
+                  info@stacklevel.group
+                </a>
+              </p>
+              <p>
+                <a href="tel:+375296682127" className="hover:text-[var(--accent)]">
+                  +375 (29) 668-21-27
+                </a>
+              </p>
             </div>
           </div>
 
-        </div>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wide text-[var(--accent)]">{t("navigate")}</p>
+            <div className="mt-3 flex flex-col gap-2 text-sm font-semibold uppercase text-[var(--black)]">
+              <Link href="/services">{t("services")}</Link>
+              <Link href="/audit-compliance">{t("audit")}</Link>
+              <Link href="/products">{t("products")}</Link>
+              <Link href="/case-studies">{t("cases")}</Link>
+              <Link href="/blog">{t("blog")}</Link>
+            </div>
+          </div>
 
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wide text-[var(--accent)]">{t("actions")}</p>
+            <div className="mt-3 flex flex-col gap-2 text-sm font-semibold uppercase text-[var(--black)]">
+              <Link href="/resources">{t("resources")}</Link>
+              <Link href="/company">{t("company")}</Link>
+              <Link href="/contact">{t("contact")}</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-[var(--accent)]">
+        <div className="width-wrapper py-5">
+          <p className="text-xs leading-relaxed text-white">{t("complianceLine")}</p>
+        </div>
       </div>
     </footer>
   );

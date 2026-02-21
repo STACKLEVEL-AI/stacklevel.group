@@ -3,14 +3,19 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { isRuLocale } from "@/i18n/localeUtils";
 
-const linkClass =
-  // NEW — clamp + запрет переноса
-  "font-bold whitespace-nowrap text-[clamp(12px,0.85vw,18px)] text-black no-underline transition hover:text-[var(--accent)] hover:shadow-[0_4px_0_0_var(--accent)]";
-
-const linkClassModal =
-  "font-semibold text-black no-underline hover:text-[var(--accent)]";
+const navLinks = [
+  { href: "/services", key: "services" },
+  { href: "/audit-compliance", key: "audit" },
+  { href: "/products", key: "products" },
+  { href: "/case-studies", key: "caseStudies" },
+  { href: "/resources", key: "resources" },
+  { href: "/blog", key: "blog" },
+  { href: "/company", key: "company" },
+  { href: "/contact", key: "contact" },
+] as const;
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -18,174 +23,82 @@ export default function Header() {
   const locale = useLocale();
   const t = useTranslations("header");
 
-  const closeMobile = () => setMobileOpen(false);
-
   const localeLinkClass = (loc: string) =>
-    `font-semibold whitespace-nowrap ${locale === loc
-      ? "text-[var(--accent)]"
-      : "text-black hover:text-[var(--accent)]"
-    }`;
+    `text-xs font-bold uppercase tracking-wide ${locale === loc ? "text-[var(--accent)]" : "text-[var(--black)] hover:text-[var(--accent)]"}`;
+  const isRu = isRuLocale(locale);
+  const openNavLabel = t("openNav");
+  const closeNavLabel = t("closeNav");
 
   return (
-    <header className="relative z-50 flex h-20 w-full items-center bg-white lg:h-[150px]">
-      <div className="width-wrapper relative flex z-10 flex w-full items-center justify-between">
-
-        <Link
-          href="/"
-          className="relative z-10 shrink-0"
-        >
-          <Image
-            src="/logo.svg"
-            alt="STACKLEVEL GROUP"
-            width={254}
-            height={48}
-            className="hidden lg:block w-[clamp(140px,11vw,254px)]"
-          />
-
-          <Image
-            src="/_small_logo.png"
-            alt="STACKLEVEL"
-            width={24}
-            height={57}
-            className="block h-8 w-24 object-contain lg:hidden w-[24px] h-[57px]"
-          />
+    <header className="relative border-b border-[rgba(0,0,0,.12)] bg-white">
+      <div className="width-wrapper relative flex min-h-[84px] items-center justify-between py-3">
+        <Link href="/" aria-label="Stacklevel Group" className="shrink-0">
+          <Image src="/logo.svg" alt="STACKLEVEL GROUP" width={318} height={60} className="h-auto w-[190px] sm:w-[230px] xl:w-[260px]" />
         </Link>
-        <div className="dots-pattern flex w-[80%] h-[60px] lg:hidden" />
-        <nav className="hidden lg:flex flex-1 w-full items-center justify-evenly">
-          {/* LINKS */}
-          <div className="flex items-center gap-[clamp(12px,2vw,32px)]">
 
-            <div className="group relative inline-block">
-              <Link
-                href="/hire-web-developers"
-                className={linkClass}
-              >
-                {t("hireDevelopers")}
-              </Link>
-
-              <div className="absolute left-0 top-full z-50 hidden min-w-[230px] flex-col rounded bg-white shadow group-hover:flex">
-                <Link
-                  href="/hire-react-developers"
-                  className={`block px-3 py-1 text-base font-medium ${linkClass}`}
-                >
-                  {t("reactDevelopment")}
-                </Link>
-
-                <Link
-                  href="/hire-php-developers"
-                  className={`block px-3 py-1 text-base font-medium ${linkClass}`}
-                >
-                  {t("phpDevelopment")}
-                </Link>
-              </div>
-            </div>
-
-            <Link href="/hire-dedicated-team" className={linkClass}>
-              {t("hireTeam")}
+        <nav className="hidden items-center gap-6 xl:flex">
+          {navLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm font-bold uppercase tracking-wide text-[var(--black)] transition hover:text-[var(--accent)]"
+            >
+              {t(item.key)}
             </Link>
+          ))}
+        </nav>
 
-            <Link href="/case-studies" className={linkClass}>
-              {t("ourCases")}
-            </Link>
-
-            <Link href="/about-us" className={linkClass}>
-              {t("aboutUs")}
-            </Link>
-
-            <Link href="/blog" className={linkClass}>
-              {t("blog")}
-            </Link>
-
-            <Link href="/careers" className={linkClass}>
-              {t("career")}
-            </Link>
-
-          </div>
-          {/* LANGUAGE */}
-          <div className=" flex shrink-0 items-center gap-2 pl-4">
+        <div className="hidden items-center gap-3 xl:flex">
+          <div className="flex items-center gap-2">
             <Link href={pathname} locale="en" className={localeLinkClass("en")}>
               EN
             </Link>
-
             <Link href={pathname} locale="ru" className={localeLinkClass("ru")}>
               RU
             </Link>
           </div>
+        </div>
 
-        </nav>
-
-        {/* BURGER */}
-        <button
-          type="button"
-          aria-label="Open menu"
-          className="cursor-pointer lg:hidden"
-          onClick={() => setMobileOpen(true)}
-        >
-          <Image src="/images/burger.svg" alt="" width={25} height={18} />
-        </button>
-
+        <div className="flex items-center gap-3 xl:hidden">
+          <div className="flex items-center gap-2">
+            <Link href={pathname} locale="en" className={localeLinkClass("en")}>
+              EN
+            </Link>
+            <Link href={pathname} locale="ru" className={localeLinkClass("ru")}>
+              RU
+            </Link>
+          </div>
+          <button type="button" onClick={() => setMobileOpen(true)} aria-label={openNavLabel}>
+            <Image src="/images/burger.svg" alt="" width={24} height={18} />
+          </button>
+        </div>
       </div>
 
-      {/* MOBILE MENU */}
-      <div className={`fixed inset-0 z-[200] bg-white ${mobileOpen ? "block" : "hidden"}`}>
-        <div className="width-wrapper">
-          <div className="width-wrapper flex h-20 items-center justify-between">
-            
-            <div className="w-full max-w-[90px] max-h-[40px]">
-              <Link href="/" onClick={closeMobile} className="w-full max-w-[90px] max-h-[40px]">
-                <Image src="/_small_logo.png" alt="STACKLEVEL" width={180} height={40} className="w-full max-w-[24px] max-h-[57px]" />
-              </Link>
-            </div>
-
-            <span className="flex gap-4">
-              <Link href={pathname} locale="en" className={localeLinkClass("en")} onClick={closeMobile}>
-                EN
-              </Link>
-
-              <Link href={pathname} locale="ru" className={localeLinkClass("ru")} onClick={closeMobile}>
-                RU
-              </Link>
-            </span>
-
-            <button onClick={closeMobile}>
-              <Image src="/images/modal-close.svg" alt="" width={40} height={40} />
+      {mobileOpen ? (
+        <div className="fixed inset-0 z-[220] bg-white xl:hidden">
+          <div className="width-wrapper relative flex min-h-[88px] items-center justify-between py-3">
+            <Link href="/" onClick={() => setMobileOpen(false)} aria-label="Stacklevel Group">
+              <Image src="/logo.svg" alt="STACKLEVEL GROUP" width={260} height={50} className="h-auto w-[185px]" />
+            </Link>
+            <button type="button" onClick={() => setMobileOpen(false)} aria-label={closeNavLabel}>
+              <Image src="/images/modal-close.svg" alt="" width={36} height={36} />
             </button>
           </div>
-          <div className="w-full max-w-[180px] max-h-[40px] mt-4">
-            <Link href="/" onClick={closeMobile}>
-              <Image src="/logo.svg" alt="STACKLEVEL" width={180} height={40} />
-            </Link>
-          </div>
-          <div className=" mt-24 flex flex-col items-end gap-4 text-2xl">
-            <Link href="/hire-web-developers" className={linkClassModal} onClick={closeMobile}>
-              {t("hireDevelopers")}
-            </Link>
 
-            <Link href="/hire-dedicated-team" className={linkClassModal} onClick={closeMobile}>
-              {t("hireTeam")}
-            </Link>
-
-            <Link href="/case-studies" className={linkClassModal} onClick={closeMobile}>
-              {t("ourCases")}
-            </Link>
-
-            <Link href="/about-us" className={linkClassModal} onClick={closeMobile}>
-              {t("aboutUs")}
-            </Link>
-
-            <Link href="/blog" className={linkClassModal} onClick={closeMobile}>
-              {t("blog")}
-            </Link>
-
-            <Link href="/careers" className={linkClassModal} onClick={closeMobile}>
-              {t("career")}
-            </Link>
+          <div className="width-wrapper relative mt-4 flex flex-col gap-2 pb-10">
+            {navLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className="border-b-2 border-[var(--black)] py-3 text-2xl font-bold uppercase tracking-wide text-[var(--black)]"
+              >
+                {t(item.key)}
+              </Link>
+            ))}
           </div>
         </div>
-        <div className="absolute top-[175px] left-[-40]">
-          <Image src="/_burger_bg.png" alt="background" width={100} height={300} />
-        </div>
-      </div>
+      ) : null}
     </header>
   );
 }

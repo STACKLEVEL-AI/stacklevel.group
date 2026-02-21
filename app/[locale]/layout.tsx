@@ -16,7 +16,7 @@ export function generateStaticParams() {
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = params;
 
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound();
   }
 
@@ -29,4 +29,3 @@ export default async function LocaleLayout({ children, params }: Props) {
     </NextIntlClientProvider>
   );
 }
-

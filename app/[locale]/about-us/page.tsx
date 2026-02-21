@@ -1,45 +1,96 @@
 "use client";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useEffect, useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { isRuLocale } from "@/i18n/localeUtils";
+
+type Interviewer = {
+  name: string;
+  role: string;
+  quote: string;
+  image?: string;
+  imageAlt: string;
+  initials: string;
+};
 
 export default function AboutUsPage() {
   const t = useTranslations("aboutUs");
+  const locale = useLocale();
+  const isRu = isRuLocale(locale);
+  const [activeInterviewer, setActiveInterviewer] = useState(0);
+
+  const interviewers = useMemo<Interviewer[]>(
+    () => [
+      {
+        name: t("ceo.name"),
+        role: t("ceo.position"),
+        quote: t("ceo.quote"),
+        image: "/images/persons/max.jpg",
+        imageAlt: "Maxim Garbar",
+        initials: "MG",
+      },
+      {
+        name: "TBD",
+        role: isRu ? "Руководитель AI Engineering" : "Head of AI Engineering",
+        quote: isRu
+          ? "Мы превращаем AI-инициативы в производственные процессы: интеграции, ограничения деплоя и оптимизацию производительности/стоимости."
+          : "We turn AI initiatives into production workflows: integrations, deployment constraints, and performance/cost optimization.",
+        imageAlt: "Head of AI Engineering",
+        initials: "AE",
+      },
+      {
+        name: "TBD",
+        role: isRu ? "Руководитель AI Audit & Compliance" : "Head of AI Audit & Compliance",
+        quote: isRu
+          ? "Мы переводим требования безопасности и регуляторов в контролируемые политики, аудит и практики governance."
+          : "We translate regulatory and security requirements into enforceable controls, audits, and governance playbooks.",
+        imageAlt: "Head of AI Audit & Compliance",
+        initials: "AC",
+      },
+    ],
+    [locale, t]
+  );
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveInterviewer((prev) => (prev + 1) % interviewers.length);
+    }, 5500);
+
+    return () => window.clearInterval(timer);
+  }, [interviewers.length]);
+
+  const current = interviewers[activeInterviewer];
 
   return (
-    <section className="w-full bg-white mb-16 md:mb-32 lg:mb-40">
-      
+    <section className="w-full bg-white mb-16 md:mb-24">
       {/* TOP BLOCK */}
-      <div className="mx-auto flex flex-col md:flex-row items-stretch">
-
+      <div className="width-wrapper stack-panel my-8 flex flex-col overflow-hidden md:my-12 md:flex-row">
         {/* LEFT */}
-        <div className="flex w-full md:w-1/2 max-[1200px]:hidden items-center justify-center px-4 py-8 md:py-12">
-          <div className="relative w-full max-w-[280px] sm:max-w-[360px] md:max-w-[470px] aspect-[470/170]">
+        <div className="hidden w-full items-center justify-center bg-white px-4 py-8 md:flex md:w-[42%] md:py-12">
+          <div className="relative aspect-[470/170] w-full max-w-[470px]">
             <Image
               src="/logo.svg"
               alt="STACKLEVEL GROUP"
               width={470}
               height={170}
-              className="object-contain w-full h-full"
+              className="h-full w-full object-contain"
             />
           </div>
         </div>
 
         {/* RIGHT */}
-        <div className="relative w-full min-[1200]:w-1/2 bg-blue-700 text-white px-4 sm:px-6 md:px-16 py-10 sm:py-12 md:py-20 md:mr-5">
-
+        <div className="relative w-full bg-[var(--accent)] px-5 py-10 text-white sm:px-6 md:w-[58%] md:px-12 md:py-14">
           {/* TEXT */}
-          <div className="relative z-10 w-full max-w-[370px] text-[16px] sm:text-[18px] md:text-[22px] lg:text-[24px] font-semibold">
-            <p className="my-4 md:my-6">
-              {t("intro.first")}
-            </p>
-
-            <p className="my-4 md:my-6">
-              {t("intro.second")}
-            </p>
+          <div className="relative z-10 w-full max-w-[720px]">
+            <h1 className="stack-title text-2xl text-white sm:text-3xl md:text-4xl">
+              {isRu ? "МЫ СОЗДАЕМ УПРАВЛЯЕМЫЕ AI-СИСТЕМЫ ДЛЯ РЕАЛЬНОГО ПРОДАКШНА" : "WE BUILD GOVERNED AI SYSTEMS FOR REAL PRODUCTION"}
+            </h1>
+            <p className="mt-5 text-base leading-relaxed text-white/92 md:text-lg">{t("intro.first")}</p>
+            <p className="mt-3 text-base leading-relaxed text-white/92 md:text-lg">{t("intro.second")}</p>
           </div>
 
           {/* SVG */}
-          <div className="pointer-events-none absolute top-[-30px] right-[-5px] w-[80px] sm:w-[120px] md:w-[170px] opacity-50 md:opacity-100 ">
+          <div className="pointer-events-none absolute -right-2 -top-5 w-[80px] opacity-45 sm:w-[120px] md:w-[170px] md:opacity-90">
             <Image
               src="/images/vector3.svg"
               alt=""
@@ -48,62 +99,64 @@ export default function AboutUsPage() {
               className="w-full h-auto"
             />
           </div>
-
         </div>
       </div>
 
-      {/* CEO BLOCK */}
-      <div className="relative mx-auto max-w-[1476px] my-12 md:my-20 lg:my-[100px] px-4 md:px-0">
-
-        <div className="flex flex-col md:flex-row w-full">
-          {/* IMAGE */}
-          <div className="relative w-full md:w-auto md:min-w-[260px] lg:min-w-[301px] aspect-[301/305] md:h-[305px] shrink-0">
-            <Image
-              src="/images/persons/max.jpg"
-              alt="Maxim Garbar"
-              width={301}
-              height={305}
-              className="object-cover w-full h-full object-top"
-            />
-            <div className="absolute -bottom-2 left-0 h-[5px] w-full bg-blue-600" />
+      {/* INTERVIEWERS ROTATOR */}
+      <div className="width-wrapper pb-2 pt-4 md:pt-6">
+        <article className="stack-panel relative bg-white p-4 sm:p-6 md:p-8">
+          <div className="pointer-events-none absolute right-4 top-4 w-14 opacity-90 sm:right-6 sm:top-5 sm:w-16 md:w-20">
+            <Image src="/images/_quotes.svg" alt="" width={146} height={111} className="h-auto w-full" />
           </div>
 
-          {/* CONTENT */}
-          <div className="relative flex w-full flex-col justify-between border-t md:border-t-0 md:border-l border-gray-200 p-5 sm:p-6 md:min-h-[305px]">
-
-            {/* QUOTES */}
-            <div className="pointer-events-none absolute -top-6 right-0 w-14 sm:w-16 md:w-20">
-              <Image
-                src="/images/_quotes.svg"
-                alt=""
-                width={146}
-                height={111}
-                className="w-full h-auto"
-              />
+          <div className="grid gap-4 md:grid-cols-[280px_1fr] md:gap-6">
+            <div className="relative overflow-hidden border border-[rgba(0,0,0,.15)] bg-[var(--pale-gray)]">
+              {current.image ? (
+                <div className="relative min-h-[320px]">
+                  <Image
+                    src={current.image}
+                    alt={current.imageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 280px"
+                    className="object-cover object-top"
+                  />
+                </div>
+              ) : (
+                <div className="flex min-h-[320px] items-center justify-center text-5xl font-bold uppercase text-[var(--accent)]">
+                  {current.initials}
+                </div>
+              )}
+              <div className="absolute bottom-0 left-0 h-[4px] w-full bg-[var(--accent)]" />
             </div>
 
-            {/* TEXT */}
-            <div>
-              <h3 className="mb-3 sm:mb-4 md:mb-6 text-[22px] sm:text-[26px] md:text-[32px] font-bold uppercase text-blue-600">
-                {t("ceo.name")}
-              </h3>
-
-              <p className="max-w-[820px] text-[15px] sm:text-[16px] md:text-[18px] leading-[1.3] md:ml-5 mb-4 md:mb-5 text-black">
-                {t("ceo.quote")}
-              </p>
+            <div className="flex min-h-[320px] flex-col justify-between border border-[rgba(0,0,0,.15)] bg-white p-5 md:p-6">
+              <div>
+                <h2 className="stack-title text-2xl text-[var(--accent)] sm:text-3xl">{current.name}</h2>
+                <p className="mt-2 text-sm font-semibold uppercase tracking-wide text-[var(--black)]/80">{current.role}</p>
+                <p className="mt-6 max-w-4xl text-lg leading-relaxed text-[var(--black)] sm:text-xl">{current.quote}</p>
+              </div>
+              <div className="mt-7 flex items-center justify-between gap-3">
+                <p className="text-xs uppercase tracking-wide text-[var(--black)]/58">
+                  {isRu ? "Интервьюеры переключаются автоматически" : "Interviewers rotate automatically"}
+                </p>
+                <div className="flex items-center gap-2">
+                  {interviewers.map((item, index) => {
+                    const isActive = index === activeInterviewer;
+                    return (
+                      <button
+                        key={`${item.role}-${index}`}
+                        type="button"
+                        onClick={() => setActiveInterviewer(index)}
+                        className={`h-2.5 transition-all ${isActive ? "w-10 bg-[var(--accent)]" : "w-6 bg-[var(--brand-gray)]"}`}
+                        aria-label={`${isRu ? "Показать" : "Show"} ${item.role}`}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
             </div>
-
-            {/* POSITION */}
-            <div>
-              <p className="mt-6 md:mt-[55px] md:ml-5 text-[15px] sm:text-[16px] md:text-[18px] font-semibold uppercase text-blue-600">
-                {t("ceo.position")}
-              </p>
-
-              <div className="mt-4 md:mt-6 h-[3px] w-full bg-blue-600" />
-            </div>
-
           </div>
-        </div>
+        </article>
       </div>
     </section>
   );

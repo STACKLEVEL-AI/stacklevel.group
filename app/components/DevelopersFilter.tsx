@@ -3,12 +3,11 @@
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import HireUsModal from "./HireUsModal";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 type Stack = "all" | "react" | "php";
 
 export default function DevelopersFilter() {
-  const locale = useLocale();
   const t = useTranslations("pageWebDevelopers");
   const [active, setActive] = useState<Stack>("all");
   const [isOpen, setIsOpen] = useState(false);
