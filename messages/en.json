@@ -1,40 +1,4 @@
 {
-  "header": {
-    "hireDevelopers": "HIRE DEVELOPERS",
-    "reactDevelopment": "React Development",
-    "phpDevelopment": "PHP Development",
-    "hireTeam": "HIRE TEAM",
-    "ourCases": "OUR CASES",
-    "aboutUs": "ABOUT US",
-    "blog": "BLOG",
-    "career": "CAREER"
-  },
-  "home": {
-    "title1": "CUSTOM",
-    "title2": "SOFTWARE",
-    "title3": "DEVELOPMENT",
-    "title4": "COMPANY",
-    "subtitle": "WE BUILD HIGH-END TECHNOLOGICAL SOLUTIONS TO SCALE BUSINESSES",
-    "ctaFind": "WANT TO FIND DEVELOPERS?",
-    "ctaHire": "WANT TO HIRE A DEDICATED TEAM?"
-  },
-  "hireHero": {
-    "line1": "We Provide You With Developers",
-    "line2": "And Dedicated Teams",
-    "requestDeveloper": "REQUEST DEVELOPER",
-    "requestTeam": "REQUEST TEAM"
-  },
-  "footer": {
-    "hireUs": "HIRE US",
-    "contacts": "CONTACTS",
-    "beInTouch": "BE IN TOUCH",
-    "wantToKnow": "WANT TO KNOW MORE ABOUT US?",
-    "experiencedDevelopers": "<value></value>EXPERIENCED DEVELOPERS",
-    "yearsOnTheMarket": "<value></value>YEARS ON THE MARKET",
-    "successfulProjects": "<value></value>SUCCESSFUL PROJECTS",
-    "ofReturnedCustomers": "<value></value>OF RETURNED CUSTOMERS",
-    "positiveOnly": "ONLY …<value></value> FEEDBACK"
-  },
   "pageWebDevelopers": {
     "title": "Find developers",
     "allDevelopers": "All Developers",
@@ -42,51 +6,46 @@
     "textButtonReact": "Do you want to know more about React Development?",
     "textButtonPHP": "Do you want to know more about PHP Development?"
   },
-  "reactPage": {
-    "intro": "If you are looking for a user-friendly and easy-to-use application — react native app development is the best option for you. Expand your business easily with STACKLEVEL GROUP react development team.",
-
-    "whatIsTitle": "What is React?",
-    "whatIsText": "Do you use Facebook, Instagram, Yahoo or Airbnb? If yes, congratulations — you’ve already got acquainted with React JS. To be clear, ReactJS was created by Facebook, and it is an open-source mobile application framework. All the applications for iOS and Android, created on React are native and easy-to-scale.",
-
-    "whereTitle": "Where to use it?",
-    "whereIntro": "React JS can help your business in many ways. We provide all kind of react native app development services:",
-
-    "services": {
-      "mobile": "React mobile apps development for iOS and Android",
-      "upgrade": "Upgrading existing web applications with React",
-      "integration": "Integration React JS plugins into existing solutions",
-      "web": "React native web apps development",
-      "frontend": "React JS front-end development"
-    },
-
-    "whyTitle": "Why React?",
-    "benefit1Title": "Saves your time and money",
-    "benefit1Text": "Money and time — there are two most important questions while doing business. To save both is almost a miracle. And React native development can make it happen! Easy start and fast goals achieved are the reasons many companies choose react js development for their mobile applications. You can be one step ahead from the competitors if you choose react native app development.",
-
-    "benefit2Title": "Offers cross-platform mobile app development",
-    "benefit2Text": "What if we say that using react native development can allow you to create only one code for both Android and iOS and make all apps run smoothly? It is real with React JS. Within a short time, you can create mobile applications for any kind of business! All you need is a talented React Developer (like one of the STACKLEVEL GROUP ones) and willing to rock your market.",
-
-    "benefit3Title": "The user-experience is always on top",
-    "benefit3Text": "React Native was created by Facebook for mobile apps. That’s why it is the best option if you want your mobile application to be as user-friendly as possible. Fast loading speed, lovable interface, and simple navigation — that is what makes mobile applications created with react native development great. You won’t have to choose between quality and functionality — react-native can do both.",
-
-    "benefit4Title": "Simple integration",
-    "benefit4Text": "There is no need to think about how to integrate your react native mobile application with third-party services. React native allows you to add plugins and APIs (like payment gateways, maps and so on) with your mobile app.",
-
-    "teamTitle": "What STACKLEVEL GROUP team can do for your business?",
-    "teamText": "STACKLEVEL GROUP is an experienced software development company. We offer a full cycle of react software development services and help our clients to scale their business and be one step ahead of the competitors. Talented react developers are always doing their best to help our clients achieve all their business goals."
+  "hireHero": {
+    "line1": "We Provide You With Developers",
+    "line2": "And Dedicated Teams",
+    "requestDeveloper": "REQUEST DEVELOPER"
   },
   "hireLinks": {
     "hireDeveloper": "Do you want to hire developer?",
     "hireDedicated": "Do you want to hire dedicated team?"
   },
-  "phpAbout": {
-    "hero": "Build high-quality web solutions with experienced\nSTACKLEVEL GROUP PHP developers.",
-    "whatIsTitle": "What is PHP development?",
-    "whatIsText": "PHP, being one of the most popular open-source languages of programming, is an essential part of almost every web-based solution. From easy-to-use websites to high-loaded applications. STACKLEVEL GROUP PHP developers have strong expertise in creating secure, stable and easy-to-scale web applications of all kinds to make businesses grow.",
-
+  "reactPage": {
+    "intro": "If you are looking for a user-friendly and easy-to-use application, React Native app development is the right option. Expand your business with STACKLEVEL GROUP React development team.",
+    "whatIsTitle": "What is React?",
+    "whatIsText": "Do you use Facebook, Instagram, Yahoo or Airbnb? If yes, you have already seen React JS in action. ReactJS was created by Facebook and is an open-source framework for modern app interfaces across iOS, Android and web.",
     "whereTitle": "Where to use it?",
-    "whereText": "PHP language is perfect for all kinds of web development. We provide all kind of php web development services:",
-
+    "whereIntro": "React JS can support business outcomes in multiple scenarios. We provide full React Native app development services:",
+    "services": {
+      "mobile": "React mobile apps development for iOS and Android",
+      "upgrade": "Upgrading existing web applications with React",
+      "integration": "Integrating React JS plugins into existing solutions",
+      "web": "React native web apps development",
+      "frontend": "React JS front-end development"
+    },
+    "whyTitle": "Why React?",
+    "benefit1Title": "Saves time and budget",
+    "benefit1Text": "React Native speeds delivery by reusing components and shortening release cycles. Teams can move from idea to production faster with lower implementation friction.",
+    "benefit2Title": "Cross-platform delivery",
+    "benefit2Text": "With React Native, one codebase can serve both Android and iOS with high UX consistency. This is practical when businesses need faster rollout across platforms.",
+    "benefit3Title": "Strong user experience",
+    "benefit3Text": "Fast rendering, smooth interface behavior and clear navigation make React-based products easier to use and scale.",
+    "benefit4Title": "Simple integration",
+    "benefit4Text": "React Native integrates with third-party APIs and services such as payment gateways, maps and analytics with predictable implementation effort.",
+    "teamTitle": "What STACKLEVEL GROUP can do for your business",
+    "teamText": "STACKLEVEL GROUP provides end-to-end React delivery and helps teams build stable products that support growth and operational goals."
+  },
+  "phpAbout": {
+    "hero": "Build high-quality web solutions with experienced STACKLEVEL GROUP PHP developers.",
+    "whatIsTitle": "What is PHP development?",
+    "whatIsText": "PHP is one of the most widely used open-source programming languages and remains core for many web systems. STACKLEVEL GROUP engineers build secure, stable and scalable PHP applications for real business workloads.",
+    "whereTitle": "Where to use it?",
+    "whereText": "PHP is practical for many web development needs. We provide full PHP development services:",
     "services": {
       "customApps": "Custom web applications development",
       "websites": "All kinds of websites development",
@@ -94,79 +53,136 @@
       "ecommerce": "E-commerce development",
       "customPhp": "Custom PHP development"
     },
-
     "whyTitle": "Why PHP development?",
-
-    "benefit1Title": "Saves your time",
-    "benefit1Text": "PHP development allows reusing parts of the code and it was created to develop web applications quickly. There is a wide variety of PHP frameworks like Symfony or Laravel. Each framework has its own specific functionality and provides time-saving development for every business need.",
-
-    "benefit2Title": "Reduce your costs",
-    "benefit2Text": "PHP is an open-source language — it means that using PHP is more cost-effective compared to all other technologies used for web application development. No additional spendings on downloading additional plugins, licensing or expensive web hosting. Affordable and fast-to-implement — what can be better for your business?",
-
-    "benefit3Title": "Allows to implement many features",
-    "benefit3Text": "If your business needs frequent updates, it is important to have a development model, which can be updated easily as soon as you need it. PHP development makes interactions built without additional development. Because of easily decipherable syntax, using PHP development allows you to change everything freely and in a short period of time.",
-
+    "benefit1Title": "Saves implementation time",
+    "benefit1Text": "PHP frameworks such as Laravel and Symfony accelerate delivery with proven architecture patterns and reusable components.",
+    "benefit2Title": "Reduces cost",
+    "benefit2Text": "PHP is open-source and cost-effective for development and infrastructure compared with many alternatives.",
+    "benefit3Title": "Flexible feature delivery",
+    "benefit3Text": "PHP enables quick iteration and maintainable updates, which is useful for products requiring frequent improvements.",
     "benefit4Title": "Secure and stable",
-    "benefit4Text": "PHP is used by almost 85% of all web applications. It is used for both highly-loaded web solutions and simple websites. PHP language was created to cover both problems of stability and safety. Choose a talented developer from STACKLEVEL GROUP team — and never worry how to protect your web application.",
-
-    "teamTitle": "What STACKLEVEL GROUP team can do for your business?",
-    "teamText": "STACKLEVEL GROUP is an experienced software development company. We offer a full cycle of php web development services and help our clients to scale their business and be one step ahead of the competitors. Talented php developers are always doing their best to help our clients achieve all their business goals."
+    "benefit4Text": "PHP can support both high-load and standard web solutions when implemented with proper architecture and operations practices.",
+    "teamTitle": "What STACKLEVEL GROUP can do for your business",
+    "teamText": "STACKLEVEL GROUP delivers full-cycle PHP engineering and helps teams launch reliable products with sustainable maintenance paths."
   },
   "dedicatedHero": {
-    "requestTeam": "Request dedicated team",
-
-    "title": "WE HELP YOU TO CHOOSE THE EXPERT OR HIRE A DEDICATED TEAM YOU NEED",
-
+    "requestTeam": "REQUEST TEAM",
+    "title": "WE HELP YOU CHOOSE THE RIGHT EXPERT OR BUILD THE TEAM YOU NEED",
     "steps": {
       "step1": "Together we define your business needs",
-      "step2": "We provide you with a perfect specialist or a dedicated team",
+      "step2": "We provide the right specialist or a dedicated team",
       "step3": "You start an effective partnership and scale your business"
     },
-
     "expertsTitle": "Our Experts",
-
     "experts": {
       "pmTitle": "Hire a Project Manager",
-      "pmText": "High-performing talented STACKLEVEL GROUP experts bring order to every chaos and manage projects effectively.",
-
+      "pmText": "Project managers who structure delivery and keep execution aligned with business targets.",
       "baTitle": "Hire a Business Analyst",
-      "baText": "Lowering project costs and increasing the value of the business? That's what STACKLEVEL GROUP business analysts will bring you.",
-
+      "baText": "Business analysts who reduce delivery risk and improve requirement quality.",
       "uxTitle": "Hire a UX/UI Designer",
-      "uxText": "STACKLEVEL GROUP UX/UI designer will identify the user-persona of your business and will implement features to grow your revenue.",
-
+      "uxText": "Design specialists who improve user experience and product clarity.",
       "devTitle": "Hire Developers",
-      "devText": "Experienced dedicated developers: php developers, iOS/Android developers, react js developers.",
-
+      "devText": "Dedicated developers: PHP developers, iOS/Android developers, React developers.",
       "qaTitle": "Hire a QA Engineer",
-      "qaText": "Deploying only perfectly working products within deadlines — is what STACKLEVEL GROUP QA engineers do. See for yourself!"
+      "qaText": "QA engineers focused on stable releases and production readiness."
     },
-
     "cta": "Request Team"
-  },
-  "caseStudies": {
-    "title": "We Provide You With Developers And Dedicated Teams",
-    "subtitle": "Find cases",
-    "inputPlaceholder": "Enter technology",
-    "submitButton": "Find for cases"
-  },
-  "aboutUs": {
-    "intro": {
-      "first": "We believe in the personal approach and the high quality of code. Because, let's be honest, the product should work properly. We know that every business can become a market leader with digitalization. From mobile applications developing to creating a complex system — the STACKLEVEL GROUP development team is always ready to help.",
-      "second": "The years of experience and high level of clients' trust make STACKLEVEL GROUP team reliable partners on the way of success. Business analysis, engineering, user-friendly ux/ui design, proper testing, product management — we guide you through the way. No need to worry about the quality with STACKLEVEL GROUP — you can focus on your business, while we do the rest."
-    },
-    "ceo": {
-      "name": "MAXIM GARBAR",
-      "quote": "We provide innovative developing and consulting services to make businesses of our clients grow and become market leaders. The client's success is our success.",
-      "position": "CEO STACKLEVEL GROUP"
-    }
-  },
-  "blog": {
-    "title": "Blog"
   },
   "careers": {
     "hero": "HIRE US",
     "title": "We're always looking for new talents. Join us!",
-    "subtitle": "If you didn't find your vacancy, just send a message, and we will figure it out!"
+    "subtitle": "If you did not find your vacancy, send a message and we will review your profile."
+  },
+  "aboutUs": {
+    "intro": {
+      "first": "Since 2018, Stacklevel Group has delivered complex enterprise systems and integrations. Today we focus on governed AI: engineering, audit, and compliance so AI can be deployed in regulated production, not only piloted.",
+      "second": "We combine delivery discipline with product assets, including Century, to standardize evidence, access control, evaluation, and audit trails. The result is faster rollout, lower operational risk, and review-ready documentation."
+    },
+    "ceo": {
+      "name": "MAXIM GARBAR",
+      "quote": "Our job is to make AI deployable in real environments: measurable, reviewable, and operationally controlled, without compromising security.",
+      "position": "CEO, STACKLEVEL GROUP"
+    }
+  },
+  "header": {
+    "services": "Services",
+    "audit": "Audit & Compliance",
+    "products": "Products",
+    "caseStudies": "Case Studies",
+    "resources": "Resources",
+    "blog": "Blog",
+    "company": "Company",
+    "contact": "Contact",
+    "openNav": "Open navigation",
+    "closeNav": "Close navigation"
+  },
+  "footer": {
+    "complianceLine": "Compliance note: We engineer AI systems with auditable controls and evidence-first workflows; final legal and regulatory interpretation remains with your legal/compliance teams.",
+    "tagline": "AI governance, audit, and compliance engineering for regulated production.",
+    "navigate": "Navigate",
+    "actions": "Actions",
+    "services": "Services",
+    "audit": "Audit & Compliance",
+    "products": "Products",
+    "cases": "Case Studies",
+    "blog": "Blog",
+    "resources": "Resources",
+    "company": "Company",
+    "contact": "Contact"
+  },
+  "contactForm": {
+    "title": "Send request",
+    "subtitle": "Share the target workflow and the constraints that matter for delivery.",
+    "name": "Name",
+    "workEmail": "Work email",
+    "company": "Company",
+    "topic": "Topic",
+    "shortMessage": "Short message",
+    "send": "Send request",
+    "emailUs": "Email us"
+  },
+  "leadership": {
+    "previous": "Previous quote",
+    "next": "Next quote",
+    "show": "Show"
+  },
+  "pages": {
+    "company": {
+      "clientsTitle": "Trusted by leading enterprises since 2018",
+      "stats": {
+        "experienced": "EXPERIENCED DEVELOPERS",
+        "returned": "OF RETURNED CUSTOMERS",
+        "years": "YEARS ON THE MARKET",
+        "positive": "POSITIVE FEEDBACK",
+        "success": "SUCCESSFUL PROJECTS"
+      },
+      "cta": {
+        "more": "WANT TO KNOW MORE ABOUT US?",
+        "scoping": "Request scoping call",
+        "audit": "Request audit brief"
+      }
+    },
+    "home": {
+      "clientsTitle": "Trusted since 2018",
+      "heading": "Engineering. Audit. Compliance in one execution plan.",
+      "lead": "One delivery model for platform, security, and governance stakeholders.",
+      "usecasesTitle": "Typical enterprise use cases",
+      "product": {
+        "title": "Product highlight",
+        "heading": "Century for governed deployment",
+        "lead": "Century is our production LLM platform with citations, IAM-aware retrieval, audit logs, and evaluation gates for controlled rollout.",
+        "bullet1": "Citations-first responses for verification workflows.",
+        "bullet2": "Permission-aware retrieval aligned with enterprise IAM.",
+        "bullet3": "Audit logs and release gates for controlled operations.",
+        "ctaView": "View Century",
+        "ctaDemo": "Request demo"
+      },
+      "scoping": {
+        "title": "Need a scoped starting point?",
+        "lead": "We align use case, deployment constraints, and governance requirements before implementation starts.",
+        "cta": "Request scoping call"
+      }
+    }
   }
 }
+

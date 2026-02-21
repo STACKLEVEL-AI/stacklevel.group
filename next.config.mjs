@@ -10,8 +10,45 @@ const withNextIntl = createNextIntlPlugin(
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // любые опции
+  async redirects() {
+    return [
+      {
+        source: "/:locale(en|ru)/hire-web-developers",
+        destination: "/:locale/services",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|ru)/hire-dedicated-team",
+        destination: "/:locale/services",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|ru)/hire-react-developers",
+        destination: "/:locale/services",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|ru)/hire-php-developers",
+        destination: "/:locale/services",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|ru)/about-us",
+        destination: "/:locale/company",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|ru)/careers",
+        destination: "/:locale/company",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|ru)/program-pack",
+        destination: "/:locale/company",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);
-

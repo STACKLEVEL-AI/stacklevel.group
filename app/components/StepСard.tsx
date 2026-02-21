@@ -1,7 +1,7 @@
 import { StepArrow } from "./ArrowBetweenSteps";
 
 type Props = {
-  step: any;
+  step: React.ReactNode;
   text: string;
   showArrow?: boolean;
 };

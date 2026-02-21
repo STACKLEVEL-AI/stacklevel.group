@@ -4,8 +4,18 @@ import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "STACKLEVEL — Custom Software Development",
-  description: "We build high-end technological solutions to scale businesses.",
+  title: "Stacklevel Group | AI Governance & Compliance Engineering",
+  description:
+    "Stacklevel Group designs, audits, and governs AI for regulated production with product assets including Century.",
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
+  keywords: ["AI", "audit", "compliance", "governance", "Stacklevel Group"],
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

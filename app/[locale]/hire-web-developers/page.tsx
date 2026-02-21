@@ -1,6 +1,6 @@
 import HireDevelopersHero from "../../components/HireDevelopersHero";
 import DevelopersFilter from "../../components/DevelopersFilter";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export const metadata = {
   title: "Hire Web Developers | STACKLEVEL",
@@ -8,7 +8,6 @@ export const metadata = {
 };
 
 export default function HireWebDevelopersPage() {
-  const locale = useLocale();
   const t = useTranslations("pageWebDevelopers");
 
   return (

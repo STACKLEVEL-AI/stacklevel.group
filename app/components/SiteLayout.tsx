@@ -11,7 +11,7 @@ export default function SiteLayout({
   return (
     <div className="page min-h-screen">
       <Header />
-      <main>{children}</main>
+      <main className="stack-main-grid">{children}</main>
       <Footer />
     </div>
   );
