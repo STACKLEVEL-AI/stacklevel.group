@@ -146,6 +146,28 @@
     "next": "Next quote",
     "show": "Show"
   },
+  "blog": {
+    "title": "Blog",
+    "isReady": "is ready",
+    "addFirstPost": "Add the first post in",
+    "hero": {
+      "line1": "Stacklevel",
+      "line2": "News",
+      "line3": "And Briefs",
+      "subtitle": "Code-first blog with practical updates on enterprise AI engineering, audit, and compliance execution.",
+      "primaryCta": "Request briefing",
+      "secondaryCta": "View case studies"
+    },
+    "chips": {
+      "engineering": "Engineering updates",
+      "audit": "Audit notes",
+      "product": "Product news"
+    },
+    "latestNews": "news",
+    "feedDescription": "Auto-scrolling feed. Newest posts start on the left.",
+    "openPost": "Open post",
+    "backToBlog": "Back to blog"
+  },
   "pages": {
     "company": {
       "clientsTitle": "Trusted by leading enterprises since 2018",

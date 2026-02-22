@@ -132,79 +132,79 @@ export default function CompanyPage({ params }: Props) {
 
       <section className="relative py-8 md:py-12">
         <div className="width-wrapper">
-          <article className="relative overflow-hidden bg-[rgba(245,244,247,.84)] px-5 py-7 sm:px-6 md:px-10 md:py-10">
-            <div className="mb-5 lg:hidden">
-              <h2 className="stack-title text-4xl text-[var(--black)]">
-                WE <span className="stack-accent">ARE ...</span>
+          <article className="dots-pattern relative overflow-hidden border border-[rgba(0,0,0,.12)] bg-[rgba(245,244,247,.86)] px-5 py-7 sm:px-6 md:px-10 md:py-10">
+            <div className="mb-6 lg:hidden">
+              <h2 className="stack-title text-[clamp(30px,7.4vw,44px)] text-[var(--black)]">
+                {isRu ? "МЫ — ..." : "WE ARE ..."}
               </h2>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-[190px_1fr]">
-              <div className="relative hidden min-h-[280px] items-center justify-start lg:flex">
+            <div className="grid gap-8 lg:grid-cols-[150px_1fr] xl:grid-cols-[170px_1fr]">
+              <div className="relative hidden min-h-[380px] items-center justify-center lg:flex">
                 <span
-                  className="stack-title absolute translate-x-[10px] translate-y-[24px] text-6xl tracking-wide text-[var(--brand-gray)]/45"
+                  className="stack-title absolute translate-x-[10px] translate-y-[18px] text-[88px] tracking-wide text-[var(--brand-gray)]/45"
                   style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
                 >
-                  МЫ — ...
+                  {isRu ? "МЫ — ..." : "WE ARE ..."}
                 </span>
                 <span
-                  className="stack-title relative z-10 text-6xl tracking-wide text-[var(--black)]"
+                  className="stack-title relative z-10 text-[88px] tracking-wide text-[var(--black)]"
                   style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
                 >
-                  МЫ — ...
+                  {isRu ? "МЫ — ..." : "WE ARE ..."}
                 </span>
               </div>
 
-              <div className="grid gap-y-10 gap-x-8 sm:grid-cols-2 xl:grid-cols-3">
-                <div className="space-y-10 md:space-y-12">
+              <div className="grid gap-x-10 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
+                <div className="space-y-10">
                   <article>
-                    <p className="stack-title text-[clamp(32px,2.7vw,56px)] text-[var(--accent)]">30+</p>
-                    <p className="stack-title mt-1 text-[clamp(24px,2vw,46px)] leading-[0.96] text-[var(--black)]">
+                    <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">30+</p>
+                    <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
                       {isRu ? "ОПЫТНЫЕ РАЗРАБОТЧИКИ" : "EXPERIENCED DEVELOPERS"}
                     </p>
                   </article>
                   <article>
-                    <p className="stack-title text-[clamp(32px,2.7vw,56px)] text-[var(--accent)]">92%</p>
-                    <p className="stack-title mt-1 text-[clamp(24px,2vw,46px)] leading-[0.96] text-[var(--black)]">
+                    <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">92%</p>
+                    <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
                       {isRu ? "ВОЗВРАЩАЮЩИХСЯ КЛИЕНТОВ" : "OF RETURNED CUSTOMERS"}
                     </p>
                   </article>
                 </div>
 
-                <div className="space-y-10 md:space-y-12">
+                <div className="space-y-10">
                   <article>
-                    <p className="stack-title text-[clamp(32px,2.7vw,56px)] text-[var(--accent)]">3+</p>
-                    <p className="stack-title mt-1 text-[clamp(24px,2vw,46px)] leading-[0.96] text-[var(--black)]">
+                    <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">3+</p>
+                    <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
                       {isRu ? "ЛЕТ НА РЫНКЕ" : "YEARS ON THE MARKET"}
                     </p>
                   </article>
                   <article>
-                    <p className="stack-title text-[clamp(32px,2.7vw,56px)] text-[var(--accent)]">ТОЛЬКО ...</p>
-                    <p className="stack-title mt-1 text-[clamp(24px,2vw,46px)] leading-[0.96] text-[var(--accent)]">
+                    <p className="stack-title text-[clamp(34px,2.6vw,44px)] leading-[1] text-[var(--black)]">
+                      {isRu ? "ТОЛЬКО ..." : "ONLY ..."}
+                    </p>
+                    <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--accent)]">
                       {isRu ? "ПОЗИТИВНЫЕ ОТЗЫВЫ" : "POSITIVE FEEDBACK"}
                     </p>
                   </article>
                 </div>
 
-                <div className="space-y-10 md:space-y-12 sm:col-span-2 xl:col-span-1">
+                <div className="space-y-10 md:col-span-2 xl:col-span-1">
                   <article>
-                    <p className="stack-title text-[clamp(32px,2.7vw,56px)] text-[var(--accent)]">20+</p>
-                    <p className="stack-title mt-1 text-[clamp(24px,2vw,46px)] leading-[0.96] text-[var(--black)]">
+                    <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">20+</p>
+                    <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
                       {isRu ? "УСПЕШНЫЕ ПРОЕКТЫ" : "SUCCESSFUL PROJECTS"}
                     </p>
                   </article>
 
                   <Link
                     href="/contact?topic=Scoping%20call"
-                    className="inline-flex min-h-[104px] w-full max-w-[360px] items-center border border-[var(--accent)] bg-[var(--accent)] px-6 py-4 text-[clamp(20px,1.6vw,32px)] font-bold uppercase leading-[1.03] text-white transition hover:bg-white hover:text-[var(--accent)]"
+                    className="inline-flex min-h-[100px] w-full max-w-[410px] items-center border border-[var(--accent)] bg-[var(--accent)] px-7 py-4 text-[clamp(26px,2vw,42px)] font-bold uppercase leading-[1.02] text-white transition hover:bg-white hover:text-[var(--accent)]"
                   >
-                    {isRu ? "ХОТИТЕ УЗНАТЬ О НАС БОЛЬШЕ?" : "WANT TO KNOW MORE ABOUT US?"}
+                    {isRu ? "ХОТИТЕ УЗНАТЬ БОЛЬШЕ О НАС?" : "WANT TO KNOW MORE ABOUT US?"}
                   </Link>
                 </div>
               </div>
             </div>
-
-            <div className="mt-8 h-3 bg-[var(--accent)]" />
           </article>
         </div>
       </section>

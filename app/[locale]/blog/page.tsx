@@ -1,23 +1,35 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
+import { isRuLocale } from "@/i18n/localeUtils";
+import { getTranslations } from "next-intl/server";
 import InnerHero from "../../components/InnerHero";
 import { getAllBlogPosts } from "@/app/content/blogPosts";
 
-export const metadata: Metadata = {
-  title: "Blog | Stacklevel Group",
-  description:
-    "News and field notes on governed AI engineering, audit readiness, and enterprise compliance-by-design.",
-};
+type Props = { params: { locale: string } };
 
-function formatDate(dateString: string) {
-  return new Date(`${dateString}T00:00:00Z`).toLocaleDateString("en-US", {
+export function generateMetadata({ params }: Props): Metadata {
+  const isRu = isRuLocale(params.locale);
+
+  return {
+    title: isRu ? "Блог | Stacklevel Group" : "Blog | Stacklevel Group",
+    description: isRu
+      ? "Новости и практические заметки по инженерии управляемого ИИ, подготовке к аудиту и соответствию по дизайну."
+      : "News and field notes on governed AI engineering, audit readiness, and enterprise compliance-by-design.",
+  };
+}
+
+function formatDate(dateString: string, locale: string) {
+  const localeCode = isRuLocale(locale) ? "ru-RU" : "en-US";
+  return new Date(`${dateString}T00:00:00Z`).toLocaleDateString(localeCode, {
     year: "numeric",
     month: "short",
     day: "numeric",
   });
 }
 
-export default function BlogPage() {
+export default async function BlogPage({ params }: Props) {
+  const t = await getTranslations("blog");
+  const locale = params.locale;
   const posts = getAllBlogPosts();
   const feedPosts = posts.slice(0, 4);
   const marqueePosts = [...feedPosts, ...feedPosts];
@@ -28,10 +40,10 @@ export default function BlogPage() {
         <section className="relative overflow-hidden py-12 md:py-16">
           <div className="width-wrapper">
             <h1 className="stack-grid-title text-[var(--black)]">
-              Blog <span className="stack-accent">is ready</span>
+              Blog <span className="stack-accent">{t("isReady")}</span>
             </h1>
             <p className="mt-4 max-w-3xl text-[var(--black)]/85">
-              Add the first post in <code>app/content/blogPosts.ts</code> and it will appear here automatically.
+              {t("addFirstPost")} <code>app/content/blogPosts.ts</code> {isRuLocale(locale) ? "и он появится здесь автоматически." : "and it will appear here automatically."}
             </p>
           </div>
         </section>
@@ -43,23 +55,23 @@ export default function BlogPage() {
     <div className="relative">
       <InnerHero
         lines={[
-          { text: "Stacklevel" },
-          { text: "News", accent: true },
-          { text: "And Briefs" },
+          { text: t("hero.line1") },
+          { text: t("hero.line2"), accent: true },
+          { text: t("hero.line3") },
         ]}
-        subtitle="Code-first blog with practical updates on enterprise AI engineering, audit, and compliance execution."
-        primaryCta={{ label: "Request briefing", href: "/contact?topic=Partnership" }}
-        secondaryCta={{ label: "View case studies", href: "/case-studies", ghost: true }}
-        chips={["Engineering updates", "Audit notes", "Product news"]}
+        subtitle={t("hero.subtitle")}
+        primaryCta={{ label: t("hero.primaryCta"), href: "/contact?topic=Partnership" }}
+        secondaryCta={{ label: t("hero.secondaryCta"), href: "/case-studies", ghost: true }}
+        chips={[t("chips.engineering"), t("chips.audit"), t("chips.product")]}
       />
 
       <section className="relative overflow-hidden py-12 md:py-16">
         <div className="width-wrapper">
           <h2 className="stack-grid-title text-[var(--black)]">
-            Latest <span className="stack-accent">news</span>
+            {isRuLocale(locale) ? "Последние" : "Latest"} <span className="stack-accent">{t("latestNews")}</span>
           </h2>
           <p className="mt-3 max-w-3xl text-[var(--black)]/78">
-            Auto-scrolling feed. Newest posts start on the left.
+            {t("feedDescription")}
           </p>
 
           <div className="news-marquee mt-7">
@@ -75,7 +87,7 @@ export default function BlogPage() {
                     className={`${cardStyle} mr-4 flex h-[340px] w-[320px] shrink-0 flex-col p-5 sm:mr-5 sm:w-[360px] lg:w-[400px]`}
                   >
                     <p className="text-xs font-bold uppercase tracking-wide text-[var(--accent)]">
-                      {post.category} • {formatDate(post.publishedAt)} • {post.readingMinutes} min read
+                      {post.category} • {formatDate(post.publishedAt, locale)} • {post.readingMinutes} {isRuLocale(locale) ? "мин. чтения" : "min read"}
                     </p>
                     <h3 className="stack-title stack-clamp-3 mt-3 min-h-[74px] text-xl leading-tight text-[var(--black)] md:min-h-[84px]">
                       {post.title}
@@ -88,7 +100,7 @@ export default function BlogPage() {
                       tabIndex={isClone ? -1 : undefined}
                       className="stack-cta-ghost mt-5 w-full text-base"
                     >
-                      Open post
+                      {t("openPost")}
                     </Link>
                   </article>
                 );

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
+import { isRuLocale } from "@/i18n/localeUtils";
+import { getTranslations } from "next-intl/server";
 import { getAllBlogPosts, getBlogPostBySlug } from "@/app/content/blogPosts";
 
 type BlogPostPageProps = {
@@ -10,8 +12,9 @@ type BlogPostPageProps = {
   };
 };
 
-function formatDate(dateString: string) {
-  return new Date(`${dateString}T00:00:00Z`).toLocaleDateString("en-US", {
+function formatDate(dateString: string, locale: string) {
+  const localeCode = isRuLocale(locale) ? "ru-RU" : "en-US";
+  return new Date(`${dateString}T00:00:00Z`).toLocaleDateString(localeCode, {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -24,21 +27,24 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: BlogPostPageProps): Metadata {
   const post = getBlogPostBySlug(params.slug);
+  const isRu = isRuLocale(params.locale);
 
   if (!post) {
     return {
-      title: "Post not found | Stacklevel Blog",
+      title: isRu ? "Пост не найден | Stacklevel Блог" : "Post not found | Stacklevel Blog",
     };
   }
 
   return {
-    title: `${post.title} | Stacklevel Blog`,
+    title: `${post.title} | ${isRu ? "Stacklevel Блог" : "Stacklevel Blog"}`,
     description: post.excerpt,
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const t = await getTranslations("blog");
   const post = getBlogPostBySlug(params.slug);
+  const locale = params.locale;
 
   if (!post) {
     notFound();
@@ -49,12 +55,12 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
       <section className="relative overflow-hidden py-12 md:py-16">
         <div className="width-wrapper">
           <Link href="/blog" className="stack-cta-ghost text-base">
-            Back to blog
+            {t("backToBlog")}
           </Link>
 
           <article className="stack-panel mt-6 bg-white p-6 md:p-8">
             <p className="text-xs font-bold uppercase tracking-wide text-[var(--accent)]">
-              {post.category} • {formatDate(post.publishedAt)} • {post.readingMinutes} min read
+              {post.category} • {formatDate(post.publishedAt, locale)} • {post.readingMinutes} {isRuLocale(locale) ? "мин. чтения" : "min read"}
             </p>
             <h1 className="stack-grid-title mt-3 text-[var(--black)]">{post.title}</h1>
             <p className="mt-4 max-w-4xl text-[var(--black)]/86">{post.excerpt}</p>
