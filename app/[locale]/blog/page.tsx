@@ -43,7 +43,7 @@ export default async function BlogPage({ params }: Props) {
               Blog <span className="stack-accent">{t("isReady")}</span>
             </h1>
             <p className="mt-4 max-w-3xl text-[var(--black)]/85">
-              {t("addFirstPost")} <code>app/content/blogPosts.ts</code> {isRuLocale(locale) ? "и он появится здесь автоматически." : "and it will appear here automatically."}
+              {t("addFirstPost")} <code>app/content/blogPosts.ts</code> {t("lastPostMessage")}
             </p>
           </div>
         </section>
@@ -87,7 +87,7 @@ export default async function BlogPage({ params }: Props) {
                     className={`${cardStyle} mr-4 flex h-[340px] w-[320px] shrink-0 flex-col p-5 sm:mr-5 sm:w-[360px] lg:w-[400px]`}
                   >
                     <p className="text-xs font-bold uppercase tracking-wide text-[var(--accent)]">
-                      {post.category} • {formatDate(post.publishedAt, locale)} • {post.readingMinutes} {isRuLocale(locale) ? "мин. чтения" : "min read"}
+                      {post.category} • {formatDate(post.publishedAt, locale)} • {post.readingMinutes} {t("minRead")}
                     </p>
                     <h3 className="stack-title stack-clamp-3 mt-3 min-h-[74px] text-xl leading-tight text-[var(--black)] md:min-h-[84px]">
                       {post.title}

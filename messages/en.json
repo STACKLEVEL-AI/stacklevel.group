@@ -150,6 +150,8 @@
     "title": "Blog",
     "isReady": "is ready",
     "addFirstPost": "Add the first post in",
+    "lastPostMessage": "and it will appear here automatically.",
+    "minRead": "min read",
     "hero": {
       "line1": "Stacklevel",
       "line2": "News",
@@ -192,6 +194,11 @@
       "heading": "Engineering. Audit. Compliance in one execution plan.",
       "lead": "One delivery model for platform, security, and governance stakeholders.",
       "usecasesTitle": "Typical enterprise use cases",
+      "heroChips": {
+        "chip1": "On-prem / air-gapped / hybrid",
+        "chip2": "RAG + citations + audit",
+        "chip3": "IAM-aware responses"
+      },
       "product": {
         "title": "Product highlight",
         "heading": "Century for governed deployment",
@@ -208,6 +215,49 @@
         "cta": "Request scoping call"
       }
     }
+  },
+  "ourWorks": {
+    "title": "NDA Case Studies",
+    "subtitle": "Industry outcome cases focused on engineering decisions, governance controls, and audit readiness.",
+    "viewAll": "View full case format",
+    "cases": {
+      "financial": {
+        "title": "Financial Services Assistant",
+        "industry": "Financial services (NDA)",
+        "focus": "Permission-aware retrieval, citations, and audit logs."
+      },
+      "public": {
+        "title": "Public Operations Knowledge Flow",
+        "industry": "Public sector operations (NDA)",
+        "focus": "Traceability and controlled document-grounded responses."
+      },
+      "industrial": {
+        "title": "Industrial Troubleshooting Copilot",
+        "industry": "Industrial and energy operations (NDA)",
+        "focus": "Evidence-backed workflows with evaluation gates."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Client Testimonials",
+    "clientAboutUs": "What our clients say about us",
+    "feedbacks": {
+      "henry": {
+        "author": "Henry",
+        "position": "CTO",
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo."
+      },
+      "anna": {
+        "author": "Anna",
+        "position": "Product Manager",
+        "comment": "We have been working with STACKLEVEL for over a year. Great team, delivered on time."
+      }
+    }
+  },
+  "services": {
+    "engagementDetails": "Engagement details",
+    "deliverables": "Deliverables",
+    "inputs": "Inputs",
+    "timelineApproach": "Timeline approach"
   }
 }
-

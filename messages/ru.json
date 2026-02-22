@@ -143,6 +143,8 @@
     "title": "Блог",
     "isReady": "Блог готов",
     "addFirstPost": "Добавьте первый пост в",
+    "lastPostMessage": "и он появится здесь автоматически.",
+    "minRead": "мин. чтения",
     "hero": {
       "line1": "Stacklevel",
       "line2": "Новости",
@@ -195,6 +197,11 @@
       "heading": "Инженерия. Аудит. Соответствие в едином плане исполнения.",
       "lead": "Единая модель поставки для платформенных, security и управленческих команд.",
       "usecasesTitle": "Типовые enterprise-сценарии",
+      "heroChips": {
+        "chip1": "Локальное / замкнутое / гибридное",
+        "chip2": "RAG + citations + audit",
+        "chip3": "Учёт прав доступа в ответах"
+      },
       "product": {
         "title": "Продуктовый акцент",
         "heading": "Century для управляемого развёртывания",
@@ -226,6 +233,49 @@
         "audit": "Запросить бриф аудита"
       }
     }
+  },
+  "ourWorks": {
+    "title": "Кейсы NDA",
+    "subtitle": "Кейсы с фокусом на инженерные решения, управление контролями и готовность к аудиту.",
+    "viewAll": "Посмотреть все кейсы",
+    "cases": {
+      "financial": {
+        "title": "Ассистент для финансового сектора",
+        "industry": "Финансовые услуги (NDA)",
+        "focus": "Поиск с учётом прав доступа, ссылки на источники и журналирование аудита."
+      },
+      "public": {
+        "title": "Поток знаний для операций госсектора",
+        "industry": "Операции госсектора (NDA)",
+        "focus": "Прослеживаемость и управляемые ответы, обоснованные документами."
+      },
+      "industrial": {
+        "title": "Copilot для диагностики проблем производства",
+        "industry": "Промышленные и энергетические операции (NDA)",
+        "focus": "Рабочие процессы с доказательной базой и этапами оценки."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Отзывы наших клиентов",
+    "clientAboutUs": "О нас говорят наши клиенты",
+    "feedbacks": {
+      "henry": {
+        "author": "Henry",
+        "position": "CTO",
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo."
+      },
+      "anna": {
+        "author": "Anna",
+        "position": "Менеджер продукта",
+        "comment": "Мы работаем со STACKLEVEL более года. Отличная команда, выполнили вовремя."
+      }
+    }
+  },
+  "services": {
+    "engagementDetails": "Детали взаимодействия",
+    "deliverables": "Результаты",
+    "inputs": "Входные данные",
+    "timelineApproach": "Подход по срокам"
   }
 }
-

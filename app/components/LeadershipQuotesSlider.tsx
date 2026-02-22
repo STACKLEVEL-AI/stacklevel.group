@@ -56,7 +56,7 @@ export default function LeadershipQuotesSlider() {
       {
         id: "head-ai-engineering",
         name: "TBD",
-        position: isRu ? "HEAD OF AI ENGINEERING" : "HEAD OF AI ENGINEERING",
+        position: isRu ? "РУКОВОДИТЕЛЬ AI ENGINEERING" : "HEAD OF AI ENGINEERING",
         quote: isRu
           ? "Мы превращаем AI-инициативы в производственные процессы: интеграции, ограничения деплоя и оптимизацию производительности/стоимости."
           : "We turn AI initiatives into production workflows: integrations, deployment constraints, and performance/cost optimization.",
@@ -65,7 +65,7 @@ export default function LeadershipQuotesSlider() {
       {
         id: "head-ai-audit",
         name: "TBD",
-        position: isRu ? "HEAD OF AI AUDIT & COMPLIANCE" : "HEAD OF AI AUDIT & COMPLIANCE",
+        position: isRu ? "РУКОВОДИТЕЛЬ AI AUDIT & COMPLIANCE" : "HEAD OF AI AUDIT & COMPLIANCE",
         quote: isRu
           ? "Мы переводим требования безопасности и регуляторов в исполнимые контролы, аудит и governance-практики."
           : "We translate regulatory and security requirements into enforceable controls, audits, and governance playbooks.",

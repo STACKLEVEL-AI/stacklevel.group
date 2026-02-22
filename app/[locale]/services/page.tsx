@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { isRuLocale } from "@/i18n/localeUtils";
+import { getTranslations } from "next-intl/server";
 import InnerHero from "../../components/InnerHero";
 import Accordion from "../../components/Accordion";
 
@@ -19,8 +20,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function ServicesPage({ params }: Props) {
+export default async function ServicesPage({ params }: Props) {
   const isRu = isRuLocale(params.locale);
+  const tGlobal = await getTranslations("services");
 
   const serviceLines = isRu
     ? [
@@ -308,7 +310,7 @@ export default function ServicesPage({ params }: Props) {
                   className="mt-4"
                   items={[
                     {
-                      title: isRu ? "Детали engagement" : "Engagement details",
+                      title: tGlobal("engagementDetails"),
                       content: (
                         <div className="grid gap-2 text-sm">
                           {service.details.map((detail) => (

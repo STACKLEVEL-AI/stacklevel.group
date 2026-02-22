@@ -80,13 +80,13 @@ export default function HomeHero() {
 
           <div className="mt-2 flex flex-wrap gap-2">
             <span className="border border-white/60 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-black">
-              {"On-prem / air-gapped / hybrid"}
+              {t("heroChips.chip1")}
             </span>
             <span className="border border-white/60 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-black">
-              {"RAG + citations + audit"}
+              {t("heroChips.chip2")}
             </span>
             <span className="border border-white/60 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-black">
-              {"IAM-aware responses"}
+              {t("heroChips.chip3")}
             </span>
           </div>
         </div>

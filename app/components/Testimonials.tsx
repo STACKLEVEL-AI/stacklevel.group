@@ -1,17 +1,28 @@
 import Image from "@/app/components/BaseImage";
 import { assetPath } from "@/app/lib/assets";
-
-const FEEDBACKS = [
-  { author: "Henry", comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.", job: "CTO" },
-  { author: "Anna", comment: "We have been working with STACKLEVEL for over a year. Great team, delivered on time.", job: "Product Manager" },
-];
+import { useTranslations } from "next-intl";
 
 export default function Testimonials() {
+  const t = useTranslations("testimonials");
+
+  const FEEDBACKS = [
+    { 
+      author: t("feedbacks.henry.author"), 
+      comment: t("feedbacks.henry.comment"), 
+      job: t("feedbacks.henry.position") 
+    },
+    { 
+      author: t("feedbacks.anna.author"), 
+      comment: t("feedbacks.anna.comment"), 
+      job: t("feedbacks.anna.position") 
+    },
+  ];
+
   return (
     <div className="testimonials__wrapper relative">
       <section id="testimonials" className="testimonials mx-auto mt-12 w-[300px] sm:w-[375px] md:w-[417px] md:my-[70px] md:w-[667px] md:mt-[90px] md:mb-[30px] lg:w-[892px] xl:w-[1000px]">
         <h3 className="testimonials__header mx-auto w-fit bg-white px-2.5 pt-2.5 text-center font-semibold uppercase md:px-[50px] md:pt-[50px] [font-size:clamp(24px,3vw,36px)]">
-          Our clients about us
+          {t("clientAboutUs")}
         </h3>
         <div className="testimonials__block relative mt-10 w-full md:py-[60px] md:pt-[60px] md:pb-10">
           <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-4">

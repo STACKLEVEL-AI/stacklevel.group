@@ -1,35 +1,38 @@
 import { Link } from "@/i18n/navigation";
-
-const ndaCases = [
-  {
-    title: "Financial Services Assistant",
-    industry: "Financial services (NDA)",
-    focus: "Permission-aware retrieval, citations, and audit logs.",
-    tone: "stack-panel-accent",
-  },
-  {
-    title: "Public Operations Knowledge Flow",
-    industry: "Public sector operations (NDA)",
-    focus: "Traceability and controlled document-grounded responses.",
-    tone: "stack-panel-dark",
-  },
-  {
-    title: "Industrial Troubleshooting Copilot",
-    industry: "Industrial and energy operations (NDA)",
-    focus: "Evidence-backed workflows with evaluation gates.",
-    tone: "stack-panel-pale",
-  },
-] as const;
+import { useTranslations } from "next-intl";
 
 export default function OurWorks() {
+  const t = useTranslations("ourWorks");
+
+  const ndaCases = [
+    {
+      title: t("cases.financial.title"),
+      industry: t("cases.financial.industry"),
+      focus: t("cases.financial.focus"),
+      tone: "stack-panel-accent",
+    },
+    {
+      title: t("cases.public.title"),
+      industry: t("cases.public.industry"),
+      focus: t("cases.public.focus"),
+      tone: "stack-panel-dark",
+    },
+    {
+      title: t("cases.industrial.title"),
+      industry: t("cases.industrial.industry"),
+      focus: t("cases.industrial.focus"),
+      tone: "stack-panel-pale",
+    },
+  ] as const;
+
   return (
     <section id="our-works" className="relative overflow-hidden bg-[#f4f4f6] py-12 md:py-16">
       <div className="width-wrapper relative">
         <h2 className="stack-grid-title max-w-4xl text-[var(--black)]">
-          NDA <span className="stack-accent">Case</span> Studies
+          {t("title")} <span className="stack-accent">Case</span> Studies
         </h2>
         <p className="mt-4 max-w-3xl text-[var(--black)]/85">
-          Industry outcome cases focused on engineering decisions, governance controls, and audit readiness.
+          {t("subtitle")}
         </p>
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -43,7 +46,7 @@ export default function OurWorks() {
         </div>
 
         <Link href="/case-studies" className="stack-cta mt-8 w-full max-w-[360px] text-xl md:text-2xl">
-          View full case format
+          {t("viewAll")}
         </Link>
       </div>
     </section>
