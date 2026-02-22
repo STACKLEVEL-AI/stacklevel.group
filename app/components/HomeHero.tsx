@@ -8,7 +8,7 @@ import { isRuLocale } from "@/i18n/localeUtils";
 export default function HomeHero() {
   const locale = useLocale();
   const isRu = isRuLocale(locale);
-  const t = useTranslations("home");
+  const t = useTranslations("pages.home");
 
   return (
     <section
