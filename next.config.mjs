@@ -12,6 +12,9 @@ const withNextIntl = createNextIntlPlugin(
 const nextConfig = {
   output: 'export',
   basePath: '/stacklevel.group',
+  env: {
+    NEXT_PUBLIC_BASE_PATH: '/stacklevel.group',
+  },
 };
 
 export default withNextIntl(nextConfig);
