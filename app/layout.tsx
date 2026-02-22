@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description:
     "Stacklevel Group designs, audits, and governs AI for regulated production with product assets including Century.",
   icons: {
-    icon: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   keywords: ["AI", "audit", "compliance", "governance", "Stacklevel Group"],
   robots: {
