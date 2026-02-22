@@ -1,4 +1,5 @@
-import Image from "next/image";
+import Image from "@/app/components/BaseImage";
+import { assetPath } from "@/app/lib/assets";
 
 const FEEDBACKS = [
   { author: "Henry", comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.", job: "CTO" },
@@ -38,8 +39,18 @@ export default function Testimonials() {
           />
         </div>
         <div className="feedback-slider__nav flex items-center justify-end gap-4 mr-[7vw] xl:mr-[100px]">
-          <button type="button" aria-label="Prev" className="h-5 w-5 shrink-0 cursor-pointer bg-[length:contain] bg-no-repeat md:h-[30px] md:w-[30px]" style={{ backgroundImage: "url(/images/_prev-feedback.svg)" }} />
-          <button type="button" aria-label="Next" className="h-5 w-5 shrink-0 cursor-pointer bg-[length:contain] bg-no-repeat md:h-[30px] md:w-[30px]" style={{ backgroundImage: "url(/images/_next-feedback.svg)" }} />
+          <button
+            type="button"
+            aria-label="Prev"
+            className="h-5 w-5 shrink-0 cursor-pointer bg-[length:contain] bg-no-repeat md:h-[30px] md:w-[30px]"
+            style={{ backgroundImage: `url(${assetPath("/images/_prev-feedback.svg")})` }}
+          />
+          <button
+            type="button"
+            aria-label="Next"
+            className="h-5 w-5 shrink-0 cursor-pointer bg-[length:contain] bg-no-repeat md:h-[30px] md:w-[30px]"
+            style={{ backgroundImage: `url(${assetPath("/images/_next-feedback.svg")})` }}
+          />
           <span className="text-xl font-semibold text-[var(--accent)] md:text-2xl xl:text-[32px]">1 / 2</span>
         </div>
       </section>

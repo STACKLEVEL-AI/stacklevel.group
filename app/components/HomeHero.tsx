@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/app/components/BaseImage";
 import { Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { isRuLocale } from "@/i18n/localeUtils";
+import { assetPath } from "@/app/lib/assets";
 
 export default function HomeHero() {
   const locale = useLocale();
@@ -37,8 +38,11 @@ export default function HomeHero() {
         </h1>
       </div>
 
-      <div className="relative col-start-2 min-h-[320px] max-[1025px]:col-auto max-[1025px]:min-h-[420px]">
-        <div className="stack-hero-bg absolute inset-0 z-0" />
+      <div className="relative col-start-2 min-h-[320px] overflow-hidden max-[1025px]:col-auto max-[1025px]:min-h-[420px]">
+        <div
+          className="stack-hero-bg absolute inset-0 z-0"
+          style={{ backgroundImage: `url(${assetPath("/images/hero-bg.png")})` }}
+        />
         <div className="absolute inset-0 z-0 bg-black/30" />
 
         <Image

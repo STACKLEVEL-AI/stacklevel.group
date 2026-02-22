@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/app/components/BaseImage";
 import { Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { isRuLocale } from "@/i18n/localeUtils";
@@ -21,8 +21,8 @@ export default function Footer() {
             <p className="mt-4 max-w-sm text-sm text-[var(--black)]">{t("tagline")}</p>
             <div className="mt-4 space-y-1 text-sm font-semibold text-[var(--black)]">
               <p>
-                <a href="mailto:info@stacklevel.group" className="hover:text-[var(--accent)]">
-                  info@stacklevel.group
+                <a href="mailto:v.bakhmat@stacklevel.group" className="hover:text-[var(--accent)]">
+                  v.bakhmat@stacklevel.group
                 </a>
               </p>
               <p>

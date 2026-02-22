@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/app/components/BaseImage";
 
 const ROW1 = [
   { slug: "gazprom_en", alt: "Gazprom" },
