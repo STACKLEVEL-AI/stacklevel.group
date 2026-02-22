@@ -10,6 +10,7 @@ const withNextIntl = createNextIntlPlugin(
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   async redirects() {
     return [
       {

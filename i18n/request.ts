@@ -10,15 +10,22 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export default async function requestConfig({
   requestLocale
 }: {
-  requestLocale: Promise<string | undefined>;
-}) {
-  const requested = await requestLocale;
+  requestLocale?: Promise<string | undefined>;
+} = {}) {
+  let locale: Locale = routing.defaultLocale;
 
-  const locale: Locale = routing.locales.includes(
-    requested as Locale
-  )
-    ? (requested as Locale)
-    : routing.defaultLocale;
+  // If requestLocale is provided, use it; otherwise use default
+  if (requestLocale) {
+    try {
+      const requested = await requestLocale;
+      if (requested && routing.locales.includes(requested as Locale)) {
+        locale = requested as Locale;
+      }
+    } catch {
+      // In static export, requestLocale may fail; fall back to default
+      locale = routing.defaultLocale;
+    }
+  }
 
   // Read JSON file synchronously
   const messagesPath = join(__dirname, '..', 'messages', `${locale}.json`);

@@ -1,8 +1,10 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import SiteLayout from "../components/SiteLayout";
+import { readFileSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
 type Props = {
   children: React.ReactNode;
@@ -20,8 +22,10 @@ export default async function LocaleLayout({ children, params }: Props) {
     notFound();
   }
 
-  setRequestLocale(locale);
-  const messages = await getMessages();
+  // Load messages directly for static export (no headers() dependency)
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const messagesPath = join(__dirname, '../../messages', `${locale}.json`);
+  const messages = JSON.parse(readFileSync(messagesPath, 'utf-8'));
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
