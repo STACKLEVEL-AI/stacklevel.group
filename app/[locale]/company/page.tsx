@@ -134,63 +134,66 @@ export default async function CompanyPage({ params }: Props) {
 
       <section className="relative py-8 md:py-12">
         <div className="width-wrapper">
-          <article className="dots-pattern relative overflow-hidden border border-[rgba(0,0,0,.12)] bg-[rgba(245,244,247,.86)] px-5 py-7 sm:px-6 md:px-10 md:py-10">
+          <article
+            className="dots-pattern relative overflow-hidden border border-[rgba(0,0,0,.12)] bg-[rgba(245,244,247,.86)] px-5 py-7 sm:px-6 md:px-10 md:py-10"
+            style={{ backgroundPosition: "14px 14px" }}
+          >
             <div className="mb-6 lg:hidden">
               <h2 className="stack-title text-[clamp(30px,7.4vw,44px)] text-[var(--black)]">
                 {isRu ? "МЫ — ..." : "WE ARE ..."}
               </h2>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-[150px_1fr] xl:grid-cols-[170px_1fr]">
-              <div className="relative hidden min-h-[380px] items-center justify-center lg:flex">
+            <div className="grid gap-8 lg:grid-cols-[130px_1fr] xl:grid-cols-[150px_1fr]">
+              <div className="relative hidden min-h-[360px] items-center justify-center lg:flex">
                 <span
-                  className="stack-title absolute translate-x-[10px] translate-y-[18px] text-[88px] tracking-wide text-[var(--brand-gray)]/45"
+                  className="stack-title absolute translate-x-[8px] translate-y-[14px] text-[72px] tracking-wide text-[var(--brand-gray)]/45"
                   style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
                 >
                   {isRu ? "МЫ — ..." : "WE ARE ..."}
                 </span>
                 <span
-                  className="stack-title relative z-10 text-[88px] tracking-wide text-[var(--black)]"
+                  className="stack-title relative z-10 text-[72px] tracking-wide text-[var(--black)]"
                   style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
                 >
                   {isRu ? "МЫ — ..." : "WE ARE ..."}
                 </span>
               </div>
 
-              <div className="grid items-start gap-x-10 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
+              <div className="grid items-start gap-x-10 gap-y-12 md:grid-cols-2 xl:grid-cols-3">
                 <article>
-                  <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">30+</p>
-                  <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
+                  <p className="text-[clamp(40px,3.6vw,58px)] font-bold uppercase leading-[1] text-[var(--accent)]">30+</p>
+                  <p className="stack-title mt-3 text-[clamp(28px,2.3vw,44px)] leading-[1.08] text-[var(--black)]">
                     {isRu ? "ОПЫТНЫЕ РАЗРАБОТЧИКИ" : "EXPERIENCED DEVELOPERS"}
                   </p>
                 </article>
 
                 <article>
-                  <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">3+</p>
-                  <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
+                  <p className="text-[clamp(40px,3.6vw,58px)] font-bold uppercase leading-[1] text-[var(--accent)]">3+</p>
+                  <p className="stack-title mt-3 text-[clamp(28px,2.3vw,44px)] leading-[1.08] text-[var(--black)]">
                     {isRu ? "ЛЕТ НА РЫНКЕ" : "YEARS ON THE MARKET"}
                   </p>
                 </article>
 
                 <article>
-                  <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">20+</p>
-                  <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
+                  <p className="text-[clamp(40px,3.6vw,58px)] font-bold uppercase leading-[1] text-[var(--accent)]">20+</p>
+                  <p className="stack-title mt-3 text-[clamp(28px,2.3vw,44px)] leading-[1.08] text-[var(--black)]">
                     {isRu ? "УСПЕШНЫЕ ПРОЕКТЫ" : "SUCCESSFUL PROJECTS"}
                   </p>
                 </article>
 
                 <article>
-                  <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">92%</p>
-                  <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
+                  <p className="text-[clamp(40px,3.6vw,58px)] font-bold uppercase leading-[1] text-[var(--accent)]">92%</p>
+                  <p className="stack-title mt-3 text-[clamp(28px,2.3vw,44px)] leading-[1.08] text-[var(--black)]">
                     {isRu ? "ВОЗВРАЩАЮЩИХСЯ КЛИЕНТОВ" : "OF RETURNED CUSTOMERS"}
                   </p>
                 </article>
 
                 <article>
-                  <p className="stack-title text-[clamp(34px,2.6vw,44px)] leading-[1] text-[var(--black)]">
+                  <p className="stack-title text-[clamp(28px,2.2vw,38px)] leading-[1.08] text-[var(--black)]">
                     {isRu ? "ТОЛЬКО ..." : "ONLY ..."}
                   </p>
-                  <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--accent)]">
+                  <p className="stack-title mt-3 text-[clamp(28px,2.3vw,44px)] leading-[1.08] text-[var(--accent)]">
                     {isRu ? "ПОЗИТИВНЫЕ ОТЗЫВЫ" : "POSITIVE FEEDBACK"}
                   </p>
                 </article>
