@@ -1,18 +1,33 @@
-'use client';
+import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { readFileSync } from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+import SiteLayout from "./components/SiteLayout";
+import LocaleHomePage from "./[locale]/page";
 
-import { useEffect } from 'react';
+export const metadata: Metadata = {
+  title: "Stacklevel Group | Инженерия ИИ, аудит и соответствие",
+  description:
+    "Stacklevel Group внедряет инженерные практики ИИ, аудит и соответствие по дизайну для корпоративных производственных сред.",
+  alternates: {
+    languages: {
+      ru: "/",
+      en: "/en",
+    },
+  },
+};
 
-export default function RootPage() {
-  useEffect(() => {
-    // Try to detect browser language, fall back to English
-    const browserLang = navigator.language.split('-')[0];
-    const preferredLocale = ['ru', 'en'].includes(browserLang) ? browserLang : 'en';
-    window.location.replace(`/${preferredLocale}`);
-  }, []);
+export default async function RootPage() {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const messagesPath = join(__dirname, "../messages", "ru.json");
+  const messages = JSON.parse(readFileSync(messagesPath, "utf-8"));
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', fontFamily: 'system-ui' }}>
-      <p>Redirecting...</p>
-    </div>
+    <NextIntlClientProvider locale="ru" messages={messages}>
+      <SiteLayout>
+        {await LocaleHomePage({ params: Promise.resolve({ locale: "ru" }) })}
+      </SiteLayout>
+    </NextIntlClientProvider>
   );
 }

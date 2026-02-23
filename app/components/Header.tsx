@@ -3,8 +3,8 @@
 import Image from "@/app/components/BaseImage";
 import { useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
+import NextLink from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { isRuLocale } from "@/i18n/localeUtils";
 
 const navLinks = [
   { href: "/services", key: "services" },
@@ -22,10 +22,11 @@ export default function Header() {
   const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations("header");
+  const ruHref = pathname || "/";
+  const enHref = pathname === "/" ? "/en" : `/en${pathname}`;
 
   const localeLinkClass = (loc: string) =>
     `text-xs font-bold uppercase tracking-wide ${locale === loc ? "text-[var(--accent)]" : "text-[var(--black)] hover:text-[var(--accent)]"}`;
-  const isRu = isRuLocale(locale);
   const openNavLabel = t("openNav");
   const closeNavLabel = t("closeNav");
 
@@ -50,23 +51,23 @@ export default function Header() {
 
         <div className="hidden items-center gap-3 xl:flex">
           <div className="flex items-center gap-2">
-            <Link href={pathname} locale="en" className={localeLinkClass("en")}>
+            <NextLink href={enHref} className={localeLinkClass("en")}>
               EN
-            </Link>
-            <Link href={pathname} locale="ru" className={localeLinkClass("ru")}>
+            </NextLink>
+            <NextLink href={ruHref} className={localeLinkClass("ru")} hrefLang="ru">
               RU
-            </Link>
+            </NextLink>
           </div>
         </div>
 
         <div className="flex items-center gap-3 xl:hidden">
           <div className="flex items-center gap-2">
-            <Link href={pathname} locale="en" className={localeLinkClass("en")}>
+            <NextLink href={enHref} className={localeLinkClass("en")}>
               EN
-            </Link>
-            <Link href={pathname} locale="ru" className={localeLinkClass("ru")}>
+            </NextLink>
+            <NextLink href={ruHref} className={localeLinkClass("ru")} hrefLang="ru">
               RU
-            </Link>
+            </NextLink>
           </div>
           <button type="button" onClick={() => setMobileOpen(true)} aria-label={openNavLabel}>
             <Image src="/images/burger.svg" alt="" width={24} height={18} />
