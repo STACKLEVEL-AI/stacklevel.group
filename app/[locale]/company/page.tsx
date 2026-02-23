@@ -155,47 +155,45 @@ export default function CompanyPage({ params }: Props) {
                 </span>
               </div>
 
-              <div className="grid gap-x-10 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
-                <div className="space-y-10">
-                  <article>
-                    <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">30+</p>
-                    <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
-                      {isRu ? "ОПЫТНЫЕ РАЗРАБОТЧИКИ" : "EXPERIENCED DEVELOPERS"}
-                    </p>
-                  </article>
-                  <article>
-                    <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">92%</p>
-                    <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
-                      {isRu ? "ВОЗВРАЩАЮЩИХСЯ КЛИЕНТОВ" : "OF RETURNED CUSTOMERS"}
-                    </p>
-                  </article>
-                </div>
+              <div className="grid items-start gap-x-10 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
+                <article>
+                  <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">30+</p>
+                  <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
+                    {isRu ? "ОПЫТНЫЕ РАЗРАБОТЧИКИ" : "EXPERIENCED DEVELOPERS"}
+                  </p>
+                </article>
 
-                <div className="space-y-10">
-                  <article>
-                    <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">3+</p>
-                    <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
-                      {isRu ? "ЛЕТ НА РЫНКЕ" : "YEARS ON THE MARKET"}
-                    </p>
-                  </article>
-                  <article>
-                    <p className="stack-title text-[clamp(34px,2.6vw,44px)] leading-[1] text-[var(--black)]">
-                      {isRu ? "ТОЛЬКО ..." : "ONLY ..."}
-                    </p>
-                    <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--accent)]">
-                      {isRu ? "ПОЗИТИВНЫЕ ОТЗЫВЫ" : "POSITIVE FEEDBACK"}
-                    </p>
-                  </article>
-                </div>
+                <article>
+                  <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">3+</p>
+                  <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
+                    {isRu ? "ЛЕТ НА РЫНКЕ" : "YEARS ON THE MARKET"}
+                  </p>
+                </article>
 
-                <div className="space-y-10 md:col-span-2 xl:col-span-1">
-                  <article>
-                    <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">20+</p>
-                    <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
-                      {isRu ? "УСПЕШНЫЕ ПРОЕКТЫ" : "SUCCESSFUL PROJECTS"}
-                    </p>
-                  </article>
+                <article>
+                  <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">20+</p>
+                  <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
+                    {isRu ? "УСПЕШНЫЕ ПРОЕКТЫ" : "SUCCESSFUL PROJECTS"}
+                  </p>
+                </article>
 
+                <article>
+                  <p className="text-[clamp(44px,4.2vw,66px)] font-bold uppercase leading-[0.95] text-[var(--accent)]">92%</p>
+                  <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--black)]">
+                    {isRu ? "ВОЗВРАЩАЮЩИХСЯ КЛИЕНТОВ" : "OF RETURNED CUSTOMERS"}
+                  </p>
+                </article>
+
+                <article>
+                  <p className="stack-title text-[clamp(34px,2.6vw,44px)] leading-[1] text-[var(--black)]">
+                    {isRu ? "ТОЛЬКО ..." : "ONLY ..."}
+                  </p>
+                  <p className="stack-title mt-2 text-[clamp(34px,2.9vw,52px)] leading-[0.98] text-[var(--accent)]">
+                    {isRu ? "ПОЗИТИВНЫЕ ОТЗЫВЫ" : "POSITIVE FEEDBACK"}
+                  </p>
+                </article>
+
+                <div className="md:col-span-2 xl:col-span-1">
                   <Link
                     href="/contact?topic=Scoping%20call"
                     className="inline-flex min-h-[100px] w-full max-w-[410px] items-center border border-[var(--accent)] bg-[var(--accent)] px-7 py-4 text-[clamp(26px,2vw,42px)] font-bold uppercase leading-[1.02] text-white transition hover:bg-white hover:text-[var(--accent)]"
