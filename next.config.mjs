@@ -11,7 +11,10 @@ const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
+    formats: ['image/avif', 'image/webp'],
   },
+  // Headers are configured in vercel.json for Vercel deployment
+  // For other static hosts, configure cache headers at the web server level
 };
 
 export default withNextIntl(nextConfig);

@@ -25,6 +25,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href={`${basePath}/images/hero-bg.png`}
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="fetch"
+          href={`${basePath}/images/companies/tdberlin.svg`}
+          type="image/svg+xml"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body>
         {children}
       </body>
