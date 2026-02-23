@@ -7,9 +7,7 @@ export default function RootPage() {
     // Try to detect browser language, fall back to English
     const browserLang = navigator.language.split('-')[0];
     const preferredLocale = ['ru', 'en'].includes(browserLang) ? browserLang : 'en';
-    // Include basePath in the redirect
-    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/stacklevel.group';
-    window.location.replace(`${basePath}/${preferredLocale}`);
+    window.location.replace(`/${preferredLocale}`);
   }, []);
 
   return (
