@@ -1,21 +1,15 @@
 import Image from "@/app/components/BaseImage";
 
 const ROW1 = [
-  { slug: "gazprom_en", alt: "Gazprom" },
-  { slug: "duma_en", alt: "Moscow City Duma" },
-  { slug: "papajobs", alt: "PAPA JOBS" },
   { slug: "hvmn", alt: "HVMN" },
   { slug: "unicredit_en", alt: "UniCredit Bank" },
-  { slug: "otkritie_en", alt: "Otkritie Bank" },
-  { slug: "zenit_en", alt: "Bank Zenit" },
-] as const;
-
-const ROW2 = [
   { slug: "jammtravel", alt: "jamm.travel" },
   { slug: "viasports", alt: "VIASPORTS" },
   { slug: "atol", alt: "ATON" },
   { slug: "tdberlin", alt: "trommsdorff + druer" },
 ] as const;
+
+const ROW2 = [] as const;
 
 const LOGOS = [...ROW1, ...ROW2] as const;
 const TOP_ROW = LOGOS.slice(0, 6);
