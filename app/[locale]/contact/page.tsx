@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
 import InnerHero from "../../components/InnerHero";
+import ContactForm from "../../components/ContactForm";
 import { isRuLocale } from "@/i18n/localeUtils";
 
-const ContactForm = dynamic(() => import("../../components/ContactForm"), {
-  ssr: false,
-});
+type Props = { params: Promise<{ locale: string }> };
 
-type Props = { params: { locale: string } };
-
-export function generateMetadata({ params }: Props): Metadata {
-  const isRu = isRuLocale(params.locale);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
 
   return {
     title: isRu ? "Контакты Stacklevel Group | Уточнение объёма, аудит или демо" : "Contact Stacklevel Group | Scoping, Audit, or Demo",
@@ -21,8 +17,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function ContactPage({ params }: Props) {
-  const isRu = isRuLocale(params.locale);
+export default async function ContactPage({ params }: Props) {
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
 
   return (
     <div className="relative">
@@ -94,9 +91,7 @@ export default function ContactPage({ params }: Props) {
 
       <section id="contact-form" className="relative overflow-hidden stack-section-pale py-12 md:py-16">
         <div className="width-wrapper relative">
-          <Suspense fallback={<div>{isRu ? "Загрузка формы..." : "Loading form..."}</div>}>
-            <ContactForm />
-          </Suspense>
+          <ContactForm />
         </div>
       </section>
     </div>
