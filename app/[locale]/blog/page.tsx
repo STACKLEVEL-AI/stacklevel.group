@@ -5,10 +5,11 @@ import { getTranslations } from "next-intl/server";
 import InnerHero from "../../components/InnerHero";
 import { getAllBlogPosts } from "@/app/content/blogPosts";
 
-type Props = { params: { locale: string } };
+type Props = { params: Promise<{ locale: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const isRu = isRuLocale(params.locale);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
 
   return {
     title: isRu ? "Блог | Stacklevel Group" : "Blog | Stacklevel Group",
@@ -29,7 +30,7 @@ function formatDate(dateString: string, locale: string) {
 
 export default async function BlogPage({ params }: Props) {
   const t = await getTranslations("blog");
-  const locale = params.locale;
+  const { locale } = await params;
   const posts = getAllBlogPosts();
   const feedPosts = posts.slice(0, 4);
   const marqueePosts = [...feedPosts, ...feedPosts];

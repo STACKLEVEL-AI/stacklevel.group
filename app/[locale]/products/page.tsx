@@ -3,10 +3,11 @@ import { Link } from "@/i18n/navigation";
 import { isRuLocale } from "@/i18n/localeUtils";
 import InnerHero from "../../components/InnerHero";
 
-type Props = { params: { locale: string } };
+type Props = { params: Promise<{ locale: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const isRu = isRuLocale(params.locale);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
 
   return {
     title: isRu
@@ -18,8 +19,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function ProductsPage({ params }: Props) {
-  const isRu = isRuLocale(params.locale);
+export default async function ProductsPage({ params }: Props) {
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
 
   const centuryHighlights = isRu
     ? [

@@ -5,10 +5,11 @@ import { getTranslations } from "next-intl/server";
 import InnerHero from "../../components/InnerHero";
 import Accordion from "../../components/Accordion";
 
-type Props = { params: { locale: string } };
+type Props = { params: Promise<{ locale: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const isRu = isRuLocale(params.locale);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
 
   return {
     title: isRu
@@ -21,7 +22,8 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 export default async function ServicesPage({ params }: Props) {
-  const isRu = isRuLocale(params.locale);
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
   const tGlobal = await getTranslations("services");
 
   const serviceLines = isRu

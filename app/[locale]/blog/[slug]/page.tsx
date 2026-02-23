@@ -6,10 +6,10 @@ import { getTranslations } from "next-intl/server";
 import { getAllBlogPosts, getBlogPostBySlug } from "@/app/content/blogPosts";
 
 type BlogPostPageProps = {
-  params: {
+  params: Promise<{
     locale: string;
     slug: string;
-  };
+  }>;
 };
 
 function formatDate(dateString: string, locale: string) {
@@ -25,9 +25,10 @@ export function generateStaticParams() {
   return getAllBlogPosts().map((post) => ({ slug: post.slug }));
 }
 
-export function generateMetadata({ params }: BlogPostPageProps): Metadata {
-  const post = getBlogPostBySlug(params.slug);
-  const isRu = isRuLocale(params.locale);
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const post = getBlogPostBySlug(slug);
+  const isRu = isRuLocale(locale);
 
   if (!post) {
     return {
@@ -43,8 +44,8 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const t = await getTranslations("blog");
-  const post = getBlogPostBySlug(params.slug);
-  const locale = params.locale;
+  const { locale, slug } = await params;
+  const post = getBlogPostBySlug(slug);
 
   if (!post) {
     notFound();

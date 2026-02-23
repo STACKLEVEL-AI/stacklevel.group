@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import InnerHero from "../../components/InnerHero";
 import ContactForm from "../../components/ContactForm";
 import { isRuLocale } from "@/i18n/localeUtils";
@@ -91,7 +92,9 @@ export default async function ContactPage({ params }: Props) {
 
       <section id="contact-form" className="relative overflow-hidden stack-section-pale py-12 md:py-16">
         <div className="width-wrapper relative">
-          <ContactForm />
+          <Suspense fallback={<div className="stack-panel bg-white p-6 md:p-8">{isRu ? "Загрузка формы..." : "Loading form..."}</div>}>
+            <ContactForm />
+          </Suspense>
         </div>
       </section>
     </div>

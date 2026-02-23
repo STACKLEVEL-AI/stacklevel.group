@@ -5,10 +5,11 @@ import InnerHero from "../../components/InnerHero";
 import Clients from "../../components/Clients";
 import CaseStudiesFilter, { CaseStudyItem } from "../../components/CaseStudiesFilter";
 
-type Props = { params: { locale: string } };
+type Props = { params: Promise<{ locale: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const isRu = isRuLocale(params.locale);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
 
   return {
     title: isRu ? "Кейсы | Управляемое внедрение ИИ" : "Case Studies | Governed AI Delivery",
@@ -18,8 +19,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function CaseStudiesPage({ params }: Props) {
-  const isRu = isRuLocale(params.locale);
+export default async function CaseStudiesPage({ params }: Props) {
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
 
   const cases: CaseStudyItem[] = isRu
     ? [

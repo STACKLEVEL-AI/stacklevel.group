@@ -5,10 +5,11 @@ import { getTranslations } from "next-intl/server";
 import HomeHero from "../components/HomeHero";
 import Clients from "../components/Clients";
 
-type Props = { params: { locale: string } };
+type Props = { params: Promise<{ locale: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const isRu = isRuLocale(params.locale);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
 
   return {
     title: isRu ? "Stacklevel Group | Инженерия ИИ, аудит и соответствие" : "Stacklevel Group | AI Engineering, Audit & Compliance",
@@ -19,7 +20,8 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 export default async function HomePage({ params }: Props) {
-  const isRu = isRuLocale(params.locale);
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
   const tr = await getTranslations();
   const t = (key: string) => tr(`pages.home.${key}`);
 
