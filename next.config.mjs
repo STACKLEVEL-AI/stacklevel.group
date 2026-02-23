@@ -8,6 +8,7 @@ const nextConfig = {
   // This allows dynamic components like ContactForm to work correctly
   // Note: Requires Node.js runtime - cannot use with static GitHub Pages
   // Consider using Vercel or another Node.js hosting for GitHub Pages
+  output: 'export',
   images: {
     unoptimized: true,
   },
