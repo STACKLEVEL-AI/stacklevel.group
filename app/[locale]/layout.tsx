@@ -11,7 +11,8 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-// Disable static params generation to allow on-demand rendering
+// Disable static params for on-demand rendering
+// This supports dynamic components like useTranslations() in ContactForm
 // export function generateStaticParams() {
 //   return routing.locales.map((locale) => ({ locale }));
 // }
