@@ -10,7 +10,7 @@
   --black: #000000;
   --white: #ffffff;
   --font-main: "Formular", ui-sans-serif, system-ui, sans-serif;
-  --grid-offset-x: 20px;
+  --grid-offset-x: 32px;
 }
 
 @theme inline {
@@ -62,7 +62,7 @@ html {
   background-size: 44px 44px;
   background-repeat: repeat;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Crect x='0' y='0' width='5' height='5' fill='%23c4c2cc' fill-opacity='0.95'/%3E%3C/svg%3E");
-  background-position: var(--grid-offset-x) 0;
+  background-position: calc(var(--grid-offset-x) - ((100vw - 100%) / 2)) 0;
 }
 
 .hire-developers-hero-dots {
@@ -89,7 +89,7 @@ html {
   }
 
   :root {
-    --grid-offset-x: 32px;
+    --grid-offset-x: 44px;
   }
 }
 
