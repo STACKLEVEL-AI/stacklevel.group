@@ -11,11 +11,10 @@ if (!existsSync(outDir)) {
 }
 
 if (existsSync(ruDir)) {
-  // Make Russian pages canonical at root for static hosting.
+  // Copy Russian pages to root for canonical access (but keep ru/ folder too)
   cpSync(ruDir, outDir, { recursive: true, force: true });
 
-  // Remove duplicate Russian-prefixed output.
-  rmSync(ruDir, { recursive: true, force: true });
+  // Remove duplicate ru.html/ru.txt at root (keep the ru/ folder)
   rmSync(join(outDir, "ru.html"), { force: true });
   rmSync(join(outDir, "ru.txt"), { force: true });
 }
