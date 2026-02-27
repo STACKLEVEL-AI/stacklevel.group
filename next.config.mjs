@@ -4,11 +4,10 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Use on-demand rendering (hybrid)
-  // This allows dynamic components like ContactForm to work correctly
-  // Note: Requires Node.js runtime - cannot use with static GitHub Pages
-  // Consider using Vercel or another Node.js hosting for GitHub Pages
+  // Static export for GitHub Pages
   output: 'export',
+  // Required for GitHub Pages to handle clean URLs without .html extension
+  trailingSlash: true,
   images: {
     unoptimized: true,
     formats: ['image/avif', 'image/webp'],
