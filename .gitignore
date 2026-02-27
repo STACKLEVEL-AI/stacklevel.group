@@ -12,6 +12,7 @@ out/
 .env
 .env.local
 *.env
+TODO.md
 
 # Python
 __pycache__/
