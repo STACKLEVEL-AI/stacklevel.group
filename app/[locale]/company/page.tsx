@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { isRuLocale } from "@/i18n/localeUtils";
-import { getTranslations } from "next-intl/server";
+import { readFileSync } from "fs";
+import { join } from "path";
 import Clients from "@/app/components/Clients";
 import LeadershipQuotesSlider from "@/app/components/LeadershipQuotesSlider";
 import InnerHero from "../../components/InnerHero";
@@ -27,7 +28,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CompanyPage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
-  const t = await getTranslations("pages.company");
+  
+  // Read messages directly for static export
+  const messagesPath = join(process.cwd(), "messages", `${locale}.json`);
+  const messages = JSON.parse(readFileSync(messagesPath, "utf-8"));
+  
+  // Get company page translations
+  const t = (key: string) => {
+    const keys = key.split('.');
+    let value: unknown = messages.pages?.company;
+    for (const k of keys) {
+      if (value && typeof value === 'object' && k in value) {
+        value = (value as Record<string, unknown>)[k];
+      } else {
+        return key;
+      }
+    }
+    return typeof value === 'string' ? value : key;
+  };
 
   const pillars = isRu
     ? [

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { isRuLocale } from "@/i18n/localeUtils";
-import { getTranslations } from "next-intl/server";
+import { readFileSync } from "fs";
+import { join } from "path";
 import HomeHero from "../components/HomeHero";
 import Clients from "../components/Clients";
 
@@ -26,88 +27,79 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
-  const tr = await getTranslations();
-  const t = (key: string) => tr(`pages.home.${key}`);
+  
+  // Read messages directly for static export
+  const messagesPath = join(process.cwd(), "messages", `${locale}.json`);
+  const messages = JSON.parse(readFileSync(messagesPath, "utf-8"));
+  
+  // Get all translations from messages directly
+  const t = (key: string) => {
+    const keys = key.split('.');
+    let value: unknown = messages.pages?.home;
+    for (const k of keys) {
+      if (value && typeof value === 'object' && k in value) {
+        value = (value as Record<string, unknown>)[k];
+      } else {
+        return key; // fallback to key if not found
+      }
+    }
+    return typeof value === 'string' ? value : key;
+  };
+  
+  // Get clients translations directly from messages
+  const clientsTitle = messages.clients?.title || "Trusted since 2018";
+  const clientsDisclaimer = messages.clients?.disclaimer || "";
 
-  const pillars = isRu
-    ? [
-        {
-          title: "Инженерия ИИ",
-          bullets: [
-            "Производственные сценарии работы LLM и корпоративные интеграции.",
-            "Локальное и гибридное развёртывание в рамках требований безопасности.",
-          ],
-          tone: "stack-panel-accent",
-          textTone: "text-white/90",
-        },
-        {
-          title: "Аудит ИИ",
-          bullets: [
-            "Структуры доказательной базы и отслеживаемость для ревью-комитетов.",
-            "Методология оценки и артефакты, готовые к проверке.",
-          ],
-          tone: "stack-panel-dark",
-          textTone: "text-white/90",
-        },
-        {
-          title: "Соответствие требованиям",
-          bullets: [
-            "Контроль доступа, журналирование и шаблоны управления изменениями.",
-            "Контролы внедряются в системах, а не в презентациях.",
-          ],
-          tone: "stack-panel-pale",
-          textTone: "text-[var(--black)]",
-        },
-      ]
-    : [
-        {
-          title: "Engineering",
-          bullets: [
-            "Production LLM workflows and enterprise integrations.",
-            "On-prem and hybrid delivery aligned to security boundaries.",
-          ],
-          tone: "stack-panel-accent",
-          textTone: "text-white/90",
-        },
-        {
-          title: "Audit",
-          bullets: [
-            "Evidence structures and traceability for review committees.",
-            "Evaluation methodology with review-ready artifacts.",
-          ],
-          tone: "stack-panel-dark",
-          textTone: "text-white/90",
-        },
-        {
-          title: "Compliance",
-          bullets: [
-            "Access control, logging, and change-control patterns.",
-            "Controls implemented in systems, not slide decks.",
-          ],
-          tone: "stack-panel-pale",
-          textTone: "text-[var(--black)]",
-        },
-      ];
+  // Get pillars from translations
+  const pillarsData = messages.pages?.home?.pillars || {};
+  const pillars: Array<{
+    title: string;
+    bullets: string[];
+    tone: string;
+    textTone: string;
+  }> = [
+    {
+      title: pillarsData.engineering?.title || "Engineering",
+      bullets: pillarsData.engineering?.bullets || [
+        "Production LLM workflows and enterprise integrations.",
+        "On-prem and hybrid delivery aligned to security boundaries.",
+      ],
+      tone: "stack-panel-accent",
+      textTone: "text-white/90",
+    },
+    {
+      title: pillarsData.audit?.title || "Audit",
+      bullets: pillarsData.audit?.bullets || [
+        "Evidence structures and traceability for review committees.",
+        "Evaluation methodology with review-ready artifacts.",
+      ],
+      tone: "stack-panel-dark",
+      textTone: "text-white/90",
+    },
+    {
+      title: pillarsData.compliance?.title || "Compliance",
+      bullets: pillarsData.compliance?.bullets || [
+        "Access control, logging, and change-control patterns.",
+        "Controls implemented in systems, not slide decks.",
+      ],
+      tone: "stack-panel-pale",
+      textTone: "text-[var(--black)]",
+    },
+  ];
 
-  const useCases = isRu
-    ? [
-        "Помощник по политике с ответами и ссылками на источники.",
-        "Корпоративный помощник с учётом управления доступом.",
-        "Поиск доказательств для аудита с прослеживаемой логикой.",
-        "Изолированные операционные рабочие процессы поддержки.",
-      ]
-    : [
-        "Policy assistant with citation-backed responses.",
-        "IAM-aware internal knowledge copilot.",
-        "Audit evidence retrieval with traceable reasoning.",
-        "Air-gapped operational support workflows.",
-      ];
+  // Get use cases from translations
+  const useCases: string[] = messages.pages?.home?.useCases || [
+    "Policy assistant with citation-backed responses.",
+    "IAM-aware internal knowledge copilot.",
+    "Audit evidence retrieval with traceable reasoning.",
+    "Air-gapped operational support workflows.",
+  ];
 
   return (
     <div className="relative">
       <HomeHero />
 
-      <Clients title={t("clientsTitle")} />
+      <Clients title={clientsTitle} disclaimer={clientsDisclaimer} />
 
       <section className="relative overflow-hidden py-12 md:py-16">
         <div className="width-wrapper relative">

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { isRuLocale } from "@/i18n/localeUtils";
+import { readFileSync } from "fs";
+import { join } from "path";
 import InnerHero from "../../components/InnerHero";
 import Clients from "../../components/Clients";
 import CaseStudiesFilter, { CaseStudyItem } from "../../components/CaseStudiesFilter";
@@ -26,6 +28,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CaseStudiesPage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
+  
+  // Read messages directly for static export
+  const messagesPath = join(process.cwd(), "messages", `${locale}.json`);
+  const messages = JSON.parse(readFileSync(messagesPath, "utf-8"));
+  
+  // Get clients translations
+  const clientsTitle = messages.clients?.title || (isRu ? "Нам доверяют с 2018 года" : "Trusted since 2018");
+  const clientsDisclaimer = messages.clients?.disclaimer || "";
 
   const cases: CaseStudyItem[] = isRu
     ? [
@@ -175,7 +185,7 @@ export default async function CaseStudiesPage({ params }: Props) {
         }
       />
 
-      <Clients />
+      <Clients title={clientsTitle} disclaimer={clientsDisclaimer} />
 
       <section className="relative overflow-hidden py-12 md:py-16">
         <div className="width-wrapper relative">

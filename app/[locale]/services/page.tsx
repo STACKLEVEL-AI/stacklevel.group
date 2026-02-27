@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { isRuLocale } from "@/i18n/localeUtils";
-import { getTranslations } from "next-intl/server";
+import { readFileSync } from "fs";
+import { join } from "path";
 import InnerHero from "../../components/InnerHero";
 import Accordion from "../../components/Accordion";
 
@@ -28,7 +29,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ServicesPage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
-  const t = await getTranslations("services");
+  
+  // Read messages directly for static export
+  const messagesPath = join(process.cwd(), "messages", `${locale}.json`);
+  const messages = JSON.parse(readFileSync(messagesPath, "utf-8"));
+  
+  // Get services translations
+  const engagementDetailsTitle = messages.services?.engagementDetails || (isRu ? "Детали взаимодействия" : "Engagement details");
 
   const serviceLines = isRu
     ? [
@@ -316,9 +323,9 @@ export default async function ServicesPage({ params }: Props) {
                   className="mt-4"
                   items={[
                     {
-title: t("engagementDetails"),
+                      title: engagementDetailsTitle,
                       content: (
-                        <div className="grid gap-2 text-sm">
+                        <div className="grid gap-2 text-sm min-h-[180px] max-[1000px]:min-h-[250px] max-[768px]:min-h-[180px] max-[500px]:min-h-[265px]">
                           {service.details.map((detail) => (
                             <p key={detail.title}>
                               <span className="font-bold uppercase">{detail.title}:</span> {detail.content}
