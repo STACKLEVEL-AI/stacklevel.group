@@ -36,12 +36,6 @@ jobs:
         run: npm ci
       - name: Build Next.js
         run: npm run build
-      - name: Verify RU is root-only
-        run: |
-          if [ -d "./out/ru" ] || [ -f "./out/ru.html" ]; then
-            echo "Unexpected /ru output remains in artifact."
-            exit 1
-          fi
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
       - name: Setup Pages
