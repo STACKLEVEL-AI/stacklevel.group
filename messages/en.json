@@ -343,7 +343,7 @@
           "heading": "Baseline controls committees should ask for first"
         },
         {
-          "heading": "1) Named owners (model, data, release)",
+          "heading": "1. Named owners (model, data, release)",
           "paragraphs": [
             "Assign explicit owners for:"
           ],
@@ -359,7 +359,7 @@
           ]
         },
         {
-          "heading": "2) Access boundaries aligned with IAM (search + answer)",
+          "heading": "2. Access boundaries aligned with IAM (search + answer)",
           "paragraphs": [
             "RAG failures in enterprise are often permission failures disguised as \"LLM mistakes.\"",
             "Baseline requirement:"
@@ -376,7 +376,7 @@
           ]
         },
         {
-          "heading": "3) Audit logs + traceability preserved for review cycles",
+          "heading": "3. Audit logs + traceability preserved for review cycles",
           "paragraphs": [
             "Committees don't need \"more dashboards.\" They need reviewable evidence:"
           ],
@@ -392,7 +392,7 @@
           ]
         },
         {
-          "heading": "4) Evaluation gates with pass/fail criteria before every release",
+          "heading": "4. Evaluation gates with pass/fail criteria before every release",
           "paragraphs": [
             "Every release needs a gate with measurable criteria:"
           ],
@@ -452,7 +452,7 @@
           "heading": "Production checklist (build it in this order)"
         },
         {
-          "heading": "1) Define ownership + acceptance criteria before implementation",
+          "heading": "1. Define ownership + acceptance criteria before implementation",
           "paragraphs": [
             "Before a line of code:"
           ],
@@ -467,7 +467,7 @@
           ]
         },
         {
-          "heading": "2) Implement citations first (verifiability by default)",
+          "heading": "2. Implement citations first (verifiability by default)",
           "paragraphs": [
             "A production assistant must be able to prove where the answer came from:"
           ],
@@ -483,7 +483,7 @@
           ]
         },
         {
-          "heading": "3) Map IAM boundaries to retrieval and answer behavior",
+          "heading": "3. Map IAM boundaries to retrieval and answer behavior",
           "paragraphs": [
             "Do not \"bolt on\" permissions:"
           ],
@@ -499,7 +499,7 @@
           ]
         },
         {
-          "heading": "4) Persist audit logs with trace metadata",
+          "heading": "4. Persist audit logs with trace metadata",
           "paragraphs": [
             "Log enough to reconstruct every critical interaction:"
           ],
@@ -521,7 +521,7 @@
           "heading": "What to review monthly (so you don't drift into non-compliance)"
         },
         {
-          "heading": "1) Re-evaluate on core workflows + risk scenarios",
+          "heading": "1. Re-evaluate on core workflows + risk scenarios",
           "paragraphs": [
             "Every month, run evaluation suites:"
           ],
@@ -532,7 +532,7 @@
           ]
         },
         {
-          "heading": "2) Track governance drift as one release unit",
+          "heading": "2. Track governance drift as one release unit",
           "paragraphs": [
             "When governance drifts, it's rarely one component—it's the combination:"
           ],
@@ -596,7 +596,7 @@
           "heading": "Core blocks of an audit brief"
         },
         {
-          "heading": "1) Risk framework + control scope",
+          "heading": "1. Risk framework + control scope",
           "paragraphs": [
             "Define:"
           ],
@@ -613,7 +613,7 @@
           ]
         },
         {
-          "heading": "2) Traceability model for outputs and sources",
+          "heading": "2. Traceability model for outputs and sources",
           "paragraphs": [
             "Your traceability model should answer:"
           ],
@@ -630,7 +630,7 @@
           ]
         },
         {
-          "heading": "3) Evaluation methodology + pass/fail gates",
+          "heading": "3. Evaluation methodology + pass/fail gates",
           "paragraphs": [
             "Define the evaluation stack:"
           ],
@@ -647,7 +647,7 @@
           ]
         },
         {
-          "heading": "4) Remediation workflow with owners and dates",
+          "heading": "4. Remediation workflow with owners and dates",
           "paragraphs": [
             "Auditors don't want \"we'll fix it.\" They want:"
           ],
@@ -707,7 +707,7 @@
           "heading": "What's improved"
         },
         {
-          "heading": "1) Stronger citation consistency for high-throughput workflows",
+          "heading": "1. Stronger citation consistency for high-throughput workflows",
           "paragraphs": [
             "When citations are inconsistent, reviews fail for avoidable reasons:"
           ],
@@ -733,7 +733,7 @@
           ]
         },
         {
-          "heading": "2) IAM-aware retrieval with stricter boundary checks across teams",
+          "heading": "2. IAM-aware retrieval with stricter boundary checks across teams",
           "paragraphs": [
             "Cross-team data access is where enterprise assistants typically fail: the system retrieves \"technically relevant\" content that is organizationally off-limits.",
             "This update strengthens IAM-aware retrieval so that:"
