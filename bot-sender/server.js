@@ -45,6 +45,11 @@ function shouldRetry(status) {
   return status === 429 || status >= 500;
 }
 
+function isSkippableRecipientStatus(status) {
+  // Telegram returns 400/403 for chats where bot is not started, blocked, or chat_id is invalid.
+  return status === 400 || status === 403;
+}
+
 async function sleep(ms) {
   await new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -230,25 +235,75 @@ async function bootstrap() {
     }
 
     const text = buildMessage({ name, workEmail, company, topic, message });
+    let deliveredCount = 0;
+    let skippedCount = 0;
+    let failedCount = 0;
+
     for (const recipient of recipients) {
       const result = await sendMessageWithRetry(botToken, recipient, text);
-      if (!result.ok) {
+      if (result.ok) {
+        deliveredCount += 1;
+        continue;
+      }
+
+      if (isSkippableRecipientStatus(result.status)) {
+        skippedCount += 1;
+        console.warn(
+          JSON.stringify({
+            timestamp: nowIso(),
+            outcome: "warn",
+            error_code: "telegram_recipient_skipped",
+            request_id: requestId,
+            ip,
+            recipient,
+            status: result.status,
+          }),
+        );
+        continue;
+      }
+
+      failedCount += 1;
+      console.error(
+        JSON.stringify({
+          timestamp: nowIso(),
+          outcome: "error",
+          error_code: "telegram_send_failed",
+          request_id: requestId,
+          ip,
+          recipient,
+          status: result.status,
+        }),
+      );
+    }
+
+    if (deliveredCount === 0) {
+      if (skippedCount > 0 && failedCount === 0) {
         console.error(
           JSON.stringify({
             timestamp: nowIso(),
             outcome: "error",
-            error_code: "telegram_send_failed",
+            error_code: "no_authorized_recipients",
             request_id: requestId,
             ip,
-            status: result.status,
+            skipped_count: skippedCount,
           }),
         );
-        return json(res, 502, { error: "Failed to send message to Telegram.", error_code: "telegram_send_failed" });
+        return json(res, 502, {
+          error: "No authorized Telegram recipients available.",
+          error_code: "no_authorized_recipients",
+        });
       }
+
+      return json(res, 502, { error: "Failed to send message to Telegram.", error_code: "telegram_send_failed" });
     }
 
     idempotencyCache.set(idempotencyKey, Date.now() + idemTtlMs);
-    return json(res, 200, { ok: true });
+    return json(res, 200, {
+      ok: true,
+      delivered_count: deliveredCount,
+      skipped_count: skippedCount,
+      failed_count: failedCount,
+    });
   });
 
   server.listen(PORT, () => {

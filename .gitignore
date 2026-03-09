@@ -81,7 +81,6 @@ dmypy.json
 *.tar.bz2
 *.tar.xz
 *.tar.zst
-secrets/*.txt
-secrets/*.key
-secrets/*.crt
+secrets/*
+!secrets/.gitkeep
 ```

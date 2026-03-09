@@ -21,9 +21,7 @@ const TOPICS = new Set(["Program intro", "Scoping call", "Audit brief", "Product
 const rateLimiter = new Map<string, RateEntry>();
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const NAME_RE = /^[\p{L}\p{M}\p{N}\s.'-]{2,120}$/u;
-const COMPANY_RE = /^[\p{L}\p{M}\p{N}\p{P}\p{S}\s]{2,160}$/u;
-const MESSAGE_RE = /^[\p{L}\p{M}\p{N}\p{P}\p{S}\s]{10,4000}$/u;
+const CONTROL_CHARS_RE = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/;
 
 function json(status: number, body: Record<string, unknown>) {
   return NextResponse.json(body, { status });
@@ -31,6 +29,10 @@ function json(status: number, body: Record<string, unknown>) {
 
 function normalize(value: unknown, max: number) {
   return String(value ?? "").normalize("NFKC").trim().slice(0, max);
+}
+
+function hasControlChars(value: string) {
+  return CONTROL_CHARS_RE.test(value);
 }
 
 function getEnvInt(name: string, fallback: number) {
@@ -107,7 +109,10 @@ export async function POST(request: NextRequest) {
   if (!EMAIL_RE.test(workEmail)) {
     return json(400, { error: "Invalid email.", request_id: requestId });
   }
-  if (!NAME_RE.test(name) || !COMPANY_RE.test(company) || !MESSAGE_RE.test(message)) {
+  if (name.length < 2 || company.length < 2 || message.length < 10) {
+    return json(400, { error: "Please provide more details.", request_id: requestId });
+  }
+  if (hasControlChars(name) || hasControlChars(company) || hasControlChars(message)) {
     return json(400, { error: "Invalid characters in input.", request_id: requestId });
   }
   if (!TOPICS.has(topic)) {
