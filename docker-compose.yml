@@ -17,10 +17,11 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: web/Dockerfile
       target: web
       args:
         NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-}
     container_name: stacklevel-web
     restart: unless-stopped
     environment:
@@ -37,7 +38,7 @@ services:
   bot-sender:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: web/Dockerfile
       target: bot-sender
     container_name: stacklevel-bot-sender
     restart: unless-stopped
