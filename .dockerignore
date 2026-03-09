@@ -1,0 +1,14 @@
+.git
+.github
+.next
+web/.next
+out
+node_modules
+web/node_modules
+npm-debug.log
+.env
+.env.*
+!.env.example
+secrets/*.txt
+secrets/*.key
+secrets/*.crt

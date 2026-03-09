@@ -1,0 +1,58 @@
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: stacklevel-nginx
+    restart: unless-stopped
+    ports:
+      - "${NGINX_HTTPS_PORT}:443"
+    depends_on:
+      - web
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ${TLS_CERT_FILE}:/etc/nginx/certs/tls.crt:ro
+      - ${TLS_KEY_FILE}:/etc/nginx/certs/tls.key:ro
+    networks:
+      - public
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: web
+      args:
+        NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+    container_name: stacklevel-web
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+      - BOT_SENDER_URL=http://bot-sender:4000/internal/send
+      - INTERNAL_HMAC_SECRET=${INTERNAL_HMAC_SECRET}
+    networks:
+      - public
+      - private
+    ports:
+      - "3000:3000"
+
+  bot-sender:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: bot-sender
+    container_name: stacklevel-bot-sender
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
+      - INTERNAL_HMAC_SECRET=${INTERNAL_HMAC_SECRET}
+      - RECIPIENT_USER_IDS=${RECIPIENT_USER_IDS}
+    networks:
+      - public
+      - private
+
+networks:
+  public:
+  private:
+    internal: true
