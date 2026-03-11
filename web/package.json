@@ -1,12 +1,11 @@
 {
-  "name": "my-app",
+  "name": "stacklevel-web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next export",
-    "start": "next start",
+    "start": "node .next/standalone/server.js || node .next/standalone/web/server.js",
     "lint": "eslint"
   },
   "dependencies": {

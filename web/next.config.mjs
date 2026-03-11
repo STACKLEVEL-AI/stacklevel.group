@@ -1,11 +1,23 @@
+import { existsSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
+const projectRoot = dirname(fileURLToPath(import.meta.url));
+const workspaceRoot = dirname(projectRoot);
+const tracingRoot = existsSync(join(projectRoot, "node_modules", "next", "package.json"))
+  ? projectRoot
+  : workspaceRoot;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
+  outputFileTracingRoot: tracingRoot,
   poweredByHeader: false,
+  turbopack: {
+    root: tracingRoot,
+  },
   images: {
     unoptimized: true,
     formats: ["image/avif", "image/webp"],

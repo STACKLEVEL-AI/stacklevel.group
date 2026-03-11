@@ -235,10 +235,22 @@
       "first": "Since 2018, Stacklevel Group has delivered complex enterprise systems and integrations. Today we focus on governed AI: engineering, audit, and compliance so AI can be deployed in regulated production, not only piloted.",
       "second": "We combine delivery discipline with product assets, including Century, to standardize evidence, access control, evaluation, and audit trails. The result is faster rollout, lower operational risk, and review-ready documentation."
     },
-    "ceo": {
-      "name": "MAXIM GARBAR",
-      "quote": "We provide innovative developing and consulting services to make businesses of our clients grow and become market leaders. The client's success is our success.",
-      "position": "CEO STACKLEVEL GROUP"
+    "leadership": {
+      "maxim": {
+        "name": "MAXIM GARBAR",
+        "quote": "We provide innovative development and consulting services so our clients can grow faster and become market leaders. The client's success is our success.",
+        "position": "CEO STACKLEVEL GROUP"
+      },
+      "vitaliy": {
+        "name": "VITALIY BAKHMAT",
+        "quote": "Marketing should speak the language of outcomes: clear positioning, a credible value proposition, and a growth system that connects brand, product, and sales.",
+        "position": "CMO STACKLEVEL GROUP"
+      },
+      "vadim": {
+        "name": "VADIM VLADYMTSEV",
+        "quote": "Technology creates value only when it can be run with confidence in production: architecture, reliability, security, and delivery speed have to work together.",
+        "position": "CTO STACKLEVEL GROUP"
+      }
     }
   },
   "header": {

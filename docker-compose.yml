@@ -1,19 +1,4 @@
 services:
-  nginx:
-    image: nginx:1.27-alpine
-    container_name: stacklevel-nginx
-    restart: unless-stopped
-    ports:
-      - "${NGINX_HTTPS_PORT}:443"
-    depends_on:
-      - web
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ${TLS_CERT_FILE}:/etc/nginx/certs/tls.crt:ro
-      - ${TLS_KEY_FILE}:/etc/nginx/certs/tls.key:ro
-    networks:
-      - public
-
   web:
     build:
       context: .
@@ -21,19 +6,21 @@ services:
       target: web
       args:
         NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
     container_name: stacklevel-web
     restart: unless-stopped
     environment:
       - NODE_ENV=production
       - NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+      - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
       - BOT_SENDER_URL=http://bot-sender:4000/internal/send
       - INTERNAL_HMAC_SECRET=${INTERNAL_HMAC_SECRET}
-    networks:
-      - public
-      - private
     ports:
-      - "3000:3000"
+      - "127.0.0.1:${WEB_HTTP_PORT:-3100}:3000"
+    depends_on:
+      - bot-sender
+    networks:
+      - app
 
   bot-sender:
     build:
@@ -50,10 +37,7 @@ services:
       - INTERNAL_HMAC_SECRET=${INTERNAL_HMAC_SECRET}
       - RECIPIENT_USER_IDS=${RECIPIENT_USER_IDS}
     networks:
-      - public
-      - private
+      - app
 
 networks:
-  public:
-  private:
-    internal: true
+  app:

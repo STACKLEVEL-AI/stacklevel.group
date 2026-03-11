@@ -3,7 +3,6 @@
 import Image from "@/app/components/BaseImage";
 import { useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { isRuLocale } from "@/i18n/localeUtils";
 
 type QuoteSlide = {
   id: string;
@@ -12,14 +11,38 @@ type QuoteSlide = {
   quote: string;
   image?: string;
   initials: string;
+  frameClassName?: string;
+  imageClassName?: string;
 };
 
-function SlideVisual({ image, initials, alt }: { image?: string; initials: string; alt: string }) {
+function SlideVisual({
+  image,
+  initials,
+  alt,
+  frameClassName,
+  imageClassName,
+}: {
+  image?: string;
+  initials: string;
+  alt: string;
+  frameClassName?: string;
+  imageClassName?: string;
+}) {
   if (image) {
     return (
       <>
-        <div className="relative min-h-[260px] overflow-hidden bg-white sm:min-h-[320px] md:min-h-[390px]">
-          <Image src={image} alt={alt} fill sizes="(max-width: 768px) 100vw, 380px" className="object-cover object-top" />
+        <div
+          className={`relative min-h-[260px] overflow-hidden bg-white sm:min-h-[320px] md:min-h-[390px] ${
+            frameClassName ?? ""
+          }`}
+        >
+          <Image
+            src={image}
+            alt={alt}
+            fill
+            sizes="(max-width: 768px) 100vw, 380px"
+            className={imageClassName ?? "object-cover object-top"}
+          />
         </div>
         <div className="h-[6px] bg-[var(--accent)]" />
       </>
@@ -38,48 +61,48 @@ function SlideVisual({ image, initials, alt }: { image?: string; initials: strin
 
 export default function LeadershipQuotesSlider() {
   const locale = useLocale();
-  const isRu = isRuLocale(locale);
   const t = useTranslations("leadership");
+  const tSlide = useTranslations("aboutUs.leadership");
 
-  const tSlide = useTranslations("aboutUs.ceo");
-  
   const slides = useMemo<QuoteSlide[]>(
     () => [
       {
         id: "maxim-garbar",
-        name: tSlide("name"),
-        position: tSlide("position"),
-        quote: tSlide("quote"),
+        name: tSlide("maxim.name"),
+        position: tSlide("maxim.position"),
+        quote: tSlide("maxim.quote"),
         image: "/images/persons/max.jpg",
         initials: "MG",
+        frameClassName: "p-5 sm:p-6 md:p-8",
+        imageClassName: "object-contain object-center",
       },
       {
-        id: "head-ai-engineering",
-        name: "TBD",
-        position: isRu ? "РУКОВОДИТЕЛЬ AI ENGINEERING" : "HEAD OF AI ENGINEERING",
-        quote: isRu
-          ? "Мы превращаем AI-инициативы в производственные процессы: интеграции, ограничения деплоя и оптимизацию производительности/стоимости."
-          : "We turn AI initiatives into production workflows: integrations, deployment constraints, and performance/cost optimization.",
-        initials: "AE",
+        id: "vitaliy-bakhmat",
+        name: tSlide("vitaliy.name"),
+        position: tSlide("vitaliy.position"),
+        quote: tSlide("vitaliy.quote"),
+        image: "/images/persons/vitaliy-bakhmat.jpg",
+        initials: "VB",
+        imageClassName: "object-cover object-center",
       },
       {
-        id: "head-ai-audit",
-        name: "TBD",
-        position: isRu ? "РУКОВОДИТЕЛЬ AI AUDIT & COMPLIANCE" : "HEAD OF AI AUDIT & COMPLIANCE",
-        quote: isRu
-          ? "Мы переводим требования безопасности и регуляторов в исполнимые контролы, аудит и governance-практики."
-          : "We translate regulatory and security requirements into enforceable controls, audits, and governance playbooks.",
-        initials: "AC",
+        id: "vadim-vladymtsev",
+        name: tSlide("vadim.name"),
+        position: tSlide("vadim.position"),
+        quote: tSlide("vadim.quote"),
+        image: "/images/persons/vadim-vladymtsev.jpg",
+        initials: "VV",
+        imageClassName: "object-cover object-center",
       },
     ],
-    [isRu, tSlide]
+    [locale, tSlide]
   );
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     setActiveIndex(0);
-  }, [isRu]);
+  }, [locale]);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -125,7 +148,13 @@ export default function LeadershipQuotesSlider() {
             >
               <div className="grid gap-5 md:grid-cols-[300px_1fr] lg:gap-8 xl:grid-cols-[380px_1fr]">
                 <div>
-                  <SlideVisual image={slide.image} initials={slide.initials} alt={slide.name} />
+                  <SlideVisual
+                    image={slide.image}
+                    initials={slide.initials}
+                    alt={slide.name}
+                    frameClassName={slide.frameClassName}
+                    imageClassName={slide.imageClassName}
+                  />
                 </div>
 
                 <div className="relative flex min-h-[260px] flex-col justify-between sm:min-h-[320px] md:min-h-[390px]">

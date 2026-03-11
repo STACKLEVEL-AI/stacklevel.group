@@ -143,7 +143,14 @@ async function deleteWebhookOnStart(botToken) {
     body: JSON.stringify({ drop_pending_updates: true }),
   });
   if (!response.ok) {
-    throw new Error(`deleteWebhook failed with status ${response.status}`);
+    console.warn(
+      JSON.stringify({
+        timestamp: nowIso(),
+        outcome: "warn",
+        error_code: "delete_webhook_failed",
+        status: response.status,
+      }),
+    );
   }
 }
 
