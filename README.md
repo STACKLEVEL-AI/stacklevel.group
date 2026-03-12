@@ -20,13 +20,14 @@ No database or Redis is used.
 
 ## Environment configuration
 
-All required runtime secrets/configuration are provided via `.env`.
+All required runtime secrets/configuration are provided via `.env`, and `docker compose` passes that file into `web` and `bot-sender` with `env_file`.
 
 1. Copy `.env.example` to `.env`
 2. Set values in `.env`
    - `WEB_HTTP_PORT`
    - `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`
    - `NEXT_PUBLIC_SITE_URL`
+   - `BOT_SENDER_URL`
    - `RECAPTCHA_SECRET_KEY`
    - `TELEGRAM_BOT_TOKEN`
    - `RECIPIENT_USER_IDS`
