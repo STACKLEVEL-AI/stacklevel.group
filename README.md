@@ -2,11 +2,21 @@
 
 ## Architecture
 
-- `apache` on the host - reverse proxy, TLS termination, vhost routing for multiple sites
-- `web` - Next.js app and public endpoint `POST /api/submit`, exposed only on loopback for Apache
-- `bot-sender` - internal service `POST /internal/send` for CAPTCHA check and Telegram delivery
+- external reverse proxy on the host, if used, forwards traffic to `127.0.0.1:${WEB_HTTP_PORT}`
+- `nginx` - public HTTP entrypoint inside the project, exposed only on loopback
+- `web` - `Next.js` app behind `nginx`
+- `bot-sender` - internal Telegram delivery service built from its own Docker context and reachable only from `web`
 
 No database or Redis is used.
+
+## Routing model
+
+- `nginx` proxies all application traffic to the `web` container
+- `Next.js App Router` resolves localized routes under `/ru/*` and `/en/*`
+- `/` redirects to the preferred locale from `Accept-Language`
+- legacy paths from the old site redirect to the closest current pages:
+  - `/react-development` -> `/:locale/hire-react-developers`
+  - `/php-development` -> `/:locale/hire-php-developers`
 
 ## Environment configuration
 
@@ -22,7 +32,7 @@ All required runtime secrets/configuration are provided via `.env`.
    - `RECIPIENT_USER_IDS`
    - `INTERNAL_HMAC_SECRET`
 
-`WEB_HTTP_PORT` must be unique on the host because Apache routes requests to the container over `127.0.0.1:${WEB_HTTP_PORT}`.
+`WEB_HTTP_PORT` defaults to `8020` to stay compatible with the old `StackLevelGroup` host port.
 
 ## Run
 
@@ -30,35 +40,36 @@ All required runtime secrets/configuration are provided via `.env`.
 docker compose up --build -d
 ```
 
-The app is published only on host loopback for Apache:
+The stack is published only on host loopback:
 
 - `http://127.0.0.1:${WEB_HTTP_PORT}`
 
-## Apache setup
+## External reverse proxy
 
-Use [`apache/stacklevel.group.conf`](./apache/stacklevel.group.conf) as the host Apache vhost.
+If the server still uses host Apache for vhost routing and TLS termination, proxy it to:
 
-Required Apache modules:
+- `http://127.0.0.1:${WEB_HTTP_PORT}`
 
-- `proxy`
-- `proxy_http`
-- `headers`
-- `rewrite`
-- `ssl`
+The host proxy should preserve:
 
-The vhost should:
+- `Host`
+- `X-Forwarded-Proto`
+- `X-Forwarded-Port`
 
-- terminate TLS on Apache
-- proxy requests to `http://127.0.0.1:${WEB_HTTP_PORT}`
-- preserve the original host header
-- set `X-Forwarded-Proto=https`
-- set `X-Forwarded-Port=443`
+## SSL notes
+
+- the current in-project `nginx` is configured as the HTTP upstream for a host reverse proxy
+- if you keep TLS on host Apache, preserve `X-Forwarded-Proto=https` and `X-Forwarded-Port=443` exactly as in the old setup
+- if you later move TLS termination into `nginx`, reuse the certificate paths from the old project:
+  - `ssl_certificate /path/to/fullchain.pem;`
+  - `ssl_certificate_key /path/to/privkey.pem;`
 
 ## Security model implemented
 
-- only `web` publishes a host port, and only on `127.0.0.1`
-- `bot-sender` does not publish ports
-- web signs requests to bot-sender with HMAC (`X-Timestamp`, `X-Signature`)
-- bot-sender validates timestamp window and idempotency key
-- bot-sender sends notifications only to `RECIPIENT_USER_IDS`
-- bot-sender disables Telegram webhook on startup via `deleteWebhook(drop_pending_updates=true)`
+- only `nginx` publishes a host port, and only on `127.0.0.1`
+- `web` is the only app service connected to both networks: public `app` and private `bot`
+- `bot-sender` is isolated on the private `bot` network and is not reachable from `nginx`
+- `web` signs requests to `bot-sender` with HMAC (`X-Timestamp`, `X-Signature`)
+- `bot-sender` validates timestamp window and idempotency key
+- `bot-sender` sends notifications only to `RECIPIENT_USER_IDS`
+- `bot-sender` disables Telegram webhook on startup via `deleteWebhook(drop_pending_updates=true)`

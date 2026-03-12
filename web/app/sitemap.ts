@@ -10,6 +10,8 @@ const staticPaths = [
   "/company",
   "/contact",
   "/hire-dedicated-team",
+  "/hire-php-developers",
+  "/hire-react-developers",
   "/products",
   "/products/century",
   "/resources",
