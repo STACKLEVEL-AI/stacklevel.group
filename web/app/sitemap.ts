@@ -6,6 +6,7 @@ const staticPaths = [
   "/",
   "/audit-compliance",
   "/blog",
+  "/bank",
   "/case-studies",
   "/company",
   "/contact",

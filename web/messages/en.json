@@ -256,6 +256,7 @@
   "header": {
     "services": "Services",
     "audit": "Audit & Compliance",
+    "bank": "Banking",
     "products": "Products",
     "caseStudies": "Case Studies",
     "resources": "Resources",
@@ -272,6 +273,7 @@
     "actions": "Actions",
     "services": "Services",
     "audit": "Audit & Compliance",
+    "bank": "Banking",
     "products": "Products",
     "cases": "Case Studies",
     "blog": "Blog",

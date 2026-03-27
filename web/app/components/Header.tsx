@@ -9,6 +9,7 @@ import { useLocale, useTranslations } from "next-intl";
 const navLinks = [
   { href: "/services", key: "services" },
   { href: "/audit-compliance", key: "audit" },
+  { href: "/bank", key: "bank" },
   { href: "/products", key: "products" },
   { href: "/case-studies", key: "caseStudies" },
   { href: "/resources", key: "resources" },

@@ -12,8 +12,8 @@ const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
 type Topic = (typeof TOPICS)[number];
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
-function getTopicFromQuery(value: string | null) {
-  if (!value) return "Scoping call";
+function getTopicFromQuery(value: string | null, fallback: Topic = "Scoping call") {
+  if (!value) return fallback;
 
   const normalized = value.toLowerCase().trim();
   const found = TOPICS.find((topic) => topic.toLowerCase() === normalized);
@@ -21,10 +21,11 @@ function getTopicFromQuery(value: string | null) {
 
   if (normalized.includes("аудит")) return "Audit brief";
   if (normalized.includes("демо")) return "Product demo";
+  if (normalized.includes("pilot") || normalized.includes("myfin") || normalized.includes("банк")) return "Product demo";
   if (normalized.includes("партнер") || normalized.includes("partner")) return "Partnership";
   if (normalized.includes("program") || normalized.includes("программ")) return "Program intro";
 
-  return "Scoping call";
+  return fallback;
 }
 
 const ruTopicLabels: Record<Topic, string> = {
@@ -35,12 +36,19 @@ const ruTopicLabels: Record<Topic, string> = {
   Partnership: "Партнерство",
 };
 
-export default function ContactForm() {
+type ContactFormProps = {
+  defaultTopic?: Topic;
+};
+
+export default function ContactForm({ defaultTopic = "Scoping call" }: ContactFormProps) {
   const locale = useLocale();
   const isRu = isRuLocale(locale);
   const t = useTranslations("contactForm");
   const searchParams = useSearchParams();
-  const initialTopic = useMemo(() => getTopicFromQuery(searchParams.get("topic")), [searchParams]);
+  const initialTopic = useMemo(
+    () => getTopicFromQuery(searchParams.get("topic"), defaultTopic),
+    [defaultTopic, searchParams],
+  );
   const [topic, setTopic] = useState<Topic>(initialTopic);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -104,7 +112,7 @@ export default function ContactForm() {
       form.reset();
       const grecaptcha = (window as unknown as { grecaptcha?: { reset?: () => void } }).grecaptcha;
       grecaptcha?.reset?.();
-      setTopic("Scoping call");
+      setTopic(defaultTopic);
       setStartedAt(Date.now());
       setSubmitStatus("success");
     } catch {

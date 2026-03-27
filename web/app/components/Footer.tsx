@@ -35,6 +35,7 @@ export default function Footer() {
             <div className="mt-3 flex flex-col gap-2 text-sm font-semibold uppercase text-[var(--black)]">
               <Link href="/services" className="hover:text-[var(--accent)] transition-colors">{t("services")}</Link>
               <Link href="/audit-compliance" className="hover:text-[var(--accent)] transition-colors">{t("audit")}</Link>
+              <Link href="/bank" className="hover:text-[var(--accent)] transition-colors">{t("bank")}</Link>
               <Link href="/products" className="hover:text-[var(--accent)] transition-colors">{t("products")}</Link>
               <Link href="/case-studies" className="hover:text-[var(--accent)] transition-colors">{t("cases")}</Link>
               <Link href="/blog" className="hover:text-[var(--accent)] transition-colors">{t("blog")}</Link>
@@ -52,9 +53,9 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="bg-[var(--accent)]">
+      <div className="stack-bank-dot-dark">
         <div className="width-wrapper py-5">
-          <p className="text-xs leading-relaxed text-white">{t("complianceLine")}</p>
+          <p className="text-xs leading-relaxed text-white/78">{t("complianceLine")}</p>
         </div>
       </div>
     </footer>

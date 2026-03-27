@@ -74,6 +74,12 @@ html {
   -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 38%, black 100%);
 }
 
+.stack-bank-dot-dark {
+  background-color: #0d0d0d;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
 /* Shared width wrapper */
 .width-wrapper {
   width: min(1476px, calc(100% - 40px));

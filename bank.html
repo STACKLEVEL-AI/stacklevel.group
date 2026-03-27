@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)file:///C:/Users/RaMpCh/Downloads/banking-agents-final.html -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-аналитика банковских продуктов — Stacklevel</title>
+<link href="./AI-аналитика банковских продуктов — Stacklevel_files/css2" rel="stylesheet">
+<style>
+:root{
+  --blue:#3333FF;--blue-l:#4D4DFF;--blue-glow:rgba(51,51,255,.06);
+  --dark:#0D0D0D;
+  --g700:#555;--g600:#777;--g500:#999;--g400:#AAA;--g200:#E5E5E5;--g100:#F0F0F0;--g50:#F7F7F7;--wh:#FFF;
+  --fd:'Montserrat',sans-serif;--fb:'Inter',sans-serif;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--fb);font-weight:400;background:var(--wh);color:var(--dark);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.box{max-width:1100px;margin:0 auto;padding:0 40px}
+@media(max-width:700px){.box{padding:0 24px}}
+html{scroll-behavior:smooth}
+
+/* ═══ BRAND DOT GRID ═══ */
+.dot-bg{
+  background-color:var(--dark);
+  background-image:radial-gradient(circle,var(--g700) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+
+/* ═══ ANIMATIONS ═══ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.vis{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(20px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.stagger.vis>*{opacity:1;transform:none}
+.stagger.vis>*:nth-child(1){transition-delay:.05s}
+.stagger.vis>*:nth-child(2){transition-delay:.1s}
+.stagger.vis>*:nth-child(3){transition-delay:.15s}
+.stagger.vis>*:nth-child(4){transition-delay:.2s}
+.stagger.vis>*:nth-child(5){transition-delay:.25s}
+.stagger.vis>*:nth-child(6){transition-delay:.3s}
+.stagger.vis>*:nth-child(7){transition-delay:.35s}
+.stagger.vis>*:nth-child(8){transition-delay:.4s}
+.stagger.vis>*:nth-child(9){transition-delay:.45s}
+.stagger.vis>*:nth-child(10){transition-delay:.5s}
+
+/* ═══ SECTION SYSTEM ═══ */
+.sl{font-family:var(--fd);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--blue);margin-bottom:12px}
+.st{font-family:var(--fd);font-weight:900;font-size:clamp(1.25rem,2.6vw,1.9rem);text-transform:uppercase;letter-spacing:-.02em;line-height:1.12;margin-bottom:48px}
+.st .a{color:var(--blue)}
+
+/* ═══════════════════════════════════════════
+   S1 — HERO
+   ═══════════════════════════════════════════ */
+.hero{padding:100px 0 88px;color:var(--wh);position:relative;overflow:hidden}
+.hero::before{
+  content:'';position:absolute;right:-40px;top:50%;transform:translateY(-50%);
+  width:520px;height:520px;border-radius:50%;pointer-events:none;
+  border:1px solid rgba(51,51,255,.06);
+}
+.hero::after{
+  content:'';position:absolute;right:40px;top:50%;transform:translateY(-50%);
+  width:340px;height:340px;border-radius:50%;pointer-events:none;
+  border:1px solid rgba(51,51,255,.1);
+}
+.hero-ey{font-family:var(--fd);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--blue-l);margin-bottom:24px}
+.hero h1{font-family:var(--fd);font-weight:900;font-size:clamp(2rem,5vw,3.6rem);text-transform:uppercase;letter-spacing:-.025em;line-height:1.04;max-width:780px}
+.hero h1 .a{color:var(--blue-l)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.7);line-height:1.75;max-width:540px;margin-top:28px;font-weight:400}
+
+/* ═══════════════════════════════════════════
+   S2 — BEFORE / AFTER
+   ═══════════════════════════════════════════ */
+.ba{padding:96px 0 80px}
+.ba-wrap{border-radius:2px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.ba-grid{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:700px){.ba-grid{grid-template-columns:1fr}}
+.ba-col{padding:40px 36px}
+.ba-bef{background:var(--g50)}
+.ba-aft{background:#EEEEFF}
+.ba-lb{font-family:var(--fd);font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:24px}
+.ba-bef .ba-lb{color:var(--g500)}
+.ba-aft .ba-lb{color:var(--blue)}
+.ba-i{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;font-size:13px;line-height:1.6}
+.ba-i:last-child{margin-bottom:0}
+.ba-bef .ba-i{color:var(--g600)}
+.ba-aft .ba-i{color:#3D3D72}
+.ba-c{font-family:var(--fd);font-weight:700;font-size:13px;flex-shrink:0;line-height:1.6}
+.ba-bef .ba-c{color:var(--g400)}
+.ba-aft .ba-c{color:var(--blue)}
+.ba-i strong{font-weight:600}
+.ba-bef .ba-i strong{color:var(--dark)}
+.ba-aft .ba-i strong{color:#1A1A42}
+
+/* ═══════════════════════════════════════════
+   S3 — SCENARIOS
+   ═══════════════════════════════════════════ */
+.sc{padding:96px 0 88px;background:var(--g50)}
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.sc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.sc-grid{grid-template-columns:1fr}}
+.sc-card{
+  border:1px solid var(--g200);background:var(--wh);
+  padding:28px 24px;border-radius:2px;
+  cursor:pointer;transition:all .3s var(--ease);
+  display:flex;flex-direction:column;min-height:190px;
+}
+.sc-card:hover{border-color:var(--blue);box-shadow:0 4px 24px rgba(51,51,255,.06);transform:translateY(-2px)}
+.sc-card.on{border-color:var(--blue);background:var(--blue-glow);transform:none;box-shadow:none}
+.sc-n{font-family:var(--fd);font-weight:900;font-size:28px;color:var(--blue);line-height:1;margin-bottom:14px}
+.sc-t{font-family:var(--fd);font-weight:800;font-size:12px;text-transform:uppercase;color:var(--dark);line-height:1.4;flex:1}
+.sc-r{font-size:11px;color:var(--blue);font-weight:600;margin-top:14px;letter-spacing:.02em}
+.sc-exp{display:none;grid-column:1/-1;border:1px solid rgba(51,51,255,.12);padding:32px;border-radius:2px;background:var(--wh)}
+.sc-exp.vis{display:block}
+.sc-exp-s{font-size:14px;color:var(--g600);line-height:1.75}
+.sc-exp-s strong{color:var(--dark)}
+.sc-exp-o{margin-top:20px;padding:14px 20px;border-left:3px solid var(--blue);background:var(--blue-glow);font-size:14px;color:var(--dark);font-weight:500;border-radius:0 2px 2px 0;line-height:1.6}
+.sc-exp-a{margin-top:14px;font-size:12px;color:var(--g500)}
+.sc-exp-a span{color:var(--blue);font-weight:600}
+
+/* ═══════════════════════════════════════════
+   S4 — ROI
+   ═══════════════════════════════════════════ */
+.roi{padding:72px 0;color:var(--wh)}
+.roi-g{display:grid;grid-template-columns:repeat(4,1fr);gap:48px}
+@media(max-width:700px){.roi-g{grid-template-columns:repeat(2,1fr);gap:32px}}
+.roi-v{font-family:var(--fd);font-weight:900;font-size:clamp(2rem,4vw,3.2rem);line-height:1}
+.roi-v span{font-size:15px;font-weight:700;color:var(--blue-l)}
+.roi-l{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.6);margin-top:12px;line-height:1.45;font-weight:500}
+
+/* ═══════════════════════════════════════════
+   S5 — ROLES
+   ═══════════════════════════════════════════ */
+.rl{padding:96px 0 72px}
+.rl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:900px){.rl-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.rl-grid{grid-template-columns:1fr}}
+.rl-card{
+  border:1px solid var(--g200);padding:28px 22px;
+  cursor:pointer;transition:all .3s var(--ease);
+  border-radius:2px;text-align:center;
+}
+.rl-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 4px 24px rgba(51,51,255,.06)}
+.rl-card.on{border-color:var(--blue);background:var(--blue-glow);transform:none;box-shadow:none}
+.rl-name{font-family:var(--fd);font-weight:900;font-size:17px;text-transform:uppercase;color:var(--dark);letter-spacing:-.01em;margin-bottom:8px}
+.rl-hint{font-size:12px;color:var(--g500);line-height:1.5}
+.rl-cnt{font-size:10px;color:var(--blue);font-weight:700;margin-top:14px;text-transform:uppercase;letter-spacing:.06em}
+.rl-exp{display:none;grid-column:1/-1;border:1px solid rgba(51,51,255,.12);padding:24px 28px;border-radius:2px;background:var(--g50);margin-top:4px}
+.rl-exp.vis{display:block}
+.rl-exp-lb{font-family:var(--fd);font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--g500);margin-bottom:10px}
+.rl-pill{display:inline-block;padding:8px 16px;border:1px solid var(--g200);background:var(--wh);border-radius:2px;margin:0 8px 8px 0;font-family:var(--fd);font-weight:700;font-size:11px;text-transform:uppercase;color:var(--dark);transition:all .2s var(--ease)}
+.rl-pill:hover{border-color:var(--blue);color:var(--blue)}
+
+/* ═══════════════════════════════════════════
+   S6 — AGENTS
+   ═══════════════════════════════════════════ */
+.ag{padding:96px 0 104px;background:var(--g50)}
+.lay-lb{
+  font-family:var(--fd);font-weight:900;font-size:13px;
+  text-transform:uppercase;letter-spacing:.06em;color:var(--blue);
+  margin:40px 0 18px;display:flex;align-items:center;gap:16px;
+}
+.lay-lb:first-child{margin-top:0}
+.lay-lb::after{content:'';flex:1;height:2px;background:var(--blue);opacity:.15}
+.ag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.ag-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.ag-grid{grid-template-columns:1fr}}
+
+.ag-card{
+  border:1px solid var(--g200);background:var(--wh);
+  padding:32px 28px;border-radius:2px;
+  transition:all .3s var(--ease);
+  display:flex;flex-direction:column;
+}
+.ag-card:hover{border-color:var(--blue);box-shadow:0 4px 24px rgba(51,51,255,.06);transform:translateY(-2px)}
+.ag-num{font-family:var(--fd);font-weight:900;font-size:38px;color:var(--blue);line-height:1;margin-bottom:12px}
+.ag-name{
+  font-family:var(--fd);font-weight:900;font-size:15px;
+  text-transform:uppercase;color:var(--dark);letter-spacing:-.01em;
+  line-height:1.25;padding-bottom:12px;
+  border-bottom:3px solid var(--blue);margin-bottom:14px;
+}
+.ag-desc{font-size:13px;color:var(--g600);line-height:1.6;margin-bottom:16px;flex:1}
+.ag-val{font-size:12px;color:var(--dark);line-height:1.55;font-weight:500;font-style:italic;opacity:.75}
+
+/* ═══════════════════════════════════════════
+   S7 — CTA
+   ═══════════════════════════════════════════ */
+.cta{padding:80px 0;background:var(--blue);text-align:center}
+.cta-t{font-family:var(--fd);font-weight:900;font-size:clamp(1.3rem,3vw,2.2rem);text-transform:uppercase;color:var(--wh);letter-spacing:-.01em;margin-bottom:12px}
+.cta-s{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:32px}
+.cta-b{
+  font-family:var(--fd);font-weight:700;font-size:13px;
+  text-transform:uppercase;letter-spacing:.1em;
+  padding:16px 44px;background:var(--wh);color:var(--blue);
+  border:none;border-radius:2px;cursor:pointer;
+  transition:all .3s var(--ease);
+}
+.cta-b:hover{box-shadow:0 8px 32px rgba(0,0,0,.2);transform:translateY(-2px)}
+
+/* ═══ FOOTER ═══ */
+.footer{padding:36px 0;text-align:center}
+.ft{font-size:11px;color:rgba(255,255,255,.22);letter-spacing:.06em}
+.ft span{color:rgba(255,255,255,.4);font-weight:600;letter-spacing:.12em}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:700px){
+  .hero{padding:64px 0 56px}
+  .ba,.sc,.rl,.ag{padding-top:64px;padding-bottom:56px}
+  .roi{padding:48px 0}
+  .cta{padding:56px 0}
+  .st{margin-bottom:32px}
+}
+</style>
+</head>
+<body>
+
+<section class="hero dot-bg">
+  <div class="box">
+    <div class="hero-ey">#Продуктовая аналитика</div>
+    <h1>БАНК ПРИНИМАЕТ <span class="a">ПРОДУКТОВЫЕ РЕШЕНИЯ</span> БЫСТРЕЕ РЫНКА</h1>
+    <p class="hero-sub">10 AI-агентов непрерывно анализируют предложения 21 банка по 8 продуктовым доменам. Аналитика за секунды — для каждой роли в банке.</p>
+  </div>
+</section>
+
+<section class="ba">
+  <div class="box">
+    <div class="sl">#Что меняется</div>
+    <div class="st">ОТ РУЧНОГО ОБЗОРА — <span class="a">К НЕПРЕРЫВНОЙ АНАЛИТИКЕ</span></div>
+    <div class="ba-wrap reveal vis">
+      <div class="ba-grid">
+        <div class="ba-col ba-bef">
+          <div class="ba-lb">Сейчас</div>
+          <div class="ba-i"><span class="ba-c">&gt;</span><span>Аналитик мониторит конкурентов — <strong>8–12 часов в неделю</strong></span></div>
+          <div class="ba-i"><span class="ba-c">&gt;</span><span>Подготовка конкурентного обзора — <strong>2–3 недели</strong></span></div>
+          <div class="ba-i"><span class="ba-c">&gt;</span><span>Скорость реакции на действия конкурентов — <strong>дни и недели</strong></span></div>
+          <div class="ba-i"><span class="ba-c">&gt;</span><span>Продуктовые ниши обнаруживаются <strong>с задержкой</strong></span></div>
+          <div class="ba-i"><span class="ba-c">&gt;</span><span>Правление получает <strong>мнения</strong> вместо данных</span></div>
+        </div>
+        <div class="ba-col ba-aft">
+          <div class="ba-lb">С AI-агентами</div>
+          <div class="ba-i"><span class="ba-c">&gt;</span><span>Агент мониторит непрерывно — <strong>экономия 400+ часов в год</strong></span></div>
+          <div class="ba-i"><span class="ba-c">&gt;</span><span>Полный пакет для комитета — <strong>за 1–2 дня</strong></span></div>
+          <div class="ba-i"><span class="ba-c">&gt;</span><span>Алерт об изменении ставки — <strong>в течение 24 часов</strong></span></div>
+          <div class="ba-i"><span class="ba-c">&gt;</span><span>Gap-анализ <strong>в реальном времени</strong></span></div>
+          <div class="ba-i"><span class="ba-c">&gt;</span><span>Правление получает <strong>данные с рекомендациями</strong></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sc">
+  <div class="box">
+    <div class="sl">#Кейсы</div>
+    <div class="st">КАК ЭТО РАБОТАЕТ <span class="a">НА ПРАКТИКЕ</span></div>
+    <div class="sc-grid stagger vis" id="scG"><div class="sc-card " onclick="tSc(1)"><div class="sc-n">01</div><div class="sc-t">Конкурент изменил ставку — вы узнали в тот же день</div><div class="sc-r">Сохранение портфеля</div></div><div class="sc-card " onclick="tSc(2)"><div class="sc-n">02</div><div class="sc-t">Нашли нишу — запустили продукт первыми</div><div class="sc-r">+5–15% к выручке сегмента</div></div><div class="sc-card " onclick="tSc(3)"><div class="sc-n">03</div><div class="sc-t">Правление видит позицию банка за 30 секунд</div><div class="sc-r">Скорость стратегических решений</div></div><div class="sc-card " onclick="tSc(4)"><div class="sc-n">04</div><div class="sc-t">Маркетолог перестраивает канал по данным</div><div class="sc-r">Конверсия +20–40%</div></div><div class="sc-card " onclick="tSc(5)"><div class="sc-n">05</div><div class="sc-t">Менеджер закрывает мерчанта с расчётом на руках</div><div class="sc-r">+2–5M BYN оборота</div></div><div class="sc-card " onclick="tSc(6)"><div class="sc-n">06</div><div class="sc-t">Комитет работает с данными, а не мнениями</div><div class="sc-r">Решение за 1 день</div></div></div>
+  </div>
+</section>
+
+<section class="roi dot-bg">
+  <div class="box">
+    <div class="roi-g stagger vis">
+      <div><div class="roi-v">400<span>+</span></div><div class="roi-l">Часов экономии в год</div></div>
+      <div><div class="roi-v">24 <span>ч</span></div><div class="roi-l">Реакция на конкурентов</div></div>
+      <div><div class="roi-v">10<span>x</span></div><div class="roi-l">Быстрее к комитету</div></div>
+      <div><div class="roi-v">21 <span>×</span> 8</div><div class="roi-l">Банков × продуктовых доменов</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="rl">
+  <div class="box">
+    <div class="sl">#Кому это нужно</div>
+    <div class="st">КАЖДАЯ РОЛЬ <span class="a">ПОЛУЧАЕТ СВОЁ</span></div>
+    <div id="rlBox"><div class="rl-grid stagger vis"><div class="rl-card " onclick="sRl(&#39;marketing&#39;)">
+      <div class="rl-name">Маркетолог</div>
+      <div class="rl-hint">Digital-стратегия конкурентов</div>
+      <div class="rl-cnt">3 агентов →</div>
+    </div><div class="rl-card " onclick="sRl(&#39;product&#39;)">
+      <div class="rl-name">Продуктовый менеджер</div>
+      <div class="rl-hint">Ставки, ниши, пакет к комитету</div>
+      <div class="rl-cnt">5 агентов →</div>
+    </div><div class="rl-card " onclick="sRl(&#39;director&#39;)">
+      <div class="rl-name">Директор направления</div>
+      <div class="rl-hint">Дайджест, сигналы, позиция</div>
+      <div class="rl-cnt">5 агентов →</div>
+    </div><div class="rl-card " onclick="sRl(&#39;board&#39;)">
+      <div class="rl-name">Правление</div>
+      <div class="rl-hint">Scorecard за 30 секунд</div>
+      <div class="rl-cnt">3 агентов →</div>
+    </div></div></div>
+  </div>
+</section>
+
+<section class="ag">
+  <div class="box">
+    <div class="sl">#Агенты</div>
+    <div class="st">10 АГЕНТОВ. <span class="a">ОТ ДАННЫХ ДО РЕШЕНИЙ.</span></div>
+    <div id="agBox"><div class="lay-lb">Анализ данных</div><div class="ag-grid stagger vis"><div class="ag-card">
+        <div class="ag-num">01</div>
+        <div class="ag-name">Ценовой радар</div>
+        <div class="ag-desc">Рыночный коридор ставок: min, max, median, позиция банка</div>
+        <div class="ag-val">Ставка ниже рынка на 1 п.п. при портфеле 100M BYN = 1M BYN/год упущенного дохода</div>
+      </div><div class="ag-card">
+        <div class="ag-num">02</div>
+        <div class="ag-name">Анализатор белых пятен</div>
+        <div class="ag-desc">Ниши, где банк отсутствует, но конкуренты представлены</div>
+        <div class="ag-val">Выход в незанятый сегмент = +5–15% к выручке направления</div>
+      </div><div class="ag-card">
+        <div class="ag-num">03</div>
+        <div class="ag-name">Монитор изменений</div>
+        <div class="ag-desc">Ежедневный diff: новые продукты, изменённые ставки, скрытые предложения</div>
+        <div class="ag-val">Реакция за часы вместо недель — сохранение портфеля и клиентов</div>
+      </div><div class="ag-card">
+        <div class="ag-num">04</div>
+        <div class="ag-name">Матрица фич</div>
+        <div class="ag-desc">Сравнение характеристик: онлайн-заявка, cashback, документы, возраст</div>
+        <div class="ag-val">18 из 21 банка дают онлайн-заявку, а вы нет — видно мгновенно</div>
+      </div><div class="ag-card">
+        <div class="ag-num">05</div>
+        <div class="ag-name">Аналитик витрины</div>
+        <div class="ag-desc">Как конкуренты продвигают продукты: featured, popup, рекламные метки</div>
+        <div class="ag-val">Конкурент инвестирует в popup + featured — сигнал к действию</div>
+      </div><div class="ag-card">
+        <div class="ag-num">06</div>
+        <div class="ag-name">Калькулятор TCO мерчанта</div>
+        <div class="ag-desc">Полная стоимость эквайринга: комиссии + оборудование у каждого банка</div>
+        <div class="ag-val">50 переключений мерчантов = +2–5M BYN оборота</div>
+      </div></div><div class="lay-lb">Единая точка входа</div><div class="ag-grid stagger vis"><div class="ag-card">
+        <div class="ag-num">07</div>
+        <div class="ag-name">Оркестратор</div>
+        <div class="ag-desc">Единая точка входа: классифицирует запрос и вызывает нужных специалистов</div>
+        <div class="ag-val">Не нужно знать архитектуру — просто задайте вопрос</div>
+      </div></div><div class="lay-lb">Отчёты и решения</div><div class="ag-grid stagger vis"><div class="ag-card">
+        <div class="ag-num">08</div>
+        <div class="ag-name">Еженедельный дайджест</div>
+        <div class="ag-desc">Автоматический обзор конкурентного ландшафта каждую неделю</div>
+        <div class="ag-val">Экономия 8–12 часов аналитика в неделю</div>
+      </div><div class="ag-card">
+        <div class="ag-num">09</div>
+        <div class="ag-name">Подготовка к комитету</div>
+        <div class="ag-desc">Полный аналитический пакет для запуска или изменения продукта</div>
+        <div class="ag-val">Time-to-decision: с 2–3 недель до 1–2 дней</div>
+      </div><div class="ag-card">
+        <div class="ag-num">10</div>
+        <div class="ag-name">Стратегическая карта</div>
+        <div class="ag-desc">Позиция банка vs конкуренты — одна картинка по всем доменам</div>
+        <div class="ag-val">Замена 50-страничному отчёту — за 30 секунд</div>
+      </div></div></div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="box">
+    <div class="cta-t">ГОТОВЫ ВИДЕТЬ РЫНОК В РЕАЛЬНОМ ВРЕМЕНИ?</div>
+    <div class="cta-s">Запустить пилот на данных MyFin — 2 недели</div>
+    <button class="cta-b">ЗАПРОСИТЬ ДЕМО</button>
+  </div>
+</section>
+
+<div class="footer dot-bg"><div class="ft"><span>STACKLEVEL</span> · Enterprise AI Platform</div></div>
+
+<script>
+const roles=[
+  {id:"marketing",label:"Маркетолог",hint:"Digital-стратегия конкурентов",agents:[5,4,3]},
+  {id:"product",label:"Продуктовый менеджер",hint:"Ставки, ниши, пакет к комитету",agents:[1,2,4,6,3]},
+  {id:"director",label:"Директор направления",hint:"Дайджест, сигналы, позиция",agents:[8,1,2,3,10]},
+  {id:"board",label:"Правление",hint:"Scorecard за 30 секунд",agents:[10,8,9]}
+];
+const agents=[
+  {id:1,layer:"specialist",name:"Ценовой радар",desc:"Рыночный коридор ставок: min, max, median, позиция банка",value:"Ставка ниже рынка на 1 п.п. при портфеле 100M BYN = 1M BYN/год упущенного дохода"},
+  {id:2,layer:"specialist",name:"Анализатор белых пятен",desc:"Ниши, где банк отсутствует, но конкуренты представлены",value:"Выход в незанятый сегмент = +5–15% к выручке направления"},
+  {id:3,layer:"specialist",name:"Монитор изменений",desc:"Ежедневный diff: новые продукты, изменённые ставки, скрытые предложения",value:"Реакция за часы вместо недель — сохранение портфеля и клиентов"},
+  {id:4,layer:"specialist",name:"Матрица фич",desc:"Сравнение характеристик: онлайн-заявка, cashback, документы, возраст",value:"18 из 21 банка дают онлайн-заявку, а вы нет — видно мгновенно"},
+  {id:5,layer:"specialist",name:"Аналитик витрины",desc:"Как конкуренты продвигают продукты: featured, popup, рекламные метки",value:"Конкурент инвестирует в popup + featured — сигнал к действию"},
+  {id:6,layer:"specialist",name:"Калькулятор TCO мерчанта",desc:"Полная стоимость эквайринга: комиссии + оборудование у каждого банка",value:"50 переключений мерчантов = +2–5M BYN оборота"},
+  {id:7,layer:"orchestrator",name:"Оркестратор",desc:"Единая точка входа: классифицирует запрос и вызывает нужных специалистов",value:"Не нужно знать архитектуру — просто задайте вопрос"},
+  {id:8,layer:"executive",name:"Еженедельный дайджест",desc:"Автоматический обзор конкурентного ландшафта каждую неделю",value:"Экономия 8–12 часов аналитика в неделю"},
+  {id:9,layer:"executive",name:"Подготовка к комитету",desc:"Полный аналитический пакет для запуска или изменения продукта",value:"Time-to-decision: с 2–3 недель до 1–2 дней"},
+  {id:10,layer:"executive",name:"Стратегическая карта",desc:"Позиция банка vs конкуренты — одна картинка по всем доменам",value:"Замена 50-страничному отчёту — за 30 секунд"}
+];
+const scenarios=[
+  {id:1,title:"Конкурент изменил ставку — вы узнали в тот же день",result:"Сохранение портфеля",agentId:3,story:"Беларусбанк повысил ставку по вкладу с 26% до 28.5%. Агент <strong>Монитор изменений</strong> формирует алерт: «Ваш продукт ниже медианы на 1.8 п.п.» Решение — в тот же день.",outcome:"При базе 500M BYN предотвращение оттока 2% = сохранение 10M BYN."},
+  {id:2,title:"Нашли нишу — запустили продукт первыми",result:"+5–15% к выручке сегмента",agentId:2,story:"«Где мы отсутствуем, но есть 3+ конкурента?» Агент <strong>Анализатор белых пятен</strong>: «Кредит на образование — 7 банков, ставка 38–52%.» Запуск за 6 недель.",outcome:"Первый мувер в сегменте. +8% к портфелю за год."},
+  {id:3,title:"Правление видит позицию банка за 30 секунд",result:"Скорость стратегических решений",agentId:10,story:"Агент <strong>Стратегическая карта</strong>: «Кредиты — топ-5. Эквайринг — ставки на 0.3 п.п. выше рынка. Карты рассрочки — не представлены.»",outcome:"Стратегические приоритеты — за встречу, не за квартал."},
+  {id:4,title:"Маркетолог перестраивает канал по данным",result:"Конверсия +20–40%",agentId:5,story:"Агент <strong>Аналитик витрины</strong>: «Альфа-Банк — popup-форма, МТБанк — Халва как featured. У вас 0 продуктов в «лучшем за месяц».»",outcome:"Popup + featured = рост заявок на 20–40%."},
+  {id:5,title:"Менеджер закрывает мерчанта с расчётом на руках",result:"+2–5M BYN оборота",agentId:6,story:"Агент <strong>Калькулятор TCO</strong>: «У конкурента 4 245 BYN/мес, у нас 3 428 BYN/мес. Экономия: 817 BYN/мес.»",outcome:"50 переключений = +2–5M BYN оборота эквайринга."},
+  {id:6,title:"Комитет работает с данными, а не мнениями",result:"Решение за 1 день",agentId:9,story:"Агент <strong>Подготовка к комитету</strong> за день: рыночная карта, ставки, фичи, незанятые ниши — полный пакет.",outcome:"Комитет решает сразу. Time-to-market: минус 4 недели."}
+];
+const layerMeta={specialist:"Анализ данных",orchestrator:"Единая точка входа",executive:"Отчёты и решения"};
+let openSc=null,activeRole=null;
+
+function renderSc(){
+  const g=document.getElementById('scG');let h='';
+  scenarios.forEach(s=>{
+    const o=openSc===s.id;
+    h+=`<div class="sc-card ${o?'on':''}" onclick="tSc(${s.id})"><div class="sc-n">${String(s.id).padStart(2,'0')}</div><div class="sc-t">${s.title}</div><div class="sc-r">${s.result}</div></div>`;
+    if(o){const ag=agents.find(a=>a.id===s.agentId);h+=`<div class="sc-exp vis"><div class="sc-exp-s">${s.story}</div><div class="sc-exp-o">${s.outcome}</div><div class="sc-exp-a">Работает агент: <span>${ag.name}</span></div></div>`}
+  });g.innerHTML=h;
+}
+function tSc(id){openSc=openSc===id?null:id;renderSc()}
+
+function renderRl(){
+  const c=document.getElementById('rlBox');
+  let h='<div class="rl-grid stagger">';
+  roles.forEach(r=>{
+    const on=activeRole===r.id;
+    h+=`<div class="rl-card ${on?'on':''}" onclick="sRl('${r.id}')">
+      <div class="rl-name">${r.label}</div>
+      <div class="rl-hint">${r.hint}</div>
+      <div class="rl-cnt">${on?'Свернуть':r.agents.length+' агентов →'}</div>
+    </div>`;
+  });h+='</div>';
+  if(activeRole){
+    const r=roles.find(x=>x.id===activeRole);
+    h+='<div class="rl-exp vis"><div class="rl-exp-lb">Агенты для роли «'+r.label+'»</div><div>';
+    r.agents.forEach(aid=>{const a=agents.find(x=>x.id===aid);h+=`<span class="rl-pill">${a.name}</span>`});
+    h+='</div></div>';
+  }c.innerHTML=h;
+  observe();
+}
+function sRl(id){activeRole=activeRole===id?null:id;renderRl()}
+
+function renderAg(){
+  const el=document.getElementById('agBox');
+  const order=['specialist','orchestrator','executive'];
+  let h='';
+  order.forEach(layer=>{
+    const la=agents.filter(a=>a.layer===layer);
+    h+=`<div class="lay-lb">${layerMeta[layer]}</div><div class="ag-grid stagger">`;
+    la.forEach(a=>{
+      const n=String(a.id).padStart(2,'0');
+      h+=`<div class="ag-card">
+        <div class="ag-num">${n}</div>
+        <div class="ag-name">${a.name}</div>
+        <div class="ag-desc">${a.desc}</div>
+        <div class="ag-val">${a.value}</div>
+      </div>`;
+    });h+='</div>';
+  });el.innerHTML=h;
+  observe();
+}
+
+function observe(){
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:.1});
+  document.querySelectorAll('.reveal:not(.vis),.stagger:not(.vis)').forEach(el=>obs.observe(el));
+}
+
+renderSc();renderRl();renderAg();observe();
+</script>
+
+
+</body></html>
