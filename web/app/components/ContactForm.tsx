@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import Script from "next/script";
 import { useSearchParams } from "next/navigation";
+import { CONTACTS } from "@/app/lib/entities";
 import { useLocale, useTranslations } from "next-intl";
 import { isRuLocale } from "@/i18n/localeUtils";
 
@@ -183,7 +184,7 @@ export default function ContactForm({ defaultTopic = "Scoping call" }: ContactFo
         <button type="submit" disabled={submitStatus === "submitting" || !RECAPTCHA_SITE_KEY} className="stack-cta cursor-pointer text-xl disabled:cursor-not-allowed disabled:opacity-70 md:text-2xl">
           {submitStatus === "submitting" ? (isRu ? "Отправка..." : "Sending...") : t("send")}
         </button>
-        <a href="mailto:v.bakhmat@stacklevel.group" className="stack-cta-ghost justify-center text-xl md:text-2xl">
+        <a href={`mailto:${CONTACTS.salesEmail}`} className="stack-cta-ghost justify-center text-xl md:text-2xl">
           {t("emailUs")}
         </a>
       </div>

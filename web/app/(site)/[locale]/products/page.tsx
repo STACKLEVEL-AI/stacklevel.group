@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import InnerHero from "@/app/components/InnerHero";
+import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
+import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema, localizedAbsoluteUrl, schemaId } from "@/app/lib/schema";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -24,8 +26,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProductsPage({ params }: Props) {
-const { locale } = await params;
+  const { locale } = await params;
   const isRu = isRuLocale(locale);
+  const pageName = isRu
+    ? "Продукты для управляемого внедрения ИИ | Stacklevel Group"
+    : "Products for Governed AI Delivery | Stacklevel Group";
+  const pageDescription = isRu
+    ? "Продуктовые решения Stacklevel ускоряют управляемое внедрение ИИ, где Century является основным решением для корпоративного развёртывания."
+    : "Stacklevel product assets accelerate governed AI rollout, with Century as the primary platform for controlled enterprise deployment.";
 
   const centuryHighlights = isRu
     ? [
@@ -53,8 +61,35 @@ const { locale } = await params;
         "Decision support for pilot-to-production roadmap choices.",
       ];
 
+  const breadcrumbSchema = buildBreadcrumbSchema(locale, "/products", [
+    { name: isRu ? "Главная" : "Home", path: "/" },
+    { name: isRu ? "Продукты" : "Products", path: "/products" },
+  ]);
+  const productListId = schemaId(locale, "/products", "product-list");
+  const productListSchema = buildItemListSchema(
+    productListId,
+    isRu ? "Продукты Stacklevel Group" : "Stacklevel Group products",
+    [
+      {
+        name: "Century",
+        url: localizedAbsoluteUrl(locale, "/products/century"),
+      },
+    ],
+  );
+  const pageSchema = buildPageSchema({
+    locale,
+    path: "/products",
+    name: pageName,
+    description: pageDescription,
+    type: "CollectionPage",
+    breadcrumbId: schemaId(locale, "/products", "breadcrumb"),
+    mainEntity: { "@id": productListId },
+  });
+
   return (
-    <div className="relative">
+    <>
+      <JsonLd data={[pageSchema, breadcrumbSchema, productListSchema]} />
+      <div className="relative">
       <InnerHero
         lines={
           isRu
@@ -166,6 +201,7 @@ const { locale } = await params;
           </article>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

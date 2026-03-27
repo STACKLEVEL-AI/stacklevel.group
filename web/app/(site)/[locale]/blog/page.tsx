@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import InnerHero from "@/app/components/InnerHero";
+import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
 import { localizedAlternates } from "@/app/lib/site";
+import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema, localizedAbsoluteUrl, schemaId } from "@/app/lib/schema";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { getAllBlogPosts } from "@/app/content/blogPosts";
@@ -53,6 +55,11 @@ function formatDate(dateString: string, locale: string) {
 
 export default async function BlogPage({ params }: Props) {
   const { locale } = await params;
+  const isRu = isRuLocale(locale);
+  const pageName = isRu ? "Блог | Stacklevel Group" : "Blog | Stacklevel Group";
+  const pageDescription = isRu
+    ? "Новости и практические заметки по инженерии управляемого ИИ, подготовке к аудиту и соответствию по дизайну."
+    : "News and field notes on governed AI engineering, audit readiness, and enterprise compliance-by-design.";
 
   // Read messages file directly based on locale
   const messagesPath = join(process.cwd(), "messages", `${locale}.json`);
@@ -87,13 +94,37 @@ export default async function BlogPage({ params }: Props) {
   }>;
 
   const posts = getAllBlogPosts(blogPostsData);
+  const breadcrumbSchema = buildBreadcrumbSchema(locale, "/blog", [
+    { name: isRu ? "Главная" : "Home", path: "/" },
+    { name: isRu ? "Блог" : "Blog", path: "/blog" },
+  ]);
+  const postListId = schemaId(locale, "/blog", "post-list");
+  const postListSchema = buildItemListSchema(
+    postListId,
+    isRu ? "Публикации Stacklevel Group" : "Stacklevel Group blog posts",
+    posts.map((post) => ({
+      name: post.title,
+      url: localizedAbsoluteUrl(locale, `/blog/${post.slug}`),
+    })),
+  );
+  const pageSchema = buildPageSchema({
+    locale,
+    path: "/blog",
+    name: pageName,
+    description: pageDescription,
+    type: "CollectionPage",
+    breadcrumbId: schemaId(locale, "/blog", "breadcrumb"),
+    mainEntity: posts.length ? { "@id": postListId } : undefined,
+  });
 
   const feedPosts = posts.slice(0, 4);
   const marqueePosts = [...feedPosts, ...feedPosts];
 
   if (feedPosts.length === 0) {
     return (
-      <div className="relative">
+      <>
+        <JsonLd data={[pageSchema, breadcrumbSchema]} />
+        <div className="relative">
         <section className="relative overflow-hidden py-12 md:py-16">
           <div className="width-wrapper">
             <h1 className="stack-grid-title text-[var(--black)]">
@@ -104,12 +135,15 @@ export default async function BlogPage({ params }: Props) {
             </p>
           </div>
         </section>
-      </div>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className="relative">
+    <>
+      <JsonLd data={[pageSchema, breadcrumbSchema, postListSchema]} />
+      <div className="relative">
       <InnerHero
         lines={[
           { text: t("hero.line1") },
@@ -166,6 +200,7 @@ export default async function BlogPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

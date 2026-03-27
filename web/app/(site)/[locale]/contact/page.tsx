@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import ContactForm from "@/app/components/ContactForm";
 import InnerHero from "@/app/components/InnerHero";
+import JsonLd from "@/app/components/JsonLd";
+import { CONTACTS } from "@/app/lib/entities";
 import { isRuLocale } from "@/i18n/localeUtils";
+import { ORGANIZATION_ID, VITALIY_BAKHMAT_ID, buildBreadcrumbSchema, buildPageSchema, getContactPersonSchema, schemaId } from "@/app/lib/schema";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -25,9 +28,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
+  const pageName = isRu ? "Контакты Stacklevel Group | Уточнение объёма, аудит или демо" : "Contact Stacklevel Group | Scoping, Audit, or Demo";
+  const pageDescription = isRu
+    ? "Опишите сценарий использования, ограничения развёртывания и требования к ревью. Мы направим запрос нужной команде."
+    : "Share your workflow, deployment constraints, and review requirements. We route your request to the right team.";
+  const breadcrumbSchema = buildBreadcrumbSchema(locale, "/contact", [
+    { name: isRu ? "Главная" : "Home", path: "/" },
+    { name: isRu ? "Контакты" : "Contact", path: "/contact" },
+  ]);
+  const pageSchema = buildPageSchema({
+    locale,
+    path: "/contact",
+    name: pageName,
+    description: pageDescription,
+    type: "ContactPage",
+    breadcrumbId: schemaId(locale, "/contact", "breadcrumb"),
+    mainEntity: { "@id": ORGANIZATION_ID },
+    about: [{ "@id": VITALIY_BAKHMAT_ID }],
+  });
 
   return (
-    <div className="relative">
+    <>
+      <JsonLd data={[pageSchema, breadcrumbSchema, getContactPersonSchema()]} />
+      <div className="relative">
       <InnerHero
         lines={
           isRu
@@ -48,7 +71,7 @@ export default async function ContactPage({ params }: Props) {
             : "Share your workflow, constraints, and review requirements. We route your request to the right team."
         }
         primaryCta={{ label: isRu ? "Отправить запрос" : "Send request", href: "/contact#contact-form" }}
-        secondaryCta={{ label: isRu ? "Написать на email" : "Email us", href: "mailto:v.bakhmat@stacklevel.group", ghost: true }}
+        secondaryCta={{ label: isRu ? "Написать на email" : "Email us", href: `mailto:${CONTACTS.salesEmail}`, ghost: true }}
         chips={
           isRu
             ? ["Вводная программа", "Звонок уточнения объёма", "Аудитный бриф", "Демонстрация продукта"]
@@ -75,18 +98,18 @@ export default async function ContactPage({ params }: Props) {
             </p>
             <div className="mt-4 space-y-1 text-sm font-semibold text-[var(--black)]">
               <p>
-                <a href="mailto:v.bakhmat@stacklevel.group" className="hover:text-[var(--accent)]">
-                  v.bakhmat@stacklevel.group
+                <a href={`mailto:${CONTACTS.salesEmail}`} className="hover:text-[var(--accent)]">
+                  {CONTACTS.salesEmail}
                 </a>
               </p>
               <p>
-                <a href="tel:+375296682127" className="hover:text-[var(--accent)]">
-                  +375 (29) 668-21-27
+                <a href={`tel:${CONTACTS.phoneE164}`} className="hover:text-[var(--accent)]">
+                  {CONTACTS.phoneDisplay}
                 </a>
               </p>
               <p>
-                <a href="tg://resolve?domain=vitalibakhmat" className="hover:text-[var(--accent)]">
-                  Telegram: @vitalibakhmat
+                <a href={`tg://resolve?domain=${CONTACTS.telegramHandle}`} className="hover:text-[var(--accent)]">
+                  Telegram: {CONTACTS.telegramDisplay}
                 </a>
               </p>
             </div>
@@ -101,6 +124,7 @@ export default async function ContactPage({ params }: Props) {
           </Suspense>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
+import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { blogPostSlugs, getBlogPostBySlug } from "@/app/content/blogPosts";
 import { localizedAlternates } from "@/app/lib/site";
+import { ORGANIZATION_ID, buildBreadcrumbSchema, buildPageSchema, localizedAbsoluteUrl, schemaId } from "@/app/lib/schema";
 
 type BlogPostPageProps = {
   params: Promise<{
@@ -105,8 +107,41 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const pathname = `/blog/${slug}`;
+  const breadcrumbSchema = buildBreadcrumbSchema(locale, pathname, [
+    { name: isRuLocale(locale) ? "Главная" : "Home", path: "/" },
+    { name: isRuLocale(locale) ? "Блог" : "Blog", path: "/blog" },
+    { name: post.title, path: pathname },
+  ]);
+  const articleId = schemaId(locale, pathname, "article");
+  const pageSchema = buildPageSchema({
+    locale,
+    path: pathname,
+    name: post.title,
+    description: post.excerpt,
+    breadcrumbId: schemaId(locale, pathname, "breadcrumb"),
+    mainEntity: { "@id": articleId },
+  });
+  const articleSchema = {
+    "@type": "BlogPosting",
+    "@id": articleId,
+    headline: post.title,
+    description: post.excerpt,
+    url: localizedAbsoluteUrl(locale, pathname),
+    datePublished: `${post.publishedAt}T00:00:00Z`,
+    dateModified: `${post.publishedAt}T00:00:00Z`,
+    articleSection: post.category,
+    inLanguage: isRuLocale(locale) ? "ru" : "en",
+    timeRequired: `PT${post.readingMinutes}M`,
+    author: { "@id": ORGANIZATION_ID },
+    publisher: { "@id": ORGANIZATION_ID },
+    mainEntityOfPage: { "@id": schemaId(locale, pathname, "webpage") },
+  };
+
   return (
-    <div className="relative">
+    <>
+      <JsonLd data={[pageSchema, breadcrumbSchema, articleSchema]} />
+      <div className="relative">
       <section className="relative overflow-hidden py-12 md:py-16">
         <div className="width-wrapper">
 
@@ -203,6 +238,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

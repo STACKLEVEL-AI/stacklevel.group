@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import Accordion from "@/app/components/Accordion";
 import InnerHero from "@/app/components/InnerHero";
+import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
+import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema, schemaId } from "@/app/lib/schema";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -25,6 +27,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ResourcesPage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
+  const pageName = isRu ? "Материалы | Управляемое корпоративное ИИ" : "Resources | Governed Enterprise AI";
+  const pageDescription = isRu
+    ? "Практические материалы по управляемому внедрению ИИ, отслеживаемости аудита и комплаенсу по дизайну для корпоративных команд."
+    : "Practical resources on governed AI implementation, audit traceability, and compliance-by-design for enterprise teams.";
 
   const featuredTopics = isRu
     ? [
@@ -58,8 +64,30 @@ export default async function ResourcesPage({ params }: Props) {
         "Prompt and policy change-control models for production AI.",
       ];
 
+  const breadcrumbSchema = buildBreadcrumbSchema(locale, "/resources", [
+    { name: isRu ? "Главная" : "Home", path: "/" },
+    { name: isRu ? "Материалы" : "Resources", path: "/resources" },
+  ]);
+  const topicListId = schemaId(locale, "/resources", "topic-list");
+  const topicListSchema = buildItemListSchema(
+    topicListId,
+    isRu ? "Темы Stacklevel Group" : "Stacklevel Group topics",
+    [...featuredTopics, ...extraTopics].map((topic) => ({ name: topic })),
+  );
+  const pageSchema = buildPageSchema({
+    locale,
+    path: "/resources",
+    name: pageName,
+    description: pageDescription,
+    type: "CollectionPage",
+    breadcrumbId: schemaId(locale, "/resources", "breadcrumb"),
+    mainEntity: { "@id": topicListId },
+  });
+
   return (
-    <div className="relative">
+    <>
+      <JsonLd data={[pageSchema, breadcrumbSchema, topicListSchema]} />
+      <div className="relative">
       <InnerHero
         lines={
           isRu
@@ -154,6 +182,7 @@ export default async function ResourcesPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

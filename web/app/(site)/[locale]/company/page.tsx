@@ -3,7 +3,18 @@ import { Link } from "@/i18n/navigation";
 import Clients from "@/app/components/Clients";
 import InnerHero from "@/app/components/InnerHero";
 import LeadershipQuotesSlider from "@/app/components/LeadershipQuotesSlider";
+import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
+import {
+  MAXIM_GARBAR_ID,
+  ORGANIZATION_ID,
+  VADIM_VLADYMTSEV_ID,
+  VITALIY_BAKHMAT_ID,
+  buildBreadcrumbSchema,
+  buildPageSchema,
+  getLeadershipSchemas,
+  schemaId,
+} from "@/app/lib/schema";
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -28,6 +39,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CompanyPage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
+  const pageName = isRu ? "О компании | Stacklevel Group" : "Company | Stacklevel Group";
+  const pageDescription = isRu
+    ? "Профиль Stacklevel Group: управляемая инженерия ИИ, аудит и соблюдение требований для корпоративных команд."
+    : "Stacklevel Group profile: governed AI engineering, audit, and compliance delivery for enterprise teams.";
   
   // Read messages directly for static export
   const messagesPath = join(process.cwd(), "messages", `${locale}.json`);
@@ -101,8 +116,30 @@ export default async function CompanyPage({ params }: Props) {
         },
       ];
 
+  const breadcrumbSchema = buildBreadcrumbSchema(locale, "/company", [
+    { name: isRu ? "Главная" : "Home", path: "/" },
+    { name: isRu ? "О компании" : "Company", path: "/company" },
+  ]);
+  const pageSchema = buildPageSchema({
+    locale,
+    path: "/company",
+    name: pageName,
+    description: pageDescription,
+    type: "AboutPage",
+    breadcrumbId: schemaId(locale, "/company", "breadcrumb"),
+    mainEntity: { "@id": ORGANIZATION_ID },
+    about: [
+      { "@id": MAXIM_GARBAR_ID },
+      { "@id": VITALIY_BAKHMAT_ID },
+      { "@id": VADIM_VLADYMTSEV_ID },
+    ],
+  });
+  const leadershipSchemas = getLeadershipSchemas();
+
   return (
-    <div className="relative pb-16 md:pb-20">
+    <>
+      <JsonLd data={[pageSchema, breadcrumbSchema, ...leadershipSchemas]} />
+      <div className="relative pb-16 md:pb-20">
       <InnerHero
         lines={
           isRu
@@ -259,6 +296,7 @@ export default async function CompanyPage({ params }: Props) {
           </article>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

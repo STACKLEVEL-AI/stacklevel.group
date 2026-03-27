@@ -3,7 +3,9 @@ import { Link } from "@/i18n/navigation";
 import CaseStudiesFilter, { CaseStudyItem } from "@/app/components/CaseStudiesFilter";
 import Clients from "@/app/components/Clients";
 import InnerHero from "@/app/components/InnerHero";
+import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
+import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema, schemaId } from "@/app/lib/schema";
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -28,6 +30,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CaseStudiesPage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
+  const pageName = isRu ? "Кейсы | Управляемое внедрение ИИ" : "Case Studies | Governed AI Delivery";
+  const pageDescription = isRu
+    ? "NDA-safe формат кейсов: постановка проблемы, дизайн решения, контролы и операционные результаты для регулируемого внедрения ИИ."
+    : "NDA-safe case study formats focused on problem framing, solution design, controls, and operational outcomes for regulated AI delivery.";
   
   // Read messages directly for static export
   const messagesPath = join(process.cwd(), "messages", `${locale}.json`);
@@ -155,8 +161,30 @@ export default async function CaseStudiesPage({ params }: Props) {
         },
       ];
 
+  const breadcrumbSchema = buildBreadcrumbSchema(locale, "/case-studies", [
+    { name: isRu ? "Главная" : "Home", path: "/" },
+    { name: isRu ? "Кейсы" : "Case studies", path: "/case-studies" },
+  ]);
+  const caseListId = schemaId(locale, "/case-studies", "case-list");
+  const caseListSchema = buildItemListSchema(
+    caseListId,
+    isRu ? "Кейсы Stacklevel Group" : "Stacklevel Group case studies",
+    cases.map((item) => ({ name: item.title })),
+  );
+  const pageSchema = buildPageSchema({
+    locale,
+    path: "/case-studies",
+    name: pageName,
+    description: pageDescription,
+    type: "CollectionPage",
+    breadcrumbId: schemaId(locale, "/case-studies", "breadcrumb"),
+    mainEntity: { "@id": caseListId },
+  });
+
   return (
-    <div className="relative">
+    <>
+      <JsonLd data={[pageSchema, breadcrumbSchema, caseListSchema]} />
+      <div className="relative">
       <InnerHero
         lines={
           isRu
@@ -238,6 +266,7 @@ export default async function CaseStudiesPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

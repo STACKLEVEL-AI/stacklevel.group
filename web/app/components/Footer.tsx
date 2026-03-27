@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "@/app/components/BaseImage";
+import { CONTACTS } from "@/app/lib/entities";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 
@@ -18,13 +19,13 @@ export default function Footer() {
             <p className="mt-4 max-w-sm text-sm text-[var(--black)]">{t("tagline")}</p>
             <div className="mt-4 space-y-1 text-sm font-semibold text-[var(--black)]">
               <p>
-                <a href="mailto:v.bakhmat@stacklevel.group" className="hover:text-[var(--accent)]">
-                  v.bakhmat@stacklevel.group
+                <a href={`mailto:${CONTACTS.salesEmail}`} className="hover:text-[var(--accent)]">
+                  {CONTACTS.salesEmail}
                 </a>
               </p>
               <p>
-                <a href="tel:+375296682127" className="hover:text-[var(--accent)]">
-                  +375 (29) 668-21-27
+                <a href={`tel:${CONTACTS.phoneE164}`} className="hover:text-[var(--accent)]">
+                  {CONTACTS.phoneDisplay}
                 </a>
               </p>
             </div>

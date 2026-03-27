@@ -3,7 +3,9 @@ import { Link } from "@/i18n/navigation";
 import { isRuLocale } from "@/i18n/localeUtils";
 import Clients from "@/app/components/Clients";
 import HomeHero from "@/app/components/HomeHero";
+import JsonLd from "@/app/components/JsonLd";
 import { localizedAlternates } from "@/app/lib/site";
+import { ORGANIZATION_ID, buildPageSchema } from "@/app/lib/schema";
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -29,6 +31,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
+  const pageName = isRu
+    ? "Stacklevel Group | Инженерия ИИ, аудит и соответствие"
+    : "Stacklevel Group | AI Engineering, Audit & Compliance";
+  const pageDescription = isRu
+    ? "Stacklevel Group внедряет инженерные практики ИИ, аудит и соответствие по дизайну для корпоративных производственных сред."
+    : "Stacklevel Group delivers AI engineering, AI audit, and compliance-by-design for enterprise production environments.";
+  const pageSchema = buildPageSchema({
+    locale,
+    path: "/",
+    name: pageName,
+    description: pageDescription,
+    mainEntity: { "@id": ORGANIZATION_ID },
+    about: [{ "@id": ORGANIZATION_ID }],
+  });
   
   // Read messages directly for static export
   const messagesPath = join(process.cwd(), "messages", `${locale}.json`);
@@ -98,7 +114,9 @@ export default async function HomePage({ params }: Props) {
   ];
 
   return (
-    <div className="relative">
+    <>
+      <JsonLd data={pageSchema} />
+      <div className="relative">
       <HomeHero />
 
       <Clients title={clientsTitle} disclaimer={clientsDisclaimer} />
@@ -160,6 +178,7 @@ export default async function HomePage({ params }: Props) {
           </article>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

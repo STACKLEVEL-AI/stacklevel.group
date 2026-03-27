@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import InnerHero from "@/app/components/InnerHero";
+import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
+import { ORGANIZATION_ID, buildBreadcrumbSchema, buildPageSchema, localizedAbsoluteUrl, schemaId } from "@/app/lib/schema";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -26,6 +28,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CenturyPage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
+  const pageName = isRu
+    ? "Century | Производственная LLM-платформа для управляемого развёртывания"
+    : "Century | Production LLM Platform for Governed Deployment";
+  const pageDescription = isRu
+    ? "Century — производственная LLM-платформа Stacklevel для корпоративных сред с атрибуцией источников, учётом прав доступа и готовностью к аудиту."
+    : "Century is Stacklevel's production LLM platform for enterprise environments requiring citations, IAM-aware behavior, and audit-grade traceability.";
 
   const capabilities = isRu
     ? [
@@ -85,8 +93,39 @@ export default async function CenturyPage({ params }: Props) {
         },
       ];
 
+  const breadcrumbSchema = buildBreadcrumbSchema(locale, "/products/century", [
+    { name: isRu ? "Главная" : "Home", path: "/" },
+    { name: isRu ? "Продукты" : "Products", path: "/products" },
+    { name: "Century", path: "/products/century" },
+  ]);
+  const productId = schemaId(locale, "/products/century", "product");
+  const pageSchema = buildPageSchema({
+    locale,
+    path: "/products/century",
+    name: pageName,
+    description: pageDescription,
+    breadcrumbId: schemaId(locale, "/products/century", "breadcrumb"),
+    mainEntity: { "@id": productId },
+  });
+  const productSchema = {
+    "@type": ["Product", "SoftwareApplication"],
+    "@id": productId,
+    name: "Century",
+    url: localizedAbsoluteUrl(locale, "/products/century"),
+    description: pageDescription,
+    brand: { "@id": ORGANIZATION_ID },
+    manufacturer: { "@id": ORGANIZATION_ID },
+    applicationCategory: "BusinessApplication",
+    operatingSystem: isRu
+      ? "Веб, локальное, изолированное и гибридное развертывание"
+      : "Web, on-prem, air-gapped, and hybrid deployment",
+    featureList: capabilities,
+  };
+
   return (
-    <div className="relative">
+    <>
+      <JsonLd data={[pageSchema, breadcrumbSchema, productSchema]} />
+      <div className="relative">
       <InnerHero
         lines={
           isRu
@@ -207,6 +246,7 @@ export default async function CenturyPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

@@ -3,7 +3,9 @@ import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { getSiteUrl } from "@/app/lib/site";
+import JsonLd from "@/app/components/JsonLd";
 import SiteLayout from "@/app/components/SiteLayout";
+import { getOrganizationSchema, getWebsiteSchema } from "@/app/lib/schema";
 import { readFileSync } from "fs";
 import { join } from "path";
 import "../../globals.css";
@@ -48,6 +50,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        <JsonLd data={[getOrganizationSchema(), getWebsiteSchema()]} />
         <link
           rel="preload"
           as="image"

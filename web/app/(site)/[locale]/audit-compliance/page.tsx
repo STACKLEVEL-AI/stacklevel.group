@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import InnerHero from "@/app/components/InnerHero";
+import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
+import { ORGANIZATION_ID, buildBreadcrumbSchema, buildPageSchema, schemaId } from "@/app/lib/schema";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -24,6 +26,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function AuditCompliancePage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
+  const pageName = isRu ? "Аудит ИИ и соответствие требованиям | Stacklevel" : "AI Audit & Compliance by Design | Stacklevel";
+  const pageDescription = isRu
+    ? "Сервисы аудита и управления для корпоративных ИИ‑программ: формируем доказательную базу, прослеживаемость и исполнимые контролы."
+    : "Audit and governance services for enterprise AI programs that require evidence, traceability, and enforceable controls.";
 
   const pillars = isRu
     ? [
@@ -119,8 +125,33 @@ export default async function AuditCompliancePage({ params }: Props) {
         "When governance artifacts are required for executive sign-off.",
       ];
 
+  const breadcrumbSchema = buildBreadcrumbSchema(locale, "/audit-compliance", [
+    { name: isRu ? "Главная" : "Home", path: "/" },
+    { name: isRu ? "Аудит и соответствие" : "Audit & compliance", path: "/audit-compliance" },
+  ]);
+  const serviceId = schemaId(locale, "/audit-compliance", "service");
+  const serviceSchema = {
+    "@type": "Service",
+    "@id": serviceId,
+    name: isRu ? "Аудит ИИ и соответствие требованиям" : "AI Audit & Compliance by Design",
+    description: pageDescription,
+    provider: { "@id": ORGANIZATION_ID },
+    serviceType: isRu ? "Аудит ИИ, governance и compliance-by-design" : "AI audit, governance, and compliance-by-design",
+  };
+  const pageSchema = buildPageSchema({
+    locale,
+    path: "/audit-compliance",
+    name: pageName,
+    description: pageDescription,
+    breadcrumbId: schemaId(locale, "/audit-compliance", "breadcrumb"),
+    mainEntity: { "@id": serviceId },
+    about: [{ "@id": ORGANIZATION_ID }],
+  });
+
   return (
-    <div className="relative">
+    <>
+      <JsonLd data={[pageSchema, breadcrumbSchema, serviceSchema]} />
+      <div className="relative">
       <InnerHero
         lines={
           isRu
@@ -236,6 +267,7 @@ export default async function AuditCompliancePage({ params }: Props) {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

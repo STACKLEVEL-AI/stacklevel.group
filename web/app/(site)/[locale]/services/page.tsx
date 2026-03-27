@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import Accordion from "@/app/components/Accordion";
 import InnerHero from "@/app/components/InnerHero";
+import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
+import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema, schemaId } from "@/app/lib/schema";
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -29,6 +31,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ServicesPage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
+  const pageName = isRu
+    ? "AI Engineering услуги для регулируемого продакшна | Stacklevel"
+    : "AI Engineering Services for Regulated Production | Stacklevel";
+  const pageDescription = isRu
+    ? "Outcome-driven AI engineering пакеты для регулируемых сред с встроенными контролями и evidence-артефактами."
+    : "Outcome-driven AI engineering packages for regulated environments, with controls and evidence built into delivery.";
   
   // Read messages directly for static export
   const messagesPath = join(process.cwd(), "messages", `${locale}.json`);
@@ -257,8 +265,30 @@ export default async function ServicesPage({ params }: Props) {
         },
       ];
 
+  const breadcrumbSchema = buildBreadcrumbSchema(locale, "/services", [
+    { name: isRu ? "Главная" : "Home", path: "/" },
+    { name: isRu ? "Услуги" : "Services", path: "/services" },
+  ]);
+  const serviceListId = schemaId(locale, "/services", "service-list");
+  const serviceListSchema = buildItemListSchema(
+    serviceListId,
+    isRu ? "Направления услуг Stacklevel Group" : "Stacklevel Group service lines",
+    serviceLines.map((serviceLine) => ({ name: serviceLine.title })),
+  );
+  const pageSchema = buildPageSchema({
+    locale,
+    path: "/services",
+    name: pageName,
+    description: pageDescription,
+    type: "CollectionPage",
+    breadcrumbId: schemaId(locale, "/services", "breadcrumb"),
+    mainEntity: { "@id": serviceListId },
+  });
+
   return (
-    <div className="relative">
+    <>
+      <JsonLd data={[pageSchema, breadcrumbSchema, serviceListSchema]} />
+      <div className="relative">
       <InnerHero
         lines={
           isRu
@@ -391,6 +421,7 @@ export default async function ServicesPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }
