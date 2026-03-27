@@ -67,15 +67,15 @@ export default async function CenturyPage({ params }: Props) {
     ? [
         {
           title: "Ассистент политик и контролов",
-          text: "Формирует ответы на базе контролируемых источников с обязательными citations.",
+          text: "Формирует ответы на базе контролируемых источников с обязательным цитированием источников.",
         },
         {
-          title: "Ассистент compliance evidence",
-          text: "Поддерживает сбор evidence и traceable summaries для review-процессов.",
+          title: "Ассистент по доказательной базе комплаенса",
+          text: "Поддерживает сбор доказательной базы и прослеживаемых резюме для процессов ревью.",
         },
         {
-          title: "Операционный knowledge assistant",
-          text: "Помогает командам с retrieval только из approved-source в контролируемых средах.",
+          title: "Операционный ассистент по знаниям",
+          text: "Помогает командам работать только с утверждёнными источниками в контролируемых средах.",
         },
       ]
     : [
@@ -131,8 +131,8 @@ export default async function CenturyPage({ params }: Props) {
           isRu
             ? [
                 { text: "Century" },
-                { text: "Управляемая LLM", accent: true },
-                { text: "Развёртывание" },
+                { text: "Управляемое", accent: true },
+                { text: "развёртывание LLM" },
               ]
             : [
                 { text: "Century" },
@@ -146,7 +146,7 @@ export default async function CenturyPage({ params }: Props) {
             : "Built for environments where every answer may require attribution, access validation, and auditability."
         }
         primaryCta={{ label: isRu ? "Запросить демонстрацию" : "Request demo", href: "/contact?topic=Product%20demo" }}
-        secondaryCta={{ label: isRu ? "Запросить security brief" : "Request security brief", href: "/contact?topic=Audit%20brief", ghost: true }}
+        secondaryCta={{ label: isRu ? "Запросить бриф по безопасности" : "Request security brief", href: "/contact?topic=Audit%20brief", ghost: true }}
         chips={
           isRu
             ? ["Атрибуция источников", "Учёт прав доступа", "Аудиторские журналы и этапы"]
@@ -183,7 +183,7 @@ export default async function CenturyPage({ params }: Props) {
             <h2 className="stack-grid-title text-[var(--black)]">
               {isRu ? (
                 <>
-                  Почему security-команды это <span className="stack-accent">одобряют</span>
+                  Почему это одобряют <span className="stack-accent">команды безопасности</span>
                 </>
               ) : (
                 <>
@@ -199,10 +199,10 @@ export default async function CenturyPage({ params }: Props) {
           </article>
 
           <article className="stack-panel-dark p-5">
-            <h3 className="stack-title text-2xl">{isRu ? "Режимы deployment" : "Deployment modes"}</h3>
+            <h3 className="stack-title text-2xl">{isRu ? "Режимы развёртывания" : "Deployment modes"}</h3>
             <p className="mt-4 text-sm text-white/88">
               {isRu
-                ? "Выбор зависит от security boundary и вашей операционной модели."
+                ? "Выбор зависит от требований безопасности и вашей операционной модели."
                 : "Choose based on security boundary and operating model."}
             </p>
             <p className="mt-4 text-base font-semibold uppercase tracking-wide text-white">{deploymentModes.join(" • ")}</p>
@@ -241,7 +241,7 @@ export default async function CenturyPage({ params }: Props) {
               {isRu ? "Запросить демо" : "Request demo"}
             </Link>
             <Link href="/contact?topic=Audit%20brief" className="stack-cta-ghost text-xl md:text-2xl">
-              {isRu ? "Запросить security brief" : "Request security brief"}
+              {isRu ? "Запросить бриф по безопасности" : "Request security brief"}
             </Link>
           </div>
         </div>

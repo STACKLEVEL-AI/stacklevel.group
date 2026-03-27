@@ -2,11 +2,15 @@
 
 import Image from "@/app/components/BaseImage";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { assetPath } from "@/app/lib/assets";
+import { isRuLocale } from "@/i18n/localeUtils";
 
 export default function HomeHero() {
+  const locale = useLocale();
+  const isRu = isRuLocale(locale);
   const t = useTranslations("pages.home");
+  const heroNote = [t("heroChips.chip1"), t("heroChips.chip2"), t("heroChips.chip3")].join(" ");
 
   return (
     <section
@@ -75,17 +79,23 @@ export default function HomeHero() {
             </Link>
           </div>
 
-          <div className="mt-2 flex flex-wrap gap-2">
-            <span className="border border-white/60 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-black">
-              {t("heroChips.chip1")}
-            </span>
-            <span className="border border-white/60 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-black">
-              {t("heroChips.chip2")}
-            </span>
-            <span className="border border-white/60 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-black">
-              {t("heroChips.chip3")}
-            </span>
-          </div>
+          {isRu ? (
+            <p className="mt-2 max-w-[680px] border border-white/60 bg-white/90 px-4 py-3 text-sm font-semibold leading-relaxed text-black">
+              {heroNote}
+            </p>
+          ) : (
+            <div className="mt-2 flex flex-wrap gap-2">
+              <span className="border border-white/60 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-black">
+                {t("heroChips.chip1")}
+              </span>
+              <span className="border border-white/60 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-black">
+                {t("heroChips.chip2")}
+              </span>
+              <span className="border border-white/60 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-black">
+                {t("heroChips.chip3")}
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -47,6 +47,7 @@ export default async function CompanyPage({ params }: Props) {
   // Read messages directly for static export
   const messagesPath = join(process.cwd(), "messages", `${locale}.json`);
   const messages = JSON.parse(readFileSync(messagesPath, "utf-8"));
+  const clientsDisclaimer = messages.clients?.disclaimer || "";
   
   // Get company page translations
   const t = (key: string) => {
@@ -188,7 +189,7 @@ export default async function CompanyPage({ params }: Props) {
         </div>
       </section>
 
-      <Clients title={t("clientsTitle")} className="py-6 md:py-8" />
+      <Clients title={t("clientsTitle")} disclaimer={clientsDisclaimer} className="py-6 md:py-8" />
 
       <section className="relative py-8 md:py-12">
         <div className="width-wrapper">
@@ -204,12 +205,6 @@ export default async function CompanyPage({ params }: Props) {
 
             <div className="grid gap-8 lg:grid-cols-[130px_1fr] xl:grid-cols-[150px_1fr]">
               <div className="relative hidden min-h-[360px] items-center justify-center lg:flex">
-                <span
-                  className="stack-title absolute translate-x-[8px] translate-y-[14px] text-[72px] tracking-wide text-[var(--brand-gray)]/45"
-                  style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-                >
-                  {t("heroSection.title")}
-                </span>
                 <span
                   className="stack-title relative z-10 text-[72px] tracking-wide text-[var(--black)]"
                   style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}

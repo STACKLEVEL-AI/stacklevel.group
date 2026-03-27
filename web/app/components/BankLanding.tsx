@@ -1141,10 +1141,19 @@ export default function BankLanding({ locale }: Props) {
                     <div className={styles.demoFormWrap}>
                         <Suspense
                             fallback={
-                                <div className="stack-panel bg-white p-6 md:p-8">
-                                    {locale === "ru"
-                                        ? "Форма загружается..."
-                                        : "Loading form…"}
+                                <div className="stack-panel bg-white p-6 md:p-8" aria-hidden="true">
+                                    <div className="h-9 w-56 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                                    <div className="mt-6 grid gap-4 md:grid-cols-2">
+                                        <div className="h-12 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                                        <div className="h-12 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                                        <div className="h-12 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                                        <div className="h-12 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                                    </div>
+                                    <div className="mt-4 h-32 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                                    <div className="mt-6 grid gap-3 md:grid-cols-2">
+                                        <div className="h-14 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                                        <div className="h-14 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                                    </div>
                                 </div>
                             }
                         >
