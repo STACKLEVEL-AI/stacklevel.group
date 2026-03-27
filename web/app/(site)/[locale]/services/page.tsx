@@ -20,10 +20,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: isRu
-      ? "AI Engineering услуги для регулируемого продакшна | Stacklevel"
+      ? "Услуги по инженерии ИИ для регулируемых сред | Stacklevel"
       : "AI Engineering Services for Regulated Production | Stacklevel",
     description: isRu
-      ? "Outcome-driven AI engineering пакеты для регулируемых сред с встроенными контролями и evidence-артефактами."
+      ? "Услуги по инженерии ИИ для регулируемых сред с встроенными контролями и доказательной базой для проверки."
       : "Outcome-driven AI engineering packages for regulated environments, with controls and evidence built into delivery.",
   };
 }
@@ -32,10 +32,10 @@ export default async function ServicesPage({ params }: Props) {
   const { locale } = await params;
   const isRu = isRuLocale(locale);
   const pageName = isRu
-    ? "AI Engineering услуги для регулируемого продакшна | Stacklevel"
+    ? "Услуги по инженерии ИИ для регулируемых сред | Stacklevel"
     : "AI Engineering Services for Regulated Production | Stacklevel";
   const pageDescription = isRu
-    ? "Outcome-driven AI engineering пакеты для регулируемых сред с встроенными контролями и evidence-артефактами."
+    ? "Услуги по инженерии ИИ для регулируемых сред с встроенными контролями и доказательной базой для проверки."
     : "Outcome-driven AI engineering packages for regulated environments, with controls and evidence built into delivery.";
   
   // Read messages directly for static export
@@ -238,16 +238,16 @@ export default async function ServicesPage({ params }: Props) {
   const engagementSteps = isRu
     ? [
         {
-          title: "1. Discovery",
-          text: "Фиксируем workflows, ограничения и ожидания по контролям со всеми stakeholders.",
+          title: "1. Диагностика",
+          text: "Фиксируем рабочие процессы, ограничения и ожидания по контролям со всеми участниками.",
         },
         {
-          title: "2. Pilot",
-          text: "Поставляем governed implementation с evidence и evaluation checkpoints.",
+          title: "2. Пилот",
+          text: "Поставляем управляемое решение с доказательной базой и контрольными точками оценки.",
         },
         {
-          title: "3. Production rollout",
-          text: "Укрепляем operations, передаем ownership и масштабируем с review-дисциплиной.",
+          title: "3. Промышленное развёртывание",
+          text: "Укрепляем эксплуатацию, передаём ответственность команде и масштабируем решение с дисциплиной регулярного ревью.",
         },
       ]
     : [
@@ -312,8 +312,8 @@ export default async function ServicesPage({ params }: Props) {
         secondaryCta={{ label: isRu ? "Аудит и комплаенс" : "Audit & Compliance", href: "/audit-compliance", ghost: true }}
         chips={
           isRu
-            ? ["LLM-решения", "Локальное или гибридное", "Доказательства и контролы"]
-            : ["LLM solutions", "On-prem or hybrid", "Evidence and controls"]
+            ? ["LLM-решения для корпоративных сред: локальное или гибридное развёртывание, встроенные контролы и доказательная база для ревью."]
+            : ["Enterprise LLM delivery with on-prem or hybrid deployment, embedded controls, and review-ready evidence."]
         }
       />
 

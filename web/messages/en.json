@@ -80,7 +80,7 @@
       "description": "For committees and partner programs evaluating collaboration and due diligence materials."
     },
     "scoping": {
-      "title": "Scoping / audit / demo",
+      "title": "Choose request type",
       "description": "For enterprise teams planning AI engineering, governance baseline work, or Century product evaluation."
     }
   },
@@ -194,7 +194,7 @@
   },
   "contactForm": {
     "title": "Send request",
-    "subtitle": "Share the target workflow and the constraints that matter for delivery.",
+    "subtitle": "Complete the form with your name, work email, company, topic, and preferred engagement type.",
     "name": "Name",
     "workEmail": "Work email",
     "company": "Company",
@@ -733,22 +733,22 @@
         "success": "SUCCESSFUL PROJECTS"
       },
       "cta": {
-        "more": "WANT TO KNOW MORE ABOUT US?",
+        "more": "Learn more about us",
         "scoping": "Request scoping call",
         "audit": "Request audit brief"
       },
       "title": "StackLevel Group",
-      "subtitle": "Governed AI engineering for enterprise teams: from pilot to production deployment.",
-      "chips": "AI Engineering, Audit, Compliance",
+      "subtitle": "We combine engineering, audit, and compliance into one execution model.",
+      "chips": "AI Engineering · Audit · Compliance",
       "primaryCta": "Contact us",
       "secondaryCta": "Our services",
       "heroSection": {
-        "title": "WE ARE ...",
+        "title": "Why teams trust us",
         "experienced": "30+",
         "years": "3+",
         "projects": "20+",
         "returnedClients": "92%",
-        "positiveFeedback": "ONLY ..."
+        "positiveFeedback": "100%"
       },
       "pillars": {
         "title": "Engineering. Audit. Compliance - one execution plan.",
@@ -788,13 +788,13 @@
     },
     "home": {
       "title": {
-        "line1": "AI",
-        "line2": "GOVERNANCE",
-        "line3": "COMPLIANCE",
-        "line4": "ENGINEERING"
+        "line1": "AI Engineering",
+        "line2": "for",
+        "line3": "Regulated",
+        "line4": "Environments"
       },
       "subtitle": "Engineering. Audit. Compliance in one execution plan.",
-      "ctaFind": "Find a Team",
+      "ctaFind": "Request consultation",
       "ctaHire": "View Products",
       "clientsTitle": "Trusted since 2018",
       "heading": "Engineering. Audit. Compliance in one execution plan.",
@@ -830,9 +830,9 @@
         "Air-gapped operational support workflows."
       ],
       "heroChips": {
-        "chip1": "On-prem / air-gapped / hybrid",
-        "chip2": "RAG + citations + audit",
-        "chip3": "IAM-aware responses"
+        "chip1": "On-prem, air-gapped, and hybrid RAG deployments",
+        "chip2": "with citations, auditability,",
+        "chip3": "and IAM-aware responses."
       },
       "product": {
         "title": "Product highlight",
@@ -938,7 +938,7 @@
         ]
       },
       "cta": {
-        "title": "Need product fit validation?",
+        "title": "Need to validate product fit?",
         "description": "We map modules to workflows, integration boundaries, and governance requirements before scaling.",
         "ctaPrimary": "Request briefing",
         "ctaSecondary": "View case studies"
@@ -962,7 +962,7 @@
       },
       "validationTrack": {
         "title": "Validation tracks",
-        "description": "Prototypes and research tracks stay compact and support production decisions, not standalone product sprawl.",
+        "description": "Prototypes and research tracks stay compact and support production decisions without expanding the product catalog.",
         "items": [
           "Reference architectures for early enterprise validation.",
           "Prototype tracks aligned to governance constraints.",
@@ -970,7 +970,7 @@
         ]
       },
       "cta": {
-        "title": "Need product fit validation?",
+        "title": "Need to validate product fit?",
         "description": "We map modules to workflows, integration boundaries, and governance requirements before scaling.",
         "ctaPrimary": "Request product demo",
         "ctaSecondary": "Explore Century"
@@ -1022,7 +1022,7 @@
     "timelineApproach": "Timeline approach",
     "page": {
       "subtitle": "Outcome-driven delivery with governance controls embedded from day one.",
-      "chips": "LLM solutions, On-prem or hybrid, Evidence and controls",
+      "chips": "Enterprise LLM delivery, on-prem or hybrid deployment, embedded controls and review-ready evidence.",
       "serviceLines": {
         "title": "Service lines",
         "description": "Four execution packages designed for enterprise teams that need production outcomes and review readiness.",

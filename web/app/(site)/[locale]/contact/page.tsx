@@ -55,14 +55,12 @@ export default async function ContactPage({ params }: Props) {
         lines={
           isRu
             ? [
-                { text: "Контакт" },
-                { text: "Уточнение объёма и аудит", accent: true },
-                { text: "или демо" },
+                { text: "Свяжитесь" },
+                { text: "с нами", accent: true },
               ]
             : [
                 { text: "Contact" },
-                { text: "Scoping Audit", accent: true },
-                { text: "Or Demo" },
+                { text: "us", accent: true },
               ]
         }
         subtitle={
@@ -74,8 +72,8 @@ export default async function ContactPage({ params }: Props) {
         secondaryCta={{ label: isRu ? "Написать на email" : "Email us", href: `mailto:${CONTACTS.salesEmail}`, ghost: true }}
         chips={
           isRu
-            ? ["Вводная программа", "Звонок уточнения объёма", "Аудитный бриф", "Демонстрация продукта"]
-            : ["Program intro", "Scoping call", "Audit brief", "Product demo"]
+            ? ["Выберите формат обращения: вводная встреча, уточнение объёма, аудит или демонстрация продукта."]
+            : ["Choose the request type: intro call, scoping, audit brief, or product demo."]
         }
       />
 
@@ -85,7 +83,7 @@ export default async function ContactPage({ params }: Props) {
             <h2 className="stack-title text-2xl text-white">{isRu ? "Вводная программа" : "Program intro"}</h2>
             <p className="mt-3 text-sm text-white/90">
               {isRu
-                ? "Для комитетов и партнерских программ, оценивающих взаимодействие и due diligence материалы."
+                ? "Для комитетов и партнёрских программ, которые оценивают формат сотрудничества и материалы для проверки."
                 : "For committees and partner programs evaluating collaboration and due diligence materials."}
             </p>
           </article>
@@ -119,7 +117,7 @@ export default async function ContactPage({ params }: Props) {
 
       <section id="contact-form" className="relative overflow-hidden stack-section-pale py-12 md:py-16">
         <div className="width-wrapper relative">
-          <Suspense fallback={<div className="stack-panel bg-white p-6 md:p-8">{isRu ? "Загрузка формы..." : "Loading form..."}</div>}>
+          <Suspense fallback={<div className="stack-panel bg-white p-6 md:p-8">{isRu ? "Форма загружается..." : "Loading form…"}</div>}>
             <ContactForm />
           </Suspense>
         </div>

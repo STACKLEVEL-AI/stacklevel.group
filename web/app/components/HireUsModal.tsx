@@ -27,7 +27,7 @@ export default function HireUsModal({ onClose }: HireUsModalProps) {
             ×
           </button>
 
-          <Suspense fallback={<div className="stack-panel bg-white p-6 md:p-8">Loading form...</div>}>
+          <Suspense fallback={<div className="stack-panel bg-white p-6 md:p-8">Loading form…</div>}>
             <ContactForm defaultTopic="Scoping call" />
           </Suspense>
         </div>
