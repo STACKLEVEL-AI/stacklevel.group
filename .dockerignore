@@ -1,14 +1,45 @@
+# VCS and editor metadata
 .git
+.gitattributes
+.gitignore
 .github
-.next
-web/.next
-out
-node_modules
-web/node_modules
-npm-debug.log
+.vscode
+.idea
+.DS_Store
+**/.DS_Store
+
+# Environment and secrets
 .env
 .env.*
 !.env.example
-secrets/*.txt
-secrets/*.key
-secrets/*.crt
+.envrc
+.direnv/
+secrets/
+**/*.pem
+**/*.key
+**/*.crt
+**/*.p12
+**/*.pfx
+
+# Dependencies, builds, and caches
+**/node_modules
+web/.next
+**/.turbo
+**/.cache
+**/.vercel
+**/coverage
+**/htmlcov
+**/.pytest_cache
+**/__pycache__
+**/*.pyc
+web/tsconfig.tsbuildinfo
+
+# Logs and temp files
+**/*.log
+**/*.pid
+**/*.pid.lock
+**/*.tmp
+**/*.temp
+tmp/
+temp/
+TODO.md

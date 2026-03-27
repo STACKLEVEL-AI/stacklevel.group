@@ -1,17 +1,31 @@
-```
 # Dependencies
 node_modules/
+.npm/
+.pnpm-store/
+.yarn/
+.pnp.*
 
-# Build outputs
-dist/
-build/
+# Build outputs and caches
 .next/
 out/
+dist/
+build/
+coverage/
+htmlcov/
+.nyc_output/
+.cache/
+.turbo/
+.vercel/
+*.tsbuildinfo
 
-# Environment variables
+# Environment and local-only config
 .env
-.env.local
+.env.*
+!.env.example
 *.env
+*.local
+.envrc
+.direnv/
 TODO.md
 
 # Python
@@ -23,11 +37,33 @@ __pycache__/
 env/
 venv/
 .venv/
-.ENV
+ENV/
 .python-version
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytest_cache/
 
-# Logs
+# Logs and temp files
 *.log
+logs/
+*.pid
+*.pid.lock
+*.seed
+*.stackdump
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Local secrets and certificates
+secrets/*
+!secrets/.gitkeep
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
 
 # OS generated files
 .DS_Store
@@ -43,44 +79,5 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
-*.tmp
-
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
-# MyPy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# PyTest
-.pytest_cache/
-
-# Compressed files
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-*.rar
-*.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
-secrets/*
-!secrets/.gitkeep
-```
+*.orig
+*.rej
