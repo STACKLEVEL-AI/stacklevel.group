@@ -1,38 +1,91 @@
-# VCS and editor metadata
-.git
-.gitattributes
-.gitignore
-.github
-.vscode
-.idea
-.DS_Store
-**/.DS_Store
+# Default deny: only send sources that Dockerfiles in this repo actually use.
+**
+!web/
+!web/**
+!nginx/
+!nginx/**
+!bot-sender/
+!bot-sender/**
 
-# Environment and secrets
+# VCS, editor metadata, and OS noise
+.git
+.git/**
+.github
+.github/**
+.vscode
+.vscode/**
+.idea
+.idea/**
+**/.DS_Store
+**/Thumbs.db
+**/*.swp
+**/*.swo
+**/*.orig
+**/*.rej
+
+# Environment, secrets, and local databases
 .env
 .env.*
-!.env.example
-.envrc
-.direnv/
-secrets/
+**/.env
+**/.env.*
+**/.envrc
+**/.direnv
+**/.direnv/**
+secrets
+secrets/**
 **/*.pem
 **/*.key
 **/*.crt
 **/*.p12
 **/*.pfx
+**/*.sqlite
+**/*.sqlite3
+**/*.db
+**/*.db-*
 
-# Dependencies, builds, and caches
+# Dependencies, build outputs, and caches
 **/node_modules
-web/.next
-**/.turbo
-**/.cache
-**/.vercel
+**/node_modules/**
+**/.npm
+**/.npm/**
+**/.pnpm-store
+**/.pnpm-store/**
+**/.yarn
+**/.yarn/**
+**/.next
+**/.next/**
+**/dist
+**/dist/**
+**/build
+**/build/**
 **/coverage
+**/coverage/**
 **/htmlcov
+**/htmlcov/**
+**/.nyc_output
+**/.nyc_output/**
+**/.cache
+**/.cache/**
+**/.parcel-cache
+**/.parcel-cache/**
+**/.turbo
+**/.turbo/**
+**/.vercel
+**/.vercel/**
 **/.pytest_cache
+**/.pytest_cache/**
 **/__pycache__
+**/__pycache__/**
 **/*.pyc
-web/tsconfig.tsbuildinfo
+**/*.pyo
+**/*.pyd
+**/*.tsbuildinfo
+**/.eslintcache
+**/.stylelintcache
+**/playwright-report
+**/playwright-report/**
+**/test-results
+**/test-results/**
 
 # Logs and temp files
 **/*.log
@@ -40,6 +93,8 @@ web/tsconfig.tsbuildinfo
 **/*.pid.lock
 **/*.tmp
 **/*.temp
-tmp/
-temp/
+**/tmp
+**/tmp/**
+**/temp
+**/temp/**
 TODO.md
