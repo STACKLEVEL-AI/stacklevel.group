@@ -67,7 +67,7 @@ export default async function CompanyPage({ params }: Props) {
         {
           title: "Инженерия ИИ",
           bullets: [
-            "Производственные сценарии обработки LLM и интеграции для enterprise-сред.",
+            "Промышленные сценарии работы с LLM и интеграции для корпоративных сред.",
             "Локальное и гибридное развёртывание с учётом ограничений.",
             "Оптимизация производительности и затрат на вывод моделей.",
           ],
@@ -75,7 +75,7 @@ export default async function CompanyPage({ params }: Props) {
         {
           title: "Аудит ИИ",
           bullets: [
-            "Требования к доказательной базе и отслеживаемости (traceability).",
+            "Требования к доказательной базе и прослеживаемости.",
             "Методология оценки и артефакты для ревью.",
             "Формат отчётности, готовый для аудита.",
           ],
@@ -155,7 +155,7 @@ export default async function CompanyPage({ params }: Props) {
         subtitle={t("subtitle")}
         primaryCta={{ label: t("primaryCta"), href: "/contact?topic=Scoping%20call" }}
         secondaryCta={{ label: t("secondaryCta"), href: "/services", ghost: true }}
-        chips={isRu ? ["AI Engineering", "Аудит", "Комплаенс"] : t("chips").split(", ")}
+        chips={isRu ? ["Инженерия ИИ · Аудит · Комплаенс"] : ["AI Engineering · Audit · Compliance"]}
       />
 
       <section className="relative py-8 md:py-12">
@@ -164,7 +164,7 @@ export default async function CompanyPage({ params }: Props) {
             <h2 className="stack-grid-title max-w-5xl text-[var(--black)]">
               {isRu ? (
                 <>
-                  Engineering. Audit. <span className="stack-accent">Compliance</span> в одном плане исполнения.
+                  Инженерия. Аудит. <span className="stack-accent">Комплаенс</span> в одном плане исполнения.
                 </>
               ) : (
                 <>

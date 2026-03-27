@@ -95,8 +95,8 @@ export default async function ProductsPage({ params }: Props) {
           isRu
               ? [
                   { text: "Продукты для" },
-                  { text: "Управляемого ИИ", accent: true },
-                  { text: "Внедрение" },
+                  { text: "управляемого", accent: true },
+                  { text: "внедрения ИИ" },
                 ]
             : [
                 { text: "Products for" },
@@ -113,8 +113,8 @@ export default async function ProductsPage({ params }: Props) {
         secondaryCta={{ label: isRu ? "Смотреть Century" : "Explore Century", href: "/products/century", ghost: true }}
         chips={
           isRu
-            ? ["Платформа Century", "Треки валидации", "Управляемое развёртывание"]
-            : ["Century platform", "Validation tracks", "Regulated rollout"]
+            ? ["Платформа Century, треки валидации и управляемое развёртывание"]
+            : ["Century platform, validation tracks, and governed rollout"]
         }
       />
 
@@ -122,12 +122,12 @@ export default async function ProductsPage({ params }: Props) {
         <div className="width-wrapper relative">
           <article className="stack-panel-accent p-6 md:p-7">
             <p className="text-xs font-bold uppercase tracking-wide text-white/86">
-              {isRu ? "Ключевой продуктовый asset" : "Primary product asset"}
+              {isRu ? "Ключевой продукт" : "Primary product"}
             </p>
             <h2 className="stack-grid-title mt-2 text-white">
               {isRu ? (
                 <>
-                  Century для production <span className="stack-accent">governance</span>
+                  Century для <span className="stack-accent">управляемого развёртывания</span>
                 </>
               ) : (
                 <>
@@ -163,7 +163,7 @@ export default async function ProductsPage({ params }: Props) {
             <h2 className="stack-grid-title text-[var(--black)]">
               {isRu ? (
                 <>
-                  Validation <span className="stack-accent">tracks</span>
+                  Треки <span className="stack-accent">валидации</span>
                 </>
               ) : (
                 <>
@@ -173,7 +173,7 @@ export default async function ProductsPage({ params }: Props) {
             </h2>
 <p className="mt-4 text-sm text-[var(--black)]/85">
               {isRu
-                ? "Prototypes и research tracks остаются компактными и поддерживают production-решения, а не раздувают каталог продуктов."
+                ? "Прототипы и исследовательские треки остаются компактными и помогают принимать решения для промышленного внедрения, не раздувая продуктовый контур."
                 : "Prototypes and research tracks stay compact and support production decisions, not standalone product sprawl."}
             </p>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-[var(--black)]">
@@ -184,10 +184,10 @@ export default async function ProductsPage({ params }: Props) {
           </article>
 
           <article className="stack-panel-dark p-5">
-            <h3 className="stack-title text-2xl">{isRu ? "Нужна валидация product fit?" : "Need product fit validation?"}</h3>
+            <h3 className="stack-title text-2xl">{isRu ? "Нужна проверка соответствия продукта вашей задаче?" : "Need to validate product fit?"}</h3>
             <p className="mt-4 text-sm text-white/88">
               {isRu
-                ? "Привязываем модули к workflows, integration boundaries и governance-требованиям до масштабирования."
+                ? "До масштабирования связываем модули со сценариями использования, границами интеграции и требованиями управления."
                 : "We map modules to workflows, integration boundaries, and governance requirements before scaling."}
             </p>
             <div className="mt-6 grid gap-3">

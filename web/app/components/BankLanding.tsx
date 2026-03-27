@@ -1143,8 +1143,8 @@ export default function BankLanding({ locale }: Props) {
                             fallback={
                                 <div className="stack-panel bg-white p-6 md:p-8">
                                     {locale === "ru"
-                                        ? "Загрузка формы..."
-                                        : "Loading form..."}
+                                        ? "Форма загружается..."
+                                        : "Loading form…"}
                                 </div>
                             }
                         >

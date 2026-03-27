@@ -156,9 +156,9 @@ export default async function AuditCompliancePage({ params }: Props) {
         lines={
           isRu
             ? [
-                { text: "Аудит ИИ" },
-                { text: "и соответствие требованиям", accent: true },
-                { text: "Инжиниринг" },
+                { text: "Инженерия аудита" },
+                { text: "и комплаенса", accent: true },
+                { text: "для ИИ" },
               ]
             : [
                 { text: "AI Audit" },
@@ -175,8 +175,8 @@ export default async function AuditCompliancePage({ params }: Props) {
         secondaryCta={{ label: isRu ? "Смотреть кейсы" : "View case studies", href: "/case-studies", ghost: true }}
         chips={
           isRu
-            ? ["Доказательная база", "Отслеживаемость", "Контролы в системах"]
-            : ["Evidence-first", "Traceability", "Controls, not slides"]
+            ? ["Доказательная база, прослеживаемость и контролы, встроенные в систему."]
+            : ["Evidence-first audit design, traceability, and controls implemented in systems."]
         }
       />
 
