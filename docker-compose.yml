@@ -1,0 +1,46 @@
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    container_name: stacklevel-nginx
+    restart: unless-stopped
+    depends_on:
+      - web
+    ports:
+      - "127.0.0.1:${WEB_HTTP_PORT:-8020}:80"
+    networks:
+      - app
+
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+      target: web
+      args:
+        NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+    container_name: stacklevel-web
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    depends_on:
+      - bot-sender
+    networks:
+      - app
+      - bot
+
+  bot-sender:
+    build:
+      context: ./bot-sender
+      dockerfile: Dockerfile
+    container_name: stacklevel-bot-sender
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    networks:
+      - bot
+
+networks:
+  app:
+  bot:

@@ -1,0 +1,145 @@
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import ContactForm from "@/app/components/ContactForm";
+import InnerHero from "@/app/components/InnerHero";
+import JsonLd from "@/app/components/JsonLd";
+import { CONTACTS } from "@/app/lib/entities";
+import { isRuLocale } from "@/i18n/localeUtils";
+import { ORGANIZATION_ID, VITALIY_BAKHMAT_ID, buildBreadcrumbSchema, buildPageSchema, getContactPersonSchema, schemaId } from "@/app/lib/schema";
+
+type Props = { params: Promise<{ locale: string }> };
+
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'ru' }];
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
+
+  return {
+    title: isRu ? "Контакты Stacklevel Group | Уточнение объёма, аудит или демо" : "Contact Stacklevel Group | Scoping, Audit, or Demo",
+    description: isRu
+      ? "Опишите сценарий использования, ограничения развёртывания и требования к ревью. Мы направим запрос нужной команде."
+      : "Share your workflow, deployment constraints, and review requirements. We route your request to the right team.",
+  };
+}
+
+export default async function ContactPage({ params }: Props) {
+  const { locale } = await params;
+  const isRu = isRuLocale(locale);
+  const pageName = isRu ? "Контакты Stacklevel Group | Уточнение объёма, аудит или демо" : "Contact Stacklevel Group | Scoping, Audit, or Demo";
+  const pageDescription = isRu
+    ? "Опишите сценарий использования, ограничения развёртывания и требования к ревью. Мы направим запрос нужной команде."
+    : "Share your workflow, deployment constraints, and review requirements. We route your request to the right team.";
+  const breadcrumbSchema = buildBreadcrumbSchema(locale, "/contact", [
+    { name: isRu ? "Главная" : "Home", path: "/" },
+    { name: isRu ? "Контакты" : "Contact", path: "/contact" },
+  ]);
+  const pageSchema = buildPageSchema({
+    locale,
+    path: "/contact",
+    name: pageName,
+    description: pageDescription,
+    type: "ContactPage",
+    breadcrumbId: schemaId(locale, "/contact", "breadcrumb"),
+    mainEntity: { "@id": ORGANIZATION_ID },
+    about: [{ "@id": VITALIY_BAKHMAT_ID }],
+  });
+
+  return (
+    <>
+      <JsonLd data={[pageSchema, breadcrumbSchema, getContactPersonSchema()]} />
+      <div className="relative">
+      <InnerHero
+        lines={
+          isRu
+            ? [
+                { text: "Свяжитесь" },
+                { text: "с нами", accent: true },
+              ]
+            : [
+                { text: "Contact" },
+                { text: "us", accent: true },
+              ]
+        }
+        subtitle={
+          isRu
+            ? "Опишите сценарий использования, ограничения и требования к ревью. Мы направим запрос в нужную команду."
+            : "Share your workflow, constraints, and review requirements. We route your request to the right team."
+        }
+        primaryCta={{ label: isRu ? "Отправить запрос" : "Send request", href: "/contact#contact-form" }}
+        secondaryCta={{ label: isRu ? "Написать на email" : "Email us", href: `mailto:${CONTACTS.salesEmail}`, ghost: true }}
+        chips={
+          isRu
+            ? ["Выберите формат обращения: вводная встреча, уточнение объёма, аудит или демонстрация продукта."]
+            : ["Choose the request type: intro call, scoping, audit brief, or product demo."]
+        }
+      />
+
+      <section className="relative overflow-hidden py-12 md:py-16">
+        <div className="width-wrapper relative grid gap-4 md:grid-cols-2">
+          <article className="stack-panel-accent p-5">
+            <h2 className="stack-title text-2xl text-white">{isRu ? "Вводная программа" : "Program intro"}</h2>
+            <p className="mt-3 text-sm text-white/90">
+              {isRu
+                ? "Для комитетов и партнёрских программ, которые оценивают формат сотрудничества и материалы для проверки."
+                : "For committees and partner programs evaluating collaboration and due diligence materials."}
+            </p>
+          </article>
+          <article className="stack-panel-pale p-5">
+            <h2 className="stack-title text-2xl text-[var(--black)]">{isRu ? "Уточнение объёма / аудит / демонстрация" : "Scoping / audit / demo"}</h2>
+            <p className="mt-3 text-sm text-[var(--black)]">
+              {isRu
+                ? "Для корпоративных команд, планирующих инженерную работу с ИИ, базовые элементы управления и оценку продукта Century."
+                : "For enterprise teams planning AI engineering, governance baseline work, or Century product evaluation."}
+            </p>
+            <div className="mt-4 space-y-1 text-sm font-semibold text-[var(--black)]">
+              <p>
+                <a href={`mailto:${CONTACTS.salesEmail}`} className="hover:text-[var(--accent)]">
+                  {CONTACTS.salesEmail}
+                </a>
+              </p>
+              <p>
+                <a href={`tel:${CONTACTS.phoneE164}`} className="hover:text-[var(--accent)]">
+                  {CONTACTS.phoneDisplay}
+                </a>
+              </p>
+              <p>
+                <a href={`tg://resolve?domain=${CONTACTS.telegramHandle}`} className="hover:text-[var(--accent)]">
+                  Telegram: {CONTACTS.telegramDisplay}
+                </a>
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact-form" className="relative overflow-hidden stack-section-pale py-12 md:py-16">
+        <div className="width-wrapper relative">
+          <Suspense
+            fallback={
+              <div className="stack-panel bg-white p-6 md:p-8" aria-hidden="true">
+                <div className="h-9 w-56 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                <div className="mt-6 grid gap-4 md:grid-cols-2">
+                  <div className="h-12 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                  <div className="h-12 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                  <div className="h-12 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                  <div className="h-12 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                </div>
+                <div className="mt-4 h-32 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                <div className="mt-6 grid gap-3 md:grid-cols-2">
+                  <div className="h-14 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                  <div className="h-14 animate-pulse rounded bg-[rgba(0,0,0,.08)]" />
+                </div>
+              </div>
+            }
+          >
+            <ContactForm />
+          </Suspense>
+        </div>
+      </section>
+      </div>
+    </>
+  );
+}
