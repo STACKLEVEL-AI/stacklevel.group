@@ -4,7 +4,7 @@ import { isRuLocale } from "@/i18n/localeUtils";
 import Clients from "@/app/components/Clients";
 import HomeHero from "@/app/components/HomeHero";
 import JsonLd from "@/app/components/JsonLd";
-import { localizedAlternates } from "@/app/lib/site";
+import { localizedAlternates, localizedOpenGraph } from "@/app/lib/site";
 import { ORGANIZATION_ID, buildPageSchema } from "@/app/lib/schema";
 import { readFileSync } from "fs";
 import { join } from "path";
@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? "Stacklevel Group внедряет инженерные практики ИИ, аудит и соответствие по дизайну для корпоративных производственных сред."
       : "Stacklevel Group delivers AI engineering, AI audit, and compliance-by-design for enterprise production environments.",
     alternates: localizedAlternates(locale, "/"),
+    openGraph: localizedOpenGraph(locale, "/", isRu ? "Stacklevel Group | Инженерия ИИ, аудит и соответствие" : "Stacklevel Group | AI Engineering, Audit & Compliance", isRu ? "Stacklevel Group внедряет инженерные практики ИИ, аудит и соответствие по дизайну для корпоративных производственных сред." : "Stacklevel Group delivers AI engineering, AI audit, and compliance-by-design for enterprise production environments."),
   };
 }
 

@@ -4,6 +4,7 @@ import InnerHero from "@/app/components/InnerHero";
 import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
 import { ORGANIZATION_ID, buildBreadcrumbSchema, buildPageSchema, schemaId } from "@/app/lib/schema";
+import { localizedAlternates } from "@/app/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -20,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: isRu
       ? "Сервисы аудита и управления для корпоративных ИИ‑программ: формируем доказательную базу, прослеживаемость и исполнимые контролы."
       : "Audit and governance services for enterprise AI programs that require evidence, traceability, and enforceable controls.",
+    alternates: localizedAlternates(locale, "/audit-compliance"),
   };
 }
 

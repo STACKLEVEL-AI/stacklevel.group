@@ -17,6 +17,7 @@ import {
 } from "@/app/lib/schema";
 import { readFileSync } from "fs";
 import { join } from "path";
+import { localizedAlternates } from "@/app/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -33,6 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: isRu
       ? "Профиль Stacklevel Group: управляемая инженерия ИИ, аудит и соблюдение требований для корпоративных команд."
       : "Stacklevel Group profile: governed AI engineering, audit, and compliance delivery for enterprise teams.",
+    alternates: localizedAlternates(locale, "/company"),
   };
 }
 

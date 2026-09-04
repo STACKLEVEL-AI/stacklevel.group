@@ -6,6 +6,7 @@ import InnerHero from "@/app/components/InnerHero";
 import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
 import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema, schemaId } from "@/app/lib/schema";
+import { localizedAlternates } from "@/app/lib/site";
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -24,6 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: isRu
       ? "NDA-safe формат кейсов: постановка проблемы, дизайн решения, контролы и операционные результаты для регулируемого внедрения ИИ."
       : "NDA-safe case study formats focused on problem framing, solution design, controls, and operational outcomes for regulated AI delivery.",
+    alternates: localizedAlternates(locale, "/case-studies"),
   };
 }
 

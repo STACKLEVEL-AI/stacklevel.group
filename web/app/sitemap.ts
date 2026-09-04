@@ -19,12 +19,9 @@ const staticPaths = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = getSiteUrl();
   const locales = ["ru", "en"] as const;
-  const now = new Date();
-
   const localizedPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     staticPaths.map((path) => ({
       url: new URL(localizedPath(locale, path), siteUrl).toString(),
-      lastModified: now,
       changeFrequency: path === "/" ? ("weekly" as const) : ("monthly" as const),
       priority: path === "/" ? 1 : 0.7,
     })),
@@ -33,7 +30,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     blogPostSlugs.map((slug) => ({
       url: new URL(localizedPath(locale, `/blog/${slug}`), siteUrl).toString(),
-      lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),

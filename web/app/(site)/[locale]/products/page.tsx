@@ -4,6 +4,7 @@ import InnerHero from "@/app/components/InnerHero";
 import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
 import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema, localizedAbsoluteUrl, schemaId } from "@/app/lib/schema";
+import { localizedAlternates } from "@/app/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: isRu
       ? "Продуктовые решения Stacklevel ускоряют управляемое внедрение ИИ, где Century является основным решением для корпоративного развёртывания."
       : "Stacklevel product assets accelerate governed AI rollout, with Century as the primary platform for controlled enterprise deployment.",
+    alternates: localizedAlternates(locale, "/products"),
   };
 }
 

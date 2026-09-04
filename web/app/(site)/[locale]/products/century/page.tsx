@@ -4,6 +4,7 @@ import InnerHero from "@/app/components/InnerHero";
 import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
 import { ORGANIZATION_ID, buildBreadcrumbSchema, buildPageSchema, localizedAbsoluteUrl, schemaId } from "@/app/lib/schema";
+import { localizedAlternates } from "@/app/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: isRu
       ? "Century — производственная LLM-платформа Stacklevel для корпоративных сред с атрибуцией источников, учётом прав доступа и готовностью к аудиту."
       : "Century is Stacklevel's production LLM platform for enterprise environments requiring citations, IAM-aware behavior, and audit-grade traceability.",
+    alternates: localizedAlternates(locale, "/products/century"),
   };
 }
 

@@ -10,7 +10,8 @@ export function getSiteUrl() {
   }
 
   try {
-    return new URL(raw);
+    const url = new URL(raw);
+    return url.hostname === "stacklevel.group" && url.protocol === "https:" ? url : new URL(DEFAULT_SITE_URL);
   } catch {
     return new URL(DEFAULT_SITE_URL);
   }
@@ -29,7 +30,20 @@ export function localizedAlternates(locale: string, pathname = "/"): Metadata["a
     languages: {
       ru: localizedPath("ru", pathname),
       en: localizedPath("en", pathname),
-      "x-default": localizedPath("ru", pathname),
+      "x-default": localizedPath("en", pathname),
     },
+  };
+}
+
+export function localizedOpenGraph(locale: string, pathname: string, title: string, description: string) {
+  const url = new URL(localizedPath(locale === "en" ? "en" : "ru", pathname), getSiteUrl()).toString();
+  const image = new URL("/images/hero-bg.png", getSiteUrl()).toString();
+
+  return {
+    title,
+    description,
+    url,
+    locale: locale === "ru" ? "ru_BY" : "en_US",
+    images: [{ url: image, alt: "Stacklevel Group" }],
   };
 }

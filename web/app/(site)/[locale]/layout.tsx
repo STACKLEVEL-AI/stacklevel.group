@@ -30,7 +30,20 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
+  openGraph: {
+    siteName: "Stacklevel Group",
+    type: "website",
+    images: [{ url: "/images/hero-bg.png", alt: "Stacklevel Group" }],
+  },
+  twitter: { card: "summary_large_image", images: ["/images/hero-bg.png"] },
 };
 
 export function generateStaticParams() {

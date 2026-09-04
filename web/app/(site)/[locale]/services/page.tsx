@@ -5,6 +5,7 @@ import InnerHero from "@/app/components/InnerHero";
 import JsonLd from "@/app/components/JsonLd";
 import { isRuLocale } from "@/i18n/localeUtils";
 import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema, schemaId } from "@/app/lib/schema";
+import { localizedAlternates } from "@/app/lib/site";
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -25,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: isRu
       ? "Услуги по инженерии ИИ для регулируемых сред с встроенными контролями и доказательной базой для проверки."
       : "Outcome-driven AI engineering packages for regulated environments, with controls and evidence built into delivery.",
+    alternates: localizedAlternates(locale, "/services"),
   };
 }
 

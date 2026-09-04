@@ -63,12 +63,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       description: post.excerpt,
       type: "article",
       locale,
-      url: localizedUrl,
+      url: localizedAbsoluteUrl(locale, pathname),
+      images: [{ url: localizedAbsoluteUrl(locale, "/images/hero-bg.png"), alt: "Stacklevel Group" }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
+      images: [localizedAbsoluteUrl(locale, "/images/hero-bg.png")],
     },
   };
 }

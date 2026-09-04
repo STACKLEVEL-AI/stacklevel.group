@@ -1,0 +1,21 @@
+# Stacklevel Group — full discovery index
+
+Canonical site: https://stacklevel.group/
+
+Stacklevel Group publishes engineering, audit, compliance, banking, product, case study, resource, blog, company, and contact pages for governed enterprise AI delivery.
+
+English: https://stacklevel.group/en
+Russian: https://stacklevel.group/ru
+Services: https://stacklevel.group/en/services
+Audit & Compliance: https://stacklevel.group/en/audit-compliance
+Banking: https://stacklevel.group/en/bank
+Products: https://stacklevel.group/en/products
+Century: https://stacklevel.group/en/products/century
+Case Studies: https://stacklevel.group/en/case-studies
+Resources: https://stacklevel.group/en/resources
+Blog: https://stacklevel.group/en/blog
+Company: https://stacklevel.group/en/company
+Contact: https://stacklevel.group/en/contact
+
+Sitemap: https://stacklevel.group/sitemap.xml
+Robots: https://stacklevel.group/robots.txt

@@ -6,6 +6,7 @@ import JsonLd from "@/app/components/JsonLd";
 import { CONTACTS } from "@/app/lib/entities";
 import { isRuLocale } from "@/i18n/localeUtils";
 import { ORGANIZATION_ID, VITALIY_BAKHMAT_ID, buildBreadcrumbSchema, buildPageSchema, getContactPersonSchema, schemaId } from "@/app/lib/schema";
+import { localizedAlternates } from "@/app/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: isRu
       ? "Опишите сценарий использования, ограничения развёртывания и требования к ревью. Мы направим запрос нужной команде."
       : "Share your workflow, deployment constraints, and review requirements. We route your request to the right team.",
+    alternates: localizedAlternates(locale, "/contact"),
   };
 }
 
